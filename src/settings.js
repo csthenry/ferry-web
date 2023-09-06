@@ -1,5 +1,5 @@
 module.exports = {
-  title: 'ferry 管理平台',
+  title: 'WorkFlow',
   logo: 'https://www.fdevops.com/wp-content/uploads/2020/08/1597815294-ferry_logo_white.png',
   isLdap: false,
   isVerifyCode: true,

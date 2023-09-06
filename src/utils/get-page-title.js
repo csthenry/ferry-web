@@ -1,6 +1,6 @@
 import defaultSettings from '@/settings'
 
-var title = defaultSettings.title || 'ferry 管理平台'
+var title = defaultSettings.title || 'WorkFlow'
 
 export default function getPageTitle(pageTitle, globalTitle) {
   if (globalTitle !== undefined && globalTitle !== null) {

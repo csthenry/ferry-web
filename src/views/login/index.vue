@@ -1,6 +1,7 @@
 <template>
   <div class="login-container">
-    <div id="particles-js">
+    <!-- 粒子特效 -->
+    <!-- <div id="particles-js">
       <vue-particles
         color="#dedede"
         :particle-opacity="0.7"
@@ -18,8 +19,7 @@
         :click-effect="true"
         click-mode="push"
       />
-    </div>
-
+    </div> -->
     <div class="login-weaper animated bounceInDown">
       <div class="login-left">
         <div class="login-time" v-text="currentTime" />
@@ -91,7 +91,7 @@
               </div>
             </template>
             <div prop="code" style="width: 100%;float: left;margin-bottom: 13px">
-              <el-checkbox v-model="isLdapTmp">LDAP登陆</el-checkbox>
+              <el-checkbox v-model="isLdapTmp" disabled="true">LDAP登陆</el-checkbox>
             </div>
             <el-button :loading="loading" type="primary" style="width:100%;padding:12px 20px;margin-bottom:30px;" @click.native.prevent="handleLogin">
               <span v-if="!loading">登 录</span>
@@ -311,7 +311,7 @@ $cursor: #fff;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  background-color: rgba(64,158,255,0);
+  background-color: rgb(112 158 255 / 75%);
   color: #fff;
   float: left;
   width: 50%;

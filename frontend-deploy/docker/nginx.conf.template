@@ -1,0 +1,57 @@
+server {
+  listen 8002; # 监听端口
+  server_name localhost; # 域名可以有多个，用空格隔开
+ 
+  location / {
+    root /usr/share/nginx/html;
+    index index.html index.htm; #目录内的默认打开文件,如果没有匹配到index.html,则搜索index.htm,依次类推
+  }
+
+  #ssl配置省略
+  location /api {
+    # rewrite ^.+api/?(.*)$ /$1 break;
+    proxy_pass http://${BACKEND_SERVER_HOST}:${BACKEND_SERVER_PORT}; # 填写你的后端地址和端口
+    proxy_redirect off;
+    proxy_set_header Host $host:$server_port;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  } 
+
+  # 登录
+  location /login {
+    proxy_pass http://${BACKEND_SERVER_HOST}:${BACKEND_SERVER_PORT}; # 填写你的后端地址和端口
+    proxy_redirect off;
+    proxy_ignore_client_abort on;
+    proxy_max_temp_file_size 256m;
+    proxy_connect_timeout      90;
+    proxy_send_timeout         90;
+    proxy_read_timeout         90;
+    proxy_buffer_size          4k;
+    proxy_buffers              4 32k;
+    proxy_busy_buffers_size    32k;
+    proxy_temp_file_write_size 64k;
+    proxy_http_version 1.1;
+    proxy_set_header Connection "";
+    proxy_set_header Host $host:$server_port;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+  }
+ 
+  # 刷新token
+  location /refresh_token {
+    proxy_pass http://${BACKEND_SERVER_HOST}:${BACKEND_SERVER_PORT}; # 填写你的后端地址和端口
+    proxy_set_header Host $host:$server_port;
+  }
+ 
+  # 接口地址
+  location /swagger {
+    proxy_pass http://${BACKEND_SERVER_HOST}:${BACKEND_SERVER_PORT}; # 填写你的后端地址和端口
+    proxy_set_header Host $host:$server_port;
+  }
+ 
+  # 后端静态文件路径
+  location /static/uploadfile {
+    proxy_pass http://${BACKEND_SERVER_HOST}:${BACKEND_SERVER_PORT}; # 填写你的后端地址和端口
+    proxy_set_header Host $host:$server_port;
+  }
+}
