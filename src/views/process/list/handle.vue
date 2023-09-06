@@ -3,8 +3,11 @@
     <div v-if="isLoadingStatus" />
     <div v-else>
       <el-card class="box-card">
+        <div slot="header" class="clearfix">
+          <span>流程跟踪</span>
+        </div>
         <div class="text item">
-          <el-steps v-if="currentNode.clazz !== undefined && currentNode.clazz !== null && currentNode.clazz !== ''" :active="activeIndex" finish-status="success">
+          <el-steps v-if="currentNode.clazz !== undefined && currentNode.clazz !== null && currentNode.clazz !== ''" :active="activeIndex" align-center finish-status="success">
             <template v-for="(item, index) in nodeStepList">
               <el-step
                 v-if="item.isHideNode === false ||

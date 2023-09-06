@@ -93,7 +93,29 @@
             <div prop="code" style="width: 100%;float: left;margin-bottom: 13px">
               <el-checkbox v-model="isLdapTmp" disabled="true">LDAP登陆</el-checkbox>
             </div>
-            <el-button :loading="loading" type="primary" style="width:100%;padding:12px 20px;margin-bottom:30px;" @click.native.prevent="handleLogin">
+            <el-popover
+              placement="bottom"
+              title="初始账号信息"
+              width="300"
+              trigger="click"
+              content="用户账号：字节星球账号；初始密码：字节星球账号.123">
+              <el-button slot="reference">查看初始账号信息</el-button>
+            </el-popover>
+            <el-popover
+              placement="bottom"
+              title="初始账号示例"
+              width="400"
+              trigger="click"
+              content="若你的字节星球账号为：henry，则本系统账号为：henry，初始密码为：henry.123">
+              <el-button slot="reference">查看初始账号示例</el-button>
+            </el-popover>
+            <el-alert
+              title="注意："
+              type="warning"
+              description="若为首次登录，请及时更改初始密码！"
+              show-icon>
+            </el-alert>
+            <el-button :loading="loading" type="primary" style="width:100%;padding:12px 20px;margin:20px 0;" @click.native.prevent="handleLogin">
               <span v-if="!loading">登 录</span>
               <span v-else>登 录 中...</span>
             </el-button>
@@ -316,7 +338,7 @@ $cursor: #fff;
   float: left;
   width: 50%;
   position: relative;
-    min-height: 500px;
+    min-height: 600px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -352,7 +374,7 @@ $cursor: #fff;
 
 .login-border{
   position: relative;
-    min-height: 500px;
+    min-height: 600px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -369,7 +391,7 @@ $cursor: #fff;
 }
 
 .login-main{
-    margin: 0 auto;
+    margin: 40px auto;
     width: 65%;
 }
 
@@ -417,6 +439,9 @@ $cursor: #fff;
     background: rgba(255, 255, 255, 0.8);
     border-radius: 5px;
     color: #454545;
+  }
+  .el-alert{
+    margin-top: 20px;
   }
 }
 $bg:#2d3a4b;

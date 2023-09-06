@@ -9,14 +9,14 @@
         </chart-card>
       </el-col>
       <el-col :sm="24" :xs="24" :md="6" :xl="6" :lg="6" :style="{ marginBottom: '12px' }">
-        <chart-card title="我创建的" :total="dashboardValue.count.my_create" style="cursor: pointer" @click.native="toTicketList('/process/my-create')">
+        <chart-card title="我的工单" :total="dashboardValue.count.my_create" style="cursor: pointer" @click.native="toTicketList('/process/my-create')">
           <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
             <i class="el-icon-warning-outline" />
           </el-tooltip>
         </chart-card>
       </el-col>
       <el-col :sm="24" :xs="24" :md="6" :xl="6" :lg="6" :style="{ marginBottom: '12px' }">
-        <chart-card title="我相关的" :total="dashboardValue.count.related" style="cursor: pointer" @click.native="toTicketList('/process/related')">
+        <chart-card title="与我相关" :total="dashboardValue.count.related" style="cursor: pointer" @click.native="toTicketList('/process/related')">
           <el-tooltip slot="action" class="item" effect="dark" content="指标说明" placement="top-start">
             <i class="el-icon-warning-outline" />
           </el-tooltip>
