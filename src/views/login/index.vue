@@ -286,7 +286,6 @@ export default {
 /* 修复input 背景不协调 和光标变色 */
 /* Detail see https://github.com/PanJiaChen/vue-element-admin/pull/927 */
 
-$bg:#283443;
 $light_gray:#fff;
 $cursor: #fff;
 
@@ -426,11 +425,6 @@ $cursor: #fff;
       color: #333;
       height: 47px;
       caret-color: #333;
-
-      &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px $bg inset !important;
-        -webkit-text-fill-color: $cursor !important;
-      }
     }
   }
 
@@ -444,7 +438,6 @@ $cursor: #fff;
     margin-top: 20px;
   }
 }
-$bg:#2d3a4b;
 $dark_gray:#889aa4;
 $light_gray:#eee;
 
