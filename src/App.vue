@@ -28,8 +28,11 @@ body, button, input, optgroup, select, textarea {
   background: #409eff;
   color: #fff;
 }
-/* 进行中状态：title（文字） */
+/* 进行中状态：文字 */
 .el-step__title.is-process {
+  color: #409eff;
+}
+.el-step__description.is-process {
   color: #409eff;
 }
 /* 完成状态：圈线 */
@@ -41,8 +44,11 @@ body, button, input, optgroup, select, textarea {
 .el-step__head.is-finish > .el-step__icon {
   background: #fbf5d5;
 }
-/* 通过状态：title（文字） */
+/* 通过状态：文字 */
 .el-step__title.is-finish {
+  color: #ffab40;
+}
+.el-step__description.is-finish {
   color: #ffab40;
 }
 /* 通过状态：圈内 */
@@ -59,8 +65,11 @@ body, button, input, optgroup, select, textarea {
   background: #F56C6C;
   color: #ECF5FF;
 }
-/* 终止（不通过）状态：title（文字） */
+/* 终止（不通过）状态：文字 */
 .el-step__title.is-error {
+  color: #F56C6C;
+}
+.el-step__description.is-error {
   color: #F56C6C;
 }
 /* 步骤条逻辑 */

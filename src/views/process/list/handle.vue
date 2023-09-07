@@ -18,6 +18,7 @@
                 :key="index"
                 :title="item.label"
                 :status="stepIsEnd && index + 1 === activeIndex ? 'finish' : ''"
+                :description="stepHistoryList[item.id] ? stepHistoryList[item.id] : ''"
               />
               <!-- 终止状态的节点单独以error形式展示  注：若流程已终止，则终止节点一定为当前节点-->
               <el-step
@@ -219,6 +220,7 @@ export default {
       stepIsEnd: false, //该变量表明流程是否在中途被终止（不通过）
       nodeStepList: [],
       circulationHistoryList: [],
+      stepHistoryList: [],  //步骤条历史（id, 处理人, 处理时间）
       activeIndex: 0,
       processStructureValue: {
         workOrder: { title: '' }
@@ -268,6 +270,12 @@ export default {
         this.isActiveProcessing = false
         this.processStructureValue = response.data
         this.circulationHistoryList = this.processStructureValue.circulationHistory
+        // 维护步骤条历史
+        for(let i = 0; i < this.circulationHistoryList.length; i++) {
+          let item = this.circulationHistoryList[i]
+          let cirSource = item['source']
+          this.stepHistoryList[cirSource] = item['processor'] + ' ' + item['update_time']
+        }
         // 获取当前展示节点列表
         this.nodeStepList = []
         if (this.processStructureValue.nodes) {
