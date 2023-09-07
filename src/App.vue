@@ -34,8 +34,22 @@ body, button, input, optgroup, select, textarea {
 }
 /* 完成状态：圈内 */
 .el-step__head.is-success > .el-step__icon {
-  background: #ECF5FF;
+  background: #ecffed;
   color: #67C23A;
+}
+/* 终止（不通过）状态：圈线 */
+.el-step__head.is-error {
+  color: #F56C6C;
+  border-color: #F56C6C;
+}
+/* 终止（不通过）状态：圈内 */
+.el-step__head.is-error > .el-step__icon {
+  background: #F56C6C;
+  color: #ECF5FF;
+}
+/* 终止（不通过）状态：title（文字） */
+.el-step__title.is-error {
+  color: #F56C6C;
 }
 /* 步骤条逻辑 */
 .el-step__head.is-process > .el-step__line i {

@@ -332,7 +332,7 @@ $cursor: #fff;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  background-color: rgb(112 158 255 / 75%);
+  background-color: rgb(135 172 249 / 75%);
   color: #fff;
   float: left;
   width: 50%;

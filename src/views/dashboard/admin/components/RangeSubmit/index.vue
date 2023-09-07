@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import echarts from 'echarts'
+import * as echarts from 'echarts';
 import resize from '../mixins/resize'
 
 export default {
@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     initChart() {
-      this.chart = echarts.init(this.$el, 'macarons')
+      this.chart = echarts.init(this.$el)
       this.setOptions(this.statisticsData)
     },
     setOptions({ expectedData, actualData } = {}) {
@@ -69,7 +69,13 @@ export default {
           }
         },
         tooltip: {
-          trigger: 'axis'
+          trigger: 'axis',
+          axisPointer: {
+            type: 'cross',
+            label: {
+              backgroundColor: '#6a7985'
+            }
+          }
         },
         legend: {
           data: ['工单总数', '未结束', '已结束']
@@ -93,16 +99,31 @@ export default {
           {
             name: '工单总数',
             type: 'line',
+            color:'#74c0df',
+            areaStyle: {},
+            emphasis: {
+              focus: 'series'
+            },
             data: this.statisticsData.total
           },
           {
             name: '未结束',
             type: 'line',
+            color:'#fac858',
+            areaStyle: {},
+            emphasis: {
+              focus: 'series'
+            },
             data: this.statisticsData.processing
           },
           {
             name: '已结束',
             type: 'line',
+            color:'#91cc75',
+            areaStyle: {},
+            emphasis: {
+              focus: 'series'
+            },
             data: this.statisticsData.overs
           }
         ]

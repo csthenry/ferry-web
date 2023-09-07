@@ -9,14 +9,30 @@
         <div class="text item">
           <el-steps v-if="currentNode.clazz !== undefined && currentNode.clazz !== null && currentNode.clazz !== ''" :active="activeIndex" align-center finish-status="success">
             <template v-for="(item, index) in nodeStepList">
+              <!-- 以success形式展示除当前节点外的未隐藏节点  -->
               <el-step
-                v-if="item.isHideNode === false ||
+                v-if="(item.isHideNode === false ||
                   item.isHideNode === undefined ||
-                  item.isHideNode == null ||
-                  item.id === processStructureValue.workOrder.current_state"
+                  item.isHideNode == null) &&
+                  item.id !== processStructureValue.workOrder.current_state"
                 :key="index"
                 :title="item.label"
               />
+              <!-- 终止状态的节点单独以error形式展示  注：若流程已终止，则终止节点一定为当前节点-->
+              <el-step
+                v-else-if="stepIsEnd && item.id === processStructureValue.workOrder.current_state"
+                :key="index"
+                :title="item.label"
+                description="不通过：流程已终止"
+                status="error"
+              />
+              <!-- 以process/success形式展示当前节点 -->
+              <el-step
+                v-else-if="item.id === processStructureValue.workOrder.current_state"
+                :key="index"
+                :title="item.label"
+              />
+              <!-- 除以上情况外，剩余的即为隐藏的非当前节点，不展示 -->
             </template>
           </el-steps>
           <div v-else>
@@ -30,7 +46,7 @@
       </el-card>
 
       <el-alert
-        v-if="activeIndex !== nodeStepList.length && processStructureValue.workOrder.is_end===1"
+        v-if="activeIndex !== nodeStepList.length && processStructureValue.workOrder.is_end === 1"
         style="margin-top: 15px"
         :title="alertMessage"
         type="error"
@@ -199,6 +215,7 @@ export default {
       tpls: [],
       remarks: '', // 备注信息
       alertMessage: '',
+      stepIsEnd: false, //该变量表明流程是否在中途被终止（不通过）
       nodeStepList: [],
       circulationHistoryList: [],
       activeIndex: 0,
@@ -325,6 +342,9 @@ export default {
     getAlertMessage() {
       if (this.processStructureValue.workOrder.is_end === 1) {
         this.alertMessage = '当前工单已结束。'
+        if(this.activeIndex !== this.nodeStepList.length) {
+          this.stepIsEnd = true   //排除所有流程流程已完结的情况
+        }
       }
     },
     activeOrderActive() {

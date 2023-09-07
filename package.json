@@ -48,7 +48,7 @@
     "driver.js": "0.9.5",
     "dropzone": "5.5.1",
     "e-icon-picker": "1.0.7",
-    "echarts": "^4.8.0",
+    "echarts": "^5.4.3",
     "element-ui": "2.15.8",
     "file-saver": "2.0.1",
     "form-making": "^1.2.11",
