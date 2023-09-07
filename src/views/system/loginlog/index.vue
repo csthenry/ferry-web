@@ -186,14 +186,14 @@ export default {
       }).then(() => {
         this.downloadLoading = true
         import('@/vendor/Export2Excel').then(excel => {
-          const tHeader = ['编号', '用户名称', '登陆地址', '登陆地点', '浏览器', '操作系统', '登陆状态', '操作信息', '登陆日期']
+          const tHeader = ['编号', '用户名称', '登录地址', '登录地点', '浏览器', '操作系统', '登录状态', '操作信息', '登录日期']
           const filterVal = ['infoId', 'username', 'ipaddr', 'loginLocation', 'browser', 'os', 'status', 'msg', 'loginTime']
           const list = this.list
           const data = formatJson(filterVal, list)
           excel.export_json_to_excel({
             header: tHeader,
             data,
-            filename: '登陆日志',
+            filename: '登录日志',
             autoWidth: true, // Optional
             bookType: 'xlsx' // Optional
           })

@@ -17,11 +17,33 @@ body, button, input, optgroup, select, textarea {
   font-family: "HarmonyOS Sans SC", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif !important;
 }
+/* el-step */
+/* 进行中状态：圈线 */
 .el-step__head.is-process {
-    color: #409eff;
-    border-color: #409eff;
+  color: #409eff;
+  border-color: #409eff;
 }
+/* 进行中状态：圈内 */
+.el-step__head.is-process > .el-step__icon {
+  background: #409eff;
+  color: #fff;
+}
+/* 进行中状态：title（文字） */
 .el-step__title.is-process {
-    color: #409eff;
+  color: #409eff;
+}
+/* 完成状态：圈内 */
+.el-step__head.is-success > .el-step__icon {
+  background: #ECF5FF;
+  color: #67C23A;
+}
+/* 步骤条逻辑 */
+.el-step__head.is-process > .el-step__line i {
+    width: 20%!important;
+    border-width: 1px!important;
+}
+ .el-step__head.is-success > .el-step__line i {
+    width: 100%!important;
+    border-width: 1px!important;
 }
 </style>

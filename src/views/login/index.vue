@@ -91,7 +91,7 @@
               </div>
             </template>
             <div prop="code" style="width: 100%;float: left;margin-bottom: 13px">
-              <el-checkbox v-model="isLdapTmp" disabled="true">LDAP登陆</el-checkbox>
+              <el-checkbox v-model="isLdapTmp" disabled="true">LDAP登录</el-checkbox>
             </div>
             <el-popover
               placement="bottom"
@@ -397,8 +397,8 @@ $cursor: #fff;
 .login-title{
   color: #333;
     margin-bottom: 40px;
-    font-weight: 500;
-    font-size: 22px;
+    font-weight: bold;
+    font-size: 25px;
     text-align: center;
     letter-spacing: 4px;
 }

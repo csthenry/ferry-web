@@ -26,7 +26,7 @@
             <el-radio v-model="ruleForm.is_verify_code" :label="true">是</el-radio>
             <el-radio v-model="ruleForm.is_verify_code" :label="false">否</el-radio>
           </el-form-item>
-          <el-form-item label="LDAP登陆：">
+          <el-form-item label="LDAP登录：">
             <el-radio v-model="ruleForm.is_ldap" :label="true">是</el-radio>
             <el-radio v-model="ruleForm.is_ldap" :label="false">否</el-radio>
           </el-form-item>
@@ -42,7 +42,7 @@
       </div>
       <div class="text item">
         <el-alert
-          title="Ldap登陆验证通过后，会将用户同步至本地数据库中，请在此配置数据同步的映射关系。单击Ldap字段可编辑，双击可隐藏编辑。"
+          title="Ldap登录验证通过后，会将用户同步至本地数据库中，请在此配置数据同步的映射关系。单击Ldap字段可编辑，双击可隐藏编辑。"
           type="info"
           style="margin-bottom: 10px"
         />
