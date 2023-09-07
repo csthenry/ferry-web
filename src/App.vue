@@ -32,10 +32,22 @@ body, button, input, optgroup, select, textarea {
 .el-step__title.is-process {
   color: #409eff;
 }
-/* 完成状态：圈内 */
+/* 完成状态：圈线 */
+.el-step__head.is-finish {
+  color: #ffab40;
+  border-color: #ffab40;
+}
+/* 通过状态：圈内 */
+.el-step__head.is-finish > .el-step__icon {
+  background: #fbf5d5;
+}
+/* 通过状态：title（文字） */
+.el-step__title.is-finish {
+  color: #ffab40;
+}
+/* 通过状态：圈内 */
 .el-step__head.is-success > .el-step__icon {
   background: #ecffed;
-  color: #67C23A;
 }
 /* 终止（不通过）状态：圈线 */
 .el-step__head.is-error {
@@ -56,7 +68,11 @@ body, button, input, optgroup, select, textarea {
     width: 20%!important;
     border-width: 1px!important;
 }
- .el-step__head.is-success > .el-step__line i {
+.el-step__head.is-success > .el-step__line i {
+    width: 100%!important;
+    border-width: 1px!important;
+}
+.el-step__head.is-finish > .el-step__line i {
     width: 100%!important;
     border-width: 1px!important;
 }

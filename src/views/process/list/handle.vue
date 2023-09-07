@@ -17,6 +17,7 @@
                   item.id !== processStructureValue.workOrder.current_state"
                 :key="index"
                 :title="item.label"
+                :status="stepIsEnd && index + 1 === activeIndex ? 'finish' : ''"
               />
               <!-- 终止状态的节点单独以error形式展示  注：若流程已终止，则终止节点一定为当前节点-->
               <el-step
