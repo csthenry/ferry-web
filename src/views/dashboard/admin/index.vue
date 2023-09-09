@@ -31,15 +31,15 @@
       </el-col>
     </el-row>
 
-    <el-card :bordered="false" :body-style="{padding: '5'}" :style="{ marginBottom: '12px', textAlign: 'center' }">
+    <el-card :bordered="false" :body-style="{padding: '5'}" :style="{ marginBottom: '12px' }">
       <el-date-picker
         v-model="querys"
         type="daterange"
-        align="right"
         unlink-panels
         range-separator="至"
         start-placeholder="开始日期"
         end-placeholder="结束日期"
+        style="width: 100%; max-width: 400px;"
         :picker-options="pickerOptions"
         @change="timeScreening"
       />

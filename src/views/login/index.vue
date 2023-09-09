@@ -99,7 +99,8 @@
                   placement="bottom"
                   title="初始账号信息"
                   trigger="click"
-                  content="用户账号：字节星球账号；初始密码：字节星球账号.123">
+                  content="用户账号：字节星球账号；初始密码：字节星球账号.123"
+                >
                   <el-button slot="reference">初始账号说明</el-button>
                 </el-popover>
               </el-col>
@@ -108,7 +109,8 @@
                   placement="bottom"
                   title="初始账号示例"
                   trigger="click"
-                  content="若你的字节星球账号为：henry，则本系统账号为：henry，初始密码为：henry.123">
+                  content="若你的字节星球账号为：henry，则本系统账号为：henry，初始密码为：henry.123"
+                >
                   <el-button slot="reference">初始账号示例</el-button>
                 </el-popover>
               </el-col>
@@ -117,8 +119,8 @@
               title="注意："
               type="warning"
               description="若为首次登录，请及时更改初始密码！"
-              show-icon>
-            </el-alert>
+              show-icon
+            />
             <el-button :loading="loading" type="primary" style="width:100%;padding:12px 20px;margin:20px 0;" @click.native.prevent="handleLogin">
               <span v-if="!loading">登 录</span>
               <span v-else>登 录 中...</span>
@@ -314,7 +316,6 @@ $cursor: #fff;
     width: 80%!important;
   }
 }
-
 .tips-button-container {
   overflow: hidden;
 }

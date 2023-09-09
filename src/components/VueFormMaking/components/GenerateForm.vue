@@ -11,14 +11,15 @@
     >
       <template v-for="item in data.list">
         <template v-if="item.type === 'grid'">
+          <!-- 为了实现移动端布局，删除type="flex"，添加 style="word-wrap: break-word" -->
           <el-row
             :key="item.key"
-            type="flex"
             :gutter="item.options.gutter ? item.options.gutter : 0"
             :justify="item.options.justify"
             :align="item.options.align"
+            style="word-wrap: break-word"
           >
-            <el-col v-for="(col, colIndex) in item.columns" :key="colIndex" :span="col.span">
+            <el-col v-for="(col, colIndex) in item.columns" :key="colIndex" :sm="col.span">
               <template v-for="citem in col.list">
                 <el-form-item v-if="citem.type==='blank'" :key="citem.key" :label="citem.name" :prop="citem.model">
                   <slot :name="citem.model" :model="models" />

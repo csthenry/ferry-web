@@ -85,6 +85,10 @@ body, button, input, optgroup, select, textarea {
     width: 100%!important;
     border-width: 1px!important;
 }
+.el-step__title {
+  margin: 10px auto;
+  line-height: normal!important;
+}
 ::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1), inset 0 -1px 0 rgba(0,0,0,0.07);
     background-clip: padding-box;
