@@ -100,7 +100,7 @@ export default {
   }
 
   .workflow-classify-div {
-    width: 20%;
+    /* width: 20%; */
     display: inline-block;
     margin-left: 0;
     margin-top: 12px;

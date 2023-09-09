@@ -170,7 +170,7 @@
         </cus-dialog>
       </el-container>
     </el-main>
-    <el-footer height="30px" style="font-weight: 600;">Powered by <a target="_blank" href="http://www.fdevops.com">fdevops</a></el-footer>
+    <!-- <el-footer height="30px" style="font-weight: 600;">Powered by <a target="_blank" href="http://www.fdevops.com">fdevops</a></el-footer> -->
   </el-container>
 
 </template>

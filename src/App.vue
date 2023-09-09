@@ -85,4 +85,17 @@ body, button, input, optgroup, select, textarea {
     width: 100%!important;
     border-width: 1px!important;
 }
+::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1), inset 0 -1px 0 rgba(0,0,0,0.07);
+    background-clip: padding-box;
+    background-color: #808080;
+    min-height: 40px;
+    padding-top: 100px;
+    border-radius: 4px;
+}
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background: #e4e4e4;
+}
 </style>

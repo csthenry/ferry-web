@@ -98,6 +98,7 @@
         start-placeholder="开始日期"
         end-placeholder="结束日期"
         align="right"
+        style="width: 100%"
         @change="getList"
       />
     </el-form-item>
@@ -188,5 +189,4 @@ export default {
 </script>
 
 <style scoped>
-
 </style>

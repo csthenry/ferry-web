@@ -54,23 +54,23 @@
       </div>
     </el-card>
 
-    <el-row>
-      <el-col :span="8">
-        <el-card :bordered="false" :body-style="{padding: '0'}">
+    <el-row :gutter="12">
+      <el-col :md="8">
+        <el-card :bordered="false" :body-style="{padding: '0'}" :style="{marginBottom: '12px'}">
           <div class="salesCard leaderboard">
             <rank-list title="热门流程排行榜 Top 10" :list="dashboardValue.ranks" />
           </div>
         </el-card>
       </el-col>
-      <el-col :span="8" style="padding-left: 12px;">
-        <el-card :bordered="false" :body-style="{padding: '0'}">
+      <el-col :md="8">
+        <el-card :bordered="false" :body-style="{padding: '0'}" :style="{marginBottom: '12px'}">
           <div class="salesCard leaderboard">
             <HandleRank title="处理工单人员排行榜" :list="dashboardValue.handle" />
           </div>
         </el-card>
       </el-col>
-      <el-col :span="8" style="padding-left: 12px;">
-        <el-card :bordered="false" :body-style="{padding: '0'}">
+      <el-col :md="8">
+        <el-card :bordered="false" :body-style="{padding: '0'}" :style="{marginBottom: '12px'}">
           <div class="salesCard leaderboard">
             <HandlePeriod title="工单处理耗时排行榜" :list="dashboardValue.period" />
           </div>

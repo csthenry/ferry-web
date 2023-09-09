@@ -93,22 +93,26 @@
             <div prop="code" style="width: 100%;float: left;margin-bottom: 13px">
               <el-checkbox v-model="isLdapTmp" disabled="true">LDAP登录</el-checkbox>
             </div>
-            <el-popover
-              placement="bottom"
-              title="初始账号信息"
-              width="300"
-              trigger="click"
-              content="用户账号：字节星球账号；初始密码：字节星球账号.123">
-              <el-button slot="reference">查看初始账号信息</el-button>
-            </el-popover>
-            <el-popover
-              placement="bottom"
-              title="初始账号示例"
-              width="400"
-              trigger="click"
-              content="若你的字节星球账号为：henry，则本系统账号为：henry，初始密码为：henry.123">
-              <el-button slot="reference">查看初始账号示例</el-button>
-            </el-popover>
+            <el-row :gutter="20" class="tips-button-container">
+              <el-col :span="12">
+                <el-popover
+                  placement="bottom"
+                  title="初始账号信息"
+                  trigger="click"
+                  content="用户账号：字节星球账号；初始密码：字节星球账号.123">
+                  <el-button slot="reference">初始账号说明</el-button>
+                </el-popover>
+              </el-col>
+              <el-col :span="12">
+                <el-popover
+                  placement="bottom"
+                  title="初始账号示例"
+                  trigger="click"
+                  content="若你的字节星球账号为：henry，则本系统账号为：henry，初始密码为：henry.123">
+                  <el-button slot="reference">初始账号示例</el-button>
+                </el-popover>
+              </el-col>
+            </el-row>
             <el-alert
               title="注意："
               type="warning"
@@ -122,7 +126,6 @@
           </el-form>
         </div>
       </div>
-
     </div>
   </div>
 </template>
@@ -289,6 +292,35 @@ export default {
 $light_gray:#fff;
 $cursor: #fff;
 
+@media screen and (max-width: 1200px) {
+  .login-left {
+    display: none!important;
+  }
+  .login-weaper {
+    width: 550px!important;
+  }
+  .login-border {
+    width: 100%!important;
+    border-radius: 5px!important;
+  }
+}
+@media screen and (max-width: 570px) {
+  .login-weaper {
+    margin: 0 10px!important;
+  }
+}
+@media screen and (max-width: 768px) {
+  .login-main {
+    width: 80%!important;
+  }
+}
+
+.tips-button-container {
+  overflow: hidden;
+}
+.tips-button-container .el-button {
+  width: 100%;
+}
 .login-container{
     display: -webkit-box;
     display: -ms-flexbox;
@@ -316,10 +348,11 @@ $cursor: #fff;
 
 .login-weaper{
   margin: 0 auto;
-  width: 1000px;
-  -webkit-box-shadow: -4px 5px 10px rgba(0,0,0,.4);
-  box-shadow: -4px 5px 10px rgba(0,0,0,.4);
+  width: 1100px;
+  -webkit-box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 40%);
+  box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 40%);
   z-index: 1000;
+  transition: .5s;
 }
 
 .login-left{
@@ -392,6 +425,7 @@ $cursor: #fff;
 .login-main{
     margin: 40px auto;
     width: 65%;
+    transition: .5s;
 }
 
 .login-title{
