@@ -25,6 +25,7 @@
         <div class="login-time" v-text="currentTime" />
         <img :src="logo" alt="" class="img">
         <p class="title" v-text="title" />
+        <span>现已接入字节星球 | 陌上花（moshanghua.net）</span>
       </div>
       <div class="login-border">
         <div class="login-main">
@@ -99,7 +100,7 @@
                   placement="bottom"
                   title="初始账号信息"
                   trigger="click"
-                  content="用户账号：字节星球账号；初始密码：字节星球账号.123"
+                  content="现已接入字节星球、陌上花平台。用户账号：平台账号；初始密码：平台账号.123"
                 >
                   <el-button slot="reference">初始账号说明</el-button>
                 </el-popover>
@@ -109,7 +110,7 @@
                   placement="bottom"
                   title="初始账号示例"
                   trigger="click"
-                  content="若你的字节星球账号为：henry，则本系统账号为：henry，初始密码为：henry.123"
+                  content="若你的平台账号为：henry，则本系统账号为：henry，初始密码为：henry.123"
                 >
                   <el-button slot="reference">初始账号示例</el-button>
                 </el-popover>

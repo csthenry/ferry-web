@@ -89,6 +89,18 @@ body, button, input, optgroup, select, textarea {
   margin: 10px auto;
   line-height: normal!important;
 }
+.el-upload {
+  text-align: left;
+}
+/* 修复分页器组件移动端适配问题 */
+@media screen and (max-width: 642px) {
+  .el-pagination__total {
+    display: none!important;
+  }
+  .el-pagination__jump {
+    display: none!important;
+  }
+}
 ::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1), inset 0 -1px 0 rgba(0,0,0,0.07);
     background-clip: padding-box;
