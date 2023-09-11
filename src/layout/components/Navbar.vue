@@ -130,7 +130,7 @@ export default {
     }
 
     .avatar-container {
-      margin-right: 30px;
+      padding-right: 30px;
 
       .avatar-wrapper {
         margin-top: 5px;

@@ -304,7 +304,7 @@ $cursor: #fff;
   }
   .login-border {
     width: 100%!important;
-    border-radius: 5px!important;
+    border-radius: 10px!important;
   }
 }
 @media screen and (max-width: 570px) {
@@ -355,11 +355,12 @@ $cursor: #fff;
   box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 40%);
   z-index: 1000;
   transition: .5s;
+  border-radius: 10px;
 }
 
 .login-left{
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
@@ -416,8 +417,8 @@ $cursor: #fff;
     display: -ms-flexbox;
     display: flex;
     border-left: none;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
     color: #fff;
     background-color: hsla(0,0%,100%,.9);
     width: 50%;

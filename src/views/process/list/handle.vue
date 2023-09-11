@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
-    <div v-if="isLoadingStatus" />
-    <div v-else>
+    <!-- <div v-if="isLoadingStatus" /> -->
+    <div v-loading="isLoadingStatus">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
           <span>流程跟踪</span>
@@ -217,10 +217,10 @@ export default {
       tpls: [],
       remarks: '', // 备注信息
       alertMessage: '',
-      stepIsEnd: false, //该变量表明流程是否在中途被终止（不通过）
+      stepIsEnd: false, // 该变量表明流程是否在中途被终止（不通过）
       nodeStepList: [],
       circulationHistoryList: [],
-      stepHistoryList: [],  //步骤条历史（id, 处理人, 处理时间）
+      stepHistoryList: [], // 步骤条历史（id, 处理人, 处理时间）
       activeIndex: 0,
       processStructureValue: {
         workOrder: { title: '' }
@@ -271,9 +271,9 @@ export default {
         this.processStructureValue = response.data
         this.circulationHistoryList = this.processStructureValue.circulationHistory
         // 维护步骤条历史
-        for(let i = 0; i < this.circulationHistoryList.length; i++) {
-          let item = this.circulationHistoryList[i]
-          let cirSource = item['source']
+        for (let i = 0; i < this.circulationHistoryList.length; i++) {
+          const item = this.circulationHistoryList[i]
+          const cirSource = item['source']
           this.stepHistoryList[cirSource] = item['processor'] + ' ' + item['update_time']
         }
         // 获取当前展示节点列表
@@ -351,8 +351,8 @@ export default {
     getAlertMessage() {
       if (this.processStructureValue.workOrder.is_end === 1) {
         this.alertMessage = '当前工单已结束。'
-        if(this.activeIndex !== this.nodeStepList.length) {
-          this.stepIsEnd = true   //排除所有流程流程已完结的情况
+        if (this.activeIndex !== this.nodeStepList.length) {
+          this.stepIsEnd = true // 排除所有流程流程已完结的情况
         }
       }
     },

@@ -20,7 +20,7 @@
       </div>
     </el-card>
 
-    <el-card class="box-card" style="margin-top: 10px">
+    <el-card v-loading="loading" class="box-card" style="margin-top: 10px">
       <div slot="header" class="clearfix">
         <span>表单信息</span>
       </div>
@@ -79,6 +79,7 @@ export default {
   name: 'Create',
   data() {
     return {
+      loading: true,
       submitDisabled: false,
       active: 0,
       processStructureValue: {},
@@ -131,6 +132,7 @@ export default {
       }).then(response => {
         this.processStructureValue = response.data
         this.currentNode = this.processStructureValue.nodes[0]
+        this.loading = false
       })
     },
     submitAction(item) {

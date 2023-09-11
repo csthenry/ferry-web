@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-row :gutter="20">
       <el-col :span="6" :xs="24">
-        <el-card class="box-card">
+        <el-card v-loading="loading" class="box-card">
           <div slot="header" class="clearfix">
             <span>个人信息</span>
           </div>
@@ -17,11 +17,11 @@
               </li>
               <li class="list-group-item">
                 <svg-icon icon-class="phone" /> 手机号码
-                <div class="pull-right">{{ user.phone }}</div>
+                <div class="pull-right">{{ user.phone ? user.phone : "--" }}</div>
               </li>
               <li class="list-group-item">
                 <svg-icon icon-class="email" /> 用户邮箱
-                <div class="pull-right">{{ user.email }}</div>
+                <div class="pull-right">{{ user.email ? user.email : "--" }}</div>
               </li>
               <li class="list-group-item">
                 <svg-icon icon-class="tree" /> 所属部门
@@ -40,7 +40,7 @@
         </el-card>
       </el-col>
       <el-col :span="18" :xs="24">
-        <el-card>
+        <el-card v-loading="loading">
           <div slot="header" class="clearfix">
             <span>基本资料</span>
           </div>
@@ -69,6 +69,7 @@ export default {
   components: { userAvatar, userInfo, resetPwd },
   data() {
     return {
+      loading: true,
       user: {},
       roleGroup: {},
       postGroup: {},
@@ -103,6 +104,7 @@ export default {
         }
         this.dept = response.dept
         this.deptName = this.dept.deptName
+        this.loading = false
       })
     }
   }
