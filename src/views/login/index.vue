@@ -92,7 +92,7 @@
               </div>
             </template>
             <div prop="code" style="width: 100%;float: left;margin-bottom: 13px">
-              <el-checkbox v-model="isLdapTmp" disabled="true">LDAP登录</el-checkbox>
+              <el-checkbox v-if="openLdap" v-model="isLdapTmp">LDAP登录</el-checkbox>
             </div>
             <el-row :gutter="20" class="tips-button-container">
               <el-col :span="12">
@@ -144,6 +144,7 @@ export default {
   data() {
     return {
       isLdapTmp: false,
+      openLdap: false,
       codeUrl: '',
       cookiePassword: '',
       loginForm: {
@@ -194,6 +195,7 @@ export default {
     isLdap: {
       handler: function(val) {
         this.isLdapTmp = val
+        this.openLdap = val
       }
     },
     isVerifyCode: {
