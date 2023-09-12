@@ -19,7 +19,8 @@
       <el-skeleton style="width: 100%" :loading="loading" :count="3" animated>
         <template slot="template">
           <div style="padding: 14px 14px 14px 0;">
-            <el-skeleton-item variant="h1" style="width: 50%" />
+            <el-skeleton-item v-if="device!=='mobile'" variant="h1" style="width: 35%" />
+            <el-skeleton-item v-else variant="h1" style="width: 65%" />
           </div>
           <div style="display: inline-block;">
             <el-skeleton-item variant="button" style="width: 222px; height: 72px;" />
@@ -77,6 +78,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { classifyProcessList } from '@/api/process/admin/process'
 
 export default {
@@ -87,6 +89,11 @@ export default {
       processLists: [],
       listQuery: {}
     }
+  },
+  computed: {
+    ...mapGetters([
+      'device'
+    ])
   },
   created() {
     this.getProcessList()

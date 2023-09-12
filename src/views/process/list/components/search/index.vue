@@ -10,10 +10,10 @@
         @keyup.enter.native="getList"
       />
     </el-form-item>
-    <el-form-item label="模版数据">
+    <el-form-item label="表单数据">
       <el-input
         v-model="listQuery.formData"
-        placeholder="请输入模版数据"
+        placeholder="请输入表单数据"
         clearable
         size="small"
         style="width: 180px"
@@ -38,7 +38,7 @@
         remote
         size="small"
         reserve-keyword
-        placeholder="请输入当前处理人"
+        placeholder="请输入当前申请人"
         :remote-method="remoteUserList"
         :loading="loading"
         style="width: 150px"

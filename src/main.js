@@ -72,6 +72,13 @@ Vue.use(Element, {
   size: Cookies.get('size') || 'medium' // set element-ui default size
 })
 
+// 导入一些ElementUI补丁
+import PATCH_ElOverlayAutoClose from '@/patch/el-overlay-auto-close.js'
+import PATCH_ElSelectOnMobile from '@/patch/el-select-on-mobile.js'
+
+Vue.use(PATCH_ElOverlayAutoClose)
+Vue.use(PATCH_ElSelectOnMobile)
+
 const messages = {
   'en-US': {
     header: {

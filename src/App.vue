@@ -101,6 +101,10 @@ body, button, input, optgroup, select, textarea {
     display: none!important;
   }
 }
+/* 输入框图标垂直居中问题 */
+.el-input__suffix {
+  line-height: 100%;
+}
 ::-webkit-scrollbar-thumb {
     -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,0.1), inset 0 -1px 0 rgba(0,0,0,0.07);
     background-clip: padding-box;

@@ -87,6 +87,15 @@
                 @click="handleDelete"
               >删除</el-button>
             </el-col>
+            <el-col :span="1.5">
+              <el-button
+                v-permisaction="['system:sysuser:export']"
+                type="warning"
+                icon="el-icon-download"
+                size="mini"
+                @click="handleExport"
+              >导出</el-button>
+            </el-col>
           </el-row>
 
           <el-table
@@ -100,7 +109,12 @@
             <el-table-column label="用户名称" align="center" prop="username" :show-overflow-tooltip="true" />
             <el-table-column label="用户昵称" align="center" prop="nickName" :show-overflow-tooltip="true" />
             <el-table-column label="部门" align="center" prop="deptName" :show-overflow-tooltip="true" />
-            <el-table-column label="手机号码" align="center" prop="phone" width="120" />
+            <el-table-column label="手机号码" align="center" prop="phone" width="120">
+              <template slot-scope="scope">
+                {{ scope.row.phone || '暂无' }}
+              </template>
+            </el-table-column>
+            <el-table-column label="邮箱" align="center" prop="email" width="165" />
             <el-table-column label="状态" width="68" align="center">
               <template slot-scope="scope">
                 <el-switch
@@ -273,11 +287,13 @@
 </template>
 
 <script>
-import { listUser, getUser, delUser, addUser, updateUser, exportUser, resetUserPwd, changeUserStatus, importTemplate, getUserInit } from '@/api/system/sysuser'
+import { listUser, getUser, delUser, addUser, updateUser, resetUserPwd, changeUserStatus, importTemplate, getUserInit } from '@/api/system/sysuser'
 import { getToken } from '@/utils/auth'
 import { treeselect } from '@/api/system/dept'
 import Treeselect from '@riophae/vue-treeselect'
 import '@riophae/vue-treeselect/dist/vue-treeselect.css'
+import { formatJson } from '@/utils'
+// import toArray from '@antv/util/lib/to-array'
 
 export default {
   name: 'User',
@@ -363,7 +379,7 @@ export default {
           }
         ],
         phone: [
-          { required: true, message: '手机号码不能为空', trigger: 'blur' },
+          { required: false, message: '手机号码不能为空', trigger: 'blur' },
           {
             pattern: /^1[3|4|5|6|7|8|9][0-9]\d{8}$/,
             message: '请输入正确的手机号码',
@@ -563,16 +579,44 @@ export default {
       }).catch(function() {})
     },
     /** 导出按钮操作 */
+    // handleExport() {
+    //   const queryParams = this.queryParams
+    //   this.$confirm('是否确认导出所有用户数据项?', '警告', {
+    //     confirmButtonText: '确定',
+    //     cancelButtonText: '取消',
+    //     type: 'warning'
+    //   }).then(function() {
+    //     return exportUser(queryParams)
+    //   }).then(response => {
+    //     this.download(response.msg)
+    //   }).catch(function() {})
+    // },
     handleExport() {
-      const queryParams = this.queryParams
+      // const queryParams = this.queryParams
       this.$confirm('是否确认导出所有用户数据项?', '警告', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
-      }).then(function() {
-        return exportUser(queryParams)
-      }).then(response => {
-        this.download(response.msg)
+      }).then(() => {
+        this.downloadLoading = true
+        import('@/vendor/Export2Excel').then(excel => {
+          const tHeader = ['编号', '用户名称', '用户昵称', '部门', '手机号码', `邮箱`, '账号状态', '创建时间']
+          const filterVal = ['userId', 'username', 'nickName', 'deptName', 'phone', `email`, `status`, `create_time`]
+          const list = JSON.parse(JSON.stringify(this.userList))
+          for (let i = 0; i < list.length; i++) {
+            list[i].status = list[i].status === '0' ? '正常' : '停用'
+          }
+          const data = formatJson(filterVal, list)
+          console.log(data)
+          excel.export_json_to_excel({
+            header: tHeader,
+            data,
+            filename: '用户管理',
+            autoWidth: true, // Optional
+            bookType: 'xlsx' // Optional
+          })
+          this.downloadLoading = false
+        })
       }).catch(function() {})
     },
     /** 导入按钮操作 */

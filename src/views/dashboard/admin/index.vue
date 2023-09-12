@@ -32,23 +32,27 @@
     </el-row>
 
     <el-card :bordered="false" :body-style="{padding: '5'}" :style="{ marginBottom: '12px' }">
-      <el-date-picker
-        v-model="querys"
-        type="daterange"
-        unlink-panels
-        range-separator="至"
-        start-placeholder="开始日期"
-        end-placeholder="结束日期"
-        style="width: 100%; max-width: 400px;"
-        :picker-options="pickerOptions"
-        @change="timeScreening"
-      />
+      <el-form ref="form" :model="form">
+        <el-form-item label="过滤工单统计" :style="{ marginBottom: '0px' }">
+          <el-date-picker
+            v-model="querys"
+            type="daterange"
+            unlink-panels
+            range-separator="至"
+            start-placeholder="开始日期"
+            end-placeholder="结束日期"
+            style="width: 100%; max-width: 400px;"
+            :picker-options="pickerOptions"
+            @change="timeScreening"
+          />
+        </el-form-item>
+      </el-form>
     </el-card>
 
     <el-card v-loading="loading" :bordered="false" :body-style="{padding: '0'}" :style="{ marginBottom: '12px' }">
       <div class="salesCard">
         <div>
-          <h4 :style="{ marginBottom: '20px' }" style="margin-left: 20px;">提交工单统计</h4>
+          <h4 :style="{ marginBottom: '20px' }" style="margin-left: 20px;">工单数据统计</h4>
           <RangeSubmit :statistics-data="dashboardValue.submit" />
         </div>
       </div>
