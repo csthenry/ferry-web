@@ -14,9 +14,10 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" size="small" @click="handleQuery">搜索</el-button>
+          <el-button type="success" icon="el-icon-refresh" size="small" :loading="loading" @click="refresh">刷新</el-button>
         </el-form-item>
       </el-form>
-      <el-skeleton style="width: 100%" :loading="loading" :count="3" animated>
+      <el-skeleton style="width: 100%" :loading="loading" :count="3" :throttle="skeletonDelay" animated>
         <template slot="template">
           <div style="padding: 14px 14px 14px 0;">
             <el-skeleton-item v-if="device!=='mobile'" variant="h1" style="width: 35%" />
@@ -28,51 +29,51 @@
             <el-skeleton-item variant="button" style="width: 222px; height: 72px;" />
           </div>
         </template>
-      </el-skeleton>
-      <template>
-        <div v-for="item in processLists" :key="item.id">
-          <div v-if="item.process_list.length!==0">
-            <div class="workflow-classify-title">
-              {{ item.name }}
-            </div>
-            <div style="margin-bottom: 15px;">
-              <template v-for="(buttonItem, buttonIndex) in item.process_list">
-                <el-tooltip :key="buttonItem.id" effect="dark" placement="top">
-                  <div slot="content">
-                    {{ buttonItem.name }}
-                    <br>
-                    {{ buttonItem.remarks }}
-                  </div>
-                  <div
-                    class="workflow-classify-div"
-                    :style="(buttonIndex + 1) % 5 === 0 ? {'padding-right': 0} : {'padding-right': '12px'}"
-                  >
-                    <el-button
-                      style="width: 100%"
-                      plain
-                      @click="submitWorkOrder(buttonItem.id)"
+        <template>
+          <div v-for="item in processLists" :key="item.id">
+            <div v-if="item.process_list.length!==0">
+              <div class="workflow-classify-title">
+                {{ item.name }}
+              </div>
+              <div style="margin-bottom: 15px;">
+                <template v-for="(buttonItem, buttonIndex) in item.process_list">
+                  <el-tooltip :key="buttonItem.id" effect="dark" placement="top">
+                    <div slot="content">
+                      {{ buttonItem.name }}
+                      <br>
+                      {{ buttonItem.remarks }}
+                    </div>
+                    <div
+                      class="workflow-classify-div"
+                      :style="(buttonIndex + 1) % 5 === 0 ? {'padding-right': 0} : {'padding-right': '12px'}"
                     >
-                      <div class="process-button-div">
-                        <div class="process-div-icon">
-                          <e-icon class="process-div-el-icon" :icon-name="buttonItem.icon" />
-                        </div>
-                        <div class="process-div-body">
-                          <div class="process-div-title ellipsis">
-                            {{ buttonItem.name }}
+                      <el-button
+                        style="width: 100%"
+                        plain
+                        @click="submitWorkOrder(buttonItem.id)"
+                      >
+                        <div class="process-button-div">
+                          <div class="process-div-icon">
+                            <e-icon class="process-div-el-icon" :icon-name="buttonItem.icon" />
                           </div>
-                          <div class="process-div-remarks ellipsis">
-                            {{ buttonItem.remarks }}
+                          <div class="process-div-body">
+                            <div class="process-div-title ellipsis">
+                              {{ buttonItem.name }}
+                            </div>
+                            <div class="process-div-remarks ellipsis">
+                              {{ buttonItem.remarks }}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </el-button>
-                  </div>
-                </el-tooltip>
-              </template>
+                      </el-button>
+                    </div>
+                  </el-tooltip>
+                </template>
+              </div>
             </div>
           </div>
-        </div>
-      </template>
+        </template>
+      </el-skeleton>
     </el-card>
   </div>
 </template>
@@ -86,6 +87,7 @@ export default {
   data() {
     return {
       loading: true,
+      skeletonDelay: 0, // 第一次加载不设置骨架延时
       processLists: [],
       listQuery: {}
     }
@@ -106,6 +108,12 @@ export default {
       })
     },
     handleQuery() {
+      this.getProcessList()
+    },
+    refresh() {
+      this.skeletonDelay = 500 // 刷新时设置骨架延时
+      this.loading = true
+      this.listQuery = {}
       this.getProcessList()
     },
     submitWorkOrder(processId) {

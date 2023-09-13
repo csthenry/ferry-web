@@ -92,7 +92,13 @@
               </div>
             </template>
             <div prop="code" style="width: 100%;float: left;margin-bottom: 13px">
-              <el-checkbox v-if="openLdap" v-model="isLdapTmp">LDAP登录</el-checkbox>
+              <!-- <el-checkbox v-if="openLdap" v-model="isLdapTmp">LDAP登录</el-checkbox> -->
+              <el-switch
+                v-if="openLdap"
+                v-model="isLdapTmp"
+                active-text="LDAP登录"
+                active-color="#13ce66"
+              />
             </div>
             <el-row :gutter="20" class="tips-button-container">
               <el-col :span="12">
@@ -194,7 +200,7 @@ export default {
     },
     isLdap: {
       handler: function(val) {
-        this.isLdapTmp = val
+        // this.isLdapTmp = val
         this.openLdap = val
       }
     },

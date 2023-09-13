@@ -104,6 +104,7 @@
     </el-form-item>
     <el-form-item>
       <el-button type="primary" icon="el-icon-search" size="small" @click="getList">搜索</el-button>
+      <el-button type="success" icon="el-icon-refresh" size="small" :loading="loading" @click="refresh">刷新</el-button>
     </el-form-item>
   </div>
 </template>
@@ -118,11 +119,10 @@ import { processList } from '@/api/process/admin/process'
 export default {
   name: 'WorkOrderSearch',
   // eslint-disable-next-line vue/require-prop-types
-  props: ['genre'],
+  props: ['genre', 'loading'],
   data() {
     return {
       processValueList: [],
-      loading: false,
       timeValue: '',
       listQuery: {},
       UserOptions: [],
@@ -166,6 +166,13 @@ export default {
       } else {
         this.listQuery.startTime = parseTime(this.timeValue[0])
         this.listQuery.endTime = parseTime(this.timeValue[1])
+      }
+      this.$emit('handleSearch', this.listQuery)
+    },
+    refresh() {
+      this.timeValue = ''
+      for (var k in this.listQuery) {
+        this.listQuery[k] = ''
       }
       this.$emit('handleSearch', this.listQuery)
     },

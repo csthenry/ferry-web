@@ -3,7 +3,7 @@
     <el-card class="box-card">
       <el-form ref="listQuery" :model="listQuery" :inline="true">
         <el-form ref="listQuery" :model="listQuery" :inline="true">
-          <WorkOrderSearch :genre="'upcoming'" @handleSearch="handleSearch" />
+          <WorkOrderSearch :genre="'upcoming'" :loading="loading" @handleSearch="handleSearch" />
         </el-form>
       </el-form>
 
@@ -153,6 +153,7 @@ export default {
       this.listQuery.page = this.queryParams.pageIndex
       this.listQuery.per_page = this.queryParams.pageSize
       this.listQuery.classify = 1
+
       workOrderList(this.listQuery).then(response => {
         this.ticketList = response.data.data
         this.queryParams.pageIndex = response.data.page

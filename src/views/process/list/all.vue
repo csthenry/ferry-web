@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-card class="box-card">
       <el-form ref="listQuery" :model="listQuery" :inline="true">
-        <WorkOrderSearch :genre="'all'" @handleSearch="handleSearch" />
+        <WorkOrderSearch :genre="'all'" :loading="loading" @handleSearch="handleSearch" />
       </el-form>
 
       <el-table v-loading="loading" border :data="ticketList" @selection-change="handleSelectionChange">
