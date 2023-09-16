@@ -33,7 +33,7 @@
 
     <el-card :bordered="false" :body-style="{padding: '5'}" :style="{ marginBottom: '12px' }">
       <el-form ref="form" :model="form">
-        <el-form-item label="过滤工单统计" :style="{ marginBottom: '0px' }">
+        <el-form-item label="工单统计过滤" :style="{ marginBottom: '0px' }">
           <el-date-picker
             v-model="querys"
             type="daterange"

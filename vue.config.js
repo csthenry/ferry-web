@@ -8,6 +8,35 @@ function resolve(dir) {
 
 const name = defaultSettings.title || 'ferry' // page title
 
+// 本地环境是否需要使用cdn
+const devNeedCdn = true;
+
+// cdn链接
+const cdn = {
+  // cdn：模块名称和模块作用域命名（对应window里面挂载的变量名称）
+  externals: {
+    vue: 'Vue',
+    vuex:'Vuex',
+    axios:'axios',
+    'vue-router':'VueRouter',
+    'element-ui':'ELEMENT',
+    "echarts":"echarts",
+  },
+  // cdn的css链接
+  css: [
+      "https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/theme-chalk/index.min.css",
+  ],
+  // cdn的js链接
+  js: [
+      "https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/2.6.14/vue.min.js",
+      "https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue-router/3.0.2/vue-router.min.js",
+      "https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js",
+      "https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/index.min.js",
+      "https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/echarts/5.3.0/echarts.min.js",
+      "https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/vuex/3.6.2/vuex.min.js",
+  ]
+}
+
 // If your port is set to 80,
 // use administrator privileges to execute the command line.
 // For example, Mac: sudo npm run
@@ -62,18 +91,33 @@ module.exports = {
     },
     disableHostCheck: true,
   },
-  configureWebpack: {
-    plugins: [
-      new MonacoWebpackPlugin()
-    ],
-    name: name,
-    resolve: {
-      alias: {
-        '@': resolve('src')
+  configureWebpack:(config) => {
+    const plugins = []
+    // 用cdn方式引入，则构建时要忽略相关资源
+    if (devNeedCdn){
+      config.externals = cdn.externals
+      config.mode = 'production';
+      config["performance"] = {//打包文件大小配置
+        "maxEntrypointSize": 10000000,
+        "maxAssetSize": 30000000
       }
+      config.plugins.push(
+        new MonacoWebpackPlugin()
+      )
+    }
+    config.name = name,
+    config.resolve['alias'] = {
+        '@': resolve('src')
     }
   },
   chainWebpack(config) {
+    // ============注入cdn start============
+    config.plugin('html').tap(args => {
+        // 需要cdn时，才注入cdn
+        if (devNeedCdn) args[0].cdn = cdn
+        return args
+    })
+    // ============注入cdn end============
     config.plugins.delete('preload') // TODO: need test
     config.plugins.delete('prefetch') // TODO: need test
 

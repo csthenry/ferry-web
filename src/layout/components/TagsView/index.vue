@@ -17,10 +17,10 @@
       </router-link>
     </scroll-pane>
     <ul v-show="visible" :style="{left:left+'px',top:top+'px'}" class="contextmenu">
-      <li @click="refreshSelectedTag(selectedTag)">Refresh</li>
-      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">Close</li>
-      <li @click="closeOthersTags">Close Others</li>
-      <li @click="closeAllTags(selectedTag)">Close All</li>
+      <li @click="refreshSelectedTag(selectedTag)">刷新页面</li>
+      <li v-if="!isAffix(selectedTag)" @click="closeSelectedTag(selectedTag)">关闭当前标签</li>
+      <li @click="closeOthersTags">关闭其他标签</li>
+      <li @click="closeAllTags(selectedTag)">关闭全部标签</li>
     </ul>
   </div>
 </template>
@@ -196,7 +196,7 @@ export default {
 
 <style lang="scss" scoped>
 .tags-view-container {
-  height: 34px;
+  height: 43px;
   width: 100%;
   background: #fff;
   border-bottom: 1px solid #d8dce5;
@@ -206,15 +206,17 @@ export default {
       display: inline-block;
       position: relative;
       cursor: pointer;
-      height: 26px;
-      line-height: 26px;
+      height: 27px;
+      line-height: 27px;
       border: 1px solid #d8dce5;
+      border-radius: 4px;
       color: #495060;
       background: #fff;
       padding: 0 8px;
       font-size: 12px;
       margin-left: 5px;
-      margin-top: 4px;
+      margin-top: 8px;
+      margin-bottom: 8px;
       &:first-of-type {
         margin-left: 15px;
       }
@@ -245,11 +247,11 @@ export default {
     position: absolute;
     list-style-type: none;
     padding: 5px 0;
-    border-radius: 4px;
-    font-size: 12px;
+    border-radius: 5px;
+    font-size: 14px;
     font-weight: 400;
     color: #333;
-    box-shadow: 2px 2px 3px 0 rgba(0, 0, 0, .3);
+    box-shadow: 0px 0px 8px 0 rgba(0,0,0,.3);
     li {
       margin: 0;
       padding: 7px 16px;
@@ -280,8 +282,7 @@ export default {
         vertical-align: -3px;
       }
       &:hover {
-        background-color: #b4bccc;
-        color: #fff;
+        background-color: #bbc0cc75;
       }
     }
   }

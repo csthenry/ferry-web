@@ -88,7 +88,14 @@
                 />
               </el-form-item>
               <div class="login-code" style="cursor:pointer; width: 30%;height: 48px;float: right;background-color: #f0f1f5;">
-                <img style="height: 48px;width: 100%;border: 1px solid rgba(0,0,0, 0.1);border-radius:5px;" :src="codeUrl" @click="getCode">
+                <el-skeleton style="width: 100%" :loading="verifyCodeLoading" :count="1" animated>
+                  <template slot="template">
+                    <el-skeleton-item variant="button" style="width: 100%; height: 48px; border: 1px solid rgba(0,0,0, 0.1); border-radius:5px;" />
+                  </template>
+                  <template>
+                    <img style="height: 48px;width: 100%;border: 1px solid rgba(0,0,0, 0.1);border-radius:5px;" :src="codeUrl" @click="getCode">
+                  </template>
+                </el-skeleton>
               </div>
             </template>
             <div prop="code" style="width: 100%;float: left;margin-bottom: 13px">
@@ -106,7 +113,7 @@
                   placement="bottom"
                   title="初始账号信息"
                   trigger="click"
-                  content="现已接入字节星球、陌上花平台。用户账号：平台账号；初始密码：平台账号.123"
+                  content="用户账号：与平台账号相同；初始密码：用户账号.123"
                 >
                   <el-button slot="reference">初始账号说明</el-button>
                 </el-popover>
@@ -116,7 +123,7 @@
                   placement="bottom"
                   title="初始账号示例"
                   trigger="click"
-                  content="若你的平台账号为：henry，则本系统账号为：henry，初始密码为：henry.123"
+                  content="[平台账号：henry] 本系统账号：henry；初始密码：henry.123"
                 >
                   <el-button slot="reference">初始账号示例</el-button>
                 </el-popover>
@@ -149,6 +156,7 @@ export default {
   name: 'LoginIndex',
   data() {
     return {
+      verifyCodeLoading: true,
       isLdapTmp: false,
       openLdap: false,
       codeUrl: '',
@@ -201,8 +209,10 @@ export default {
     isLdap: {
       handler: function(val) {
         // this.isLdapTmp = val
+        // this.$nextTick可实现在DOM状态更新后，执行传入的方法。
         this.openLdap = val
-      }
+      },
+      immediate: true
     },
     isVerifyCode: {
       handler: function(val) {
@@ -234,10 +244,12 @@ export default {
       }, 1000)
     },
     getCode() {
+      this.verifyCodeLoading = true
       getCodeImg().then(res => {
         if (res !== undefined) {
           this.codeUrl = res.data
           this.loginForm.uuid = res.id
+          this.verifyCodeLoading = false
         }
       })
     },
@@ -273,7 +285,7 @@ export default {
             .then(() => {
               // this.$router.push({ path: this.redirect || '/', query: this.otherQuery })
               this.$router.push({ path: '/' })
-              this.loading = false
+              // this.loading = false
             })
             .catch(() => {
               this.loading = false

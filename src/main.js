@@ -25,8 +25,8 @@ import * as filters from './filters' // global filters
 
 import Pagination from '@/components/Pagination'
 
-import VueParticles from 'vue-particles'
-Vue.use(VueParticles)
+// import VueParticles from 'vue-particles'
+// Vue.use(VueParticles)
 
 // 代码编辑器
 import VueCodeMirror from 'vue-codemirror'

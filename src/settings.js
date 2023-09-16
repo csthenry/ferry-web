@@ -1,6 +1,6 @@
 module.exports = {
   title: 'WorkFlow',
-  logo: 'https://www.fdevops.com/wp-content/uploads/2020/08/1597815294-ferry_logo_white.png',
+  logo: './static/uploadfile/default.png',
   isLdap: false,
   isVerifyCode: true,
 
@@ -8,7 +8,7 @@ module.exports = {
    * @type {boolean} true | false
    * @description Whether show the settings right-panel
    */
-  showSettings: false,
+  showSettings: true,
 
   /**
    * @type {boolean} true | false
@@ -20,7 +20,7 @@ module.exports = {
    * @type {boolean} true | false
    * @description Whether fix the header
    */
-  fixedHeader: false,
+  fixedHeader: true,
 
   /**
    * @type {boolean} true | false
