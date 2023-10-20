@@ -6,13 +6,14 @@
         <i class="el-icon-warning-outline" style="float: right" />
       </el-tooltip>
     </h4>
-    <ul class="list">
+    <ul v-if="list && list.length > 0" class="list">
       <li v-for="(item, index) in list" :key="index">
         <span :class="index < 3 ? 'active' : null">{{ index + 1 }}</span>
         <span>{{ item.name }}</span>
         <span>{{ item.total }}</span>
       </li>
     </ul>
+    <el-empty v-else description="暂无数据" />
   </div>
 </template>
 

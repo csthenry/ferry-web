@@ -342,6 +342,10 @@ export default {
           if (response.code === 200) {
           // this.$router.push({ name: 'upcoming' })
           // window.location.reload()
+            this.$message({
+              message: '数据提交成功',
+              type: 'success'
+            })
             this.getProcessNodeList()
           }
         })

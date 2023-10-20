@@ -185,6 +185,10 @@ export default {
             this.ruleForm.is_exec_task = item.isExecuteTask
             createWorkOrder(this.ruleForm).then(response => {
               if (response.code === 200) {
+                this.$message({
+                  message: '数据提交成功',
+                  type: 'success'
+                })
                 this.$router.push({ path: '/process/upcoming' })
               }
             }).catch(() => {
