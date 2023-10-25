@@ -4,10 +4,10 @@
     <div v-loading="isLoadingStatus">
       <el-card class="box-card">
         <div slot="header" class="clearfix">
-          <span>流程跟踪</span>
+          <span><i class="el-icon-d-arrow-right" style="margin-right: 10px;" />流程跟踪</span>
         </div>
         <div class="text item">
-          <el-steps v-if="currentNode.clazz !== undefined && currentNode.clazz !== null && currentNode.clazz !== ''" :active="activeIndex" align-center finish-status="success">
+          <el-steps v-if="currentNode.clazz !== undefined && currentNode.clazz !== null && currentNode.clazz !== ''" id="process-trace" :active="activeIndex" align-center finish-status="success">
             <template v-for="(item, index) in nodeStepList">
               <!-- 以success形式展示除当前节点外的未隐藏节点  -->
               <el-step
@@ -55,40 +55,29 @@
         :closable="false"
       />
 
-      <el-card class="box-card" style="margin-top: 15px">
-        <div slot="header" class="clearfix">
-          <span>公共信息</span>
-        </div>
-        <div class="text item">
-          <el-form label-width="100px">
-            <el-row>
-              <el-col :span="12">
-                <el-form-item label="标题:" style="margin-bottom: 5px">
-                  <span>{{ processStructureValue.workOrder.title }}</span>
-                </el-form-item>
-              </el-col>
-              <el-col :span="12">
-                <el-form-item label="优先级:" style="margin-bottom: 0">
-                  <span v-if="processStructureValue.workOrder.priority===2">
-                    <el-tag type="warning">紧急</el-tag>
-                  </span>
-                  <span v-else-if="processStructureValue.workOrder.priority===3">
-                    <el-tag type="danger">非常紧急</el-tag>
-                  </span>
-                  <span v-else>
-                    <el-tag type="success">一般</el-tag>
-                  </span>
-                </el-form-item>
-              </el-col>
-            </el-row>
-          </el-form>
-        </div>
-      </el-card>
-
       <el-card class="box-card" style="margin-top: 15px;">
         <div slot="header" class="clearfix">
-          <span>表单信息</span>
+          <span><i class="el-icon-edit" style="margin-right: 10px;" />工单标题：</span>
+          <span>{{ processStructureValue.workOrder.title }}</span>
+          <el-divider direction="vertical" />
+          <span><i class="el-icon-warning-outline" style="margin-right: 10px;" />工单优先级：</span>
+          <span v-if="processStructureValue.workOrder.priority === 2">
+            <el-tag type="warning">紧急</el-tag>
+          </span>
+          <span v-else-if="processStructureValue.workOrder.priority === 3">
+            <el-tag type="danger">非常紧急</el-tag>
+          </span>
+          <span v-else>
+            <el-tag type="success">一般</el-tag>
+          </span>
+          <el-divider direction="vertical" />
+          <span><i class="el-icon-user" style="margin-right: 10px;" />申请人：</span>
+          <span>{{ processStructureValue.workOrder.creator_name }}</span>
+          <el-divider direction="vertical" />
+          <span><i class="el-icon-time" style="margin-right: 10px;" />创建时间：</span>
+          <span>{{ processStructureValue.workOrder.create_time }}</span>
         </div>
+
         <div class="text item">
           <template v-for="(tplItem, tplIndex) in processStructureValue.tpls">
             <fm-generate-form
@@ -110,50 +99,57 @@
             />
           </template>
         </div>
-        <div v-if="processStructureValue.userAuthority">
-          <hr style="background-color: #d9d9d9; border:0; height:1px; margin-bottom: 15px">
-          <div>
-            <el-input
-              v-model="remarks"
-              type="textarea"
-              placeholder="请输入备注信息"
-              maxlength="200"
-              :autosize="{ minRows: 3, maxRows: 99}"
-              show-word-limit
-            />
-          </div>
-          <div class="text item" style="text-align: center;margin-top:18px">
-            <div
-              v-if="isActiveProcessing && currentNode.activeOrder"
+      </el-card>
+      <el-card v-if="processStructureValue.userAuthority" class="box-card" style="margin-top: 15px;">
+        <div slot="header" class="clearfix">
+          <span><i class="el-icon-finished" style="margin-right: 10px;" />处理工单</span>
+        </div>
+        <div>
+          <el-input
+            v-model="remarks"
+            type="textarea"
+            placeholder="请输入备注信息"
+            maxlength="200"
+            :autosize="{ minRows: 3, maxRows: 99 }"
+            show-word-limit
+          />
+        </div>
+        <div class="text item" style="text-align: center;margin-top:18px">
+          <div
+            v-if="isActiveProcessing && currentNode.activeOrder"
+          >
+            <el-button
+              v-permisaction="['process:list:handle:active']"
+              type="primary"
+              @click="activeOrderActive"
             >
+              主动接单
+            </el-button>
+          </div>
+          <div v-else>
+            <template v-for="(item, index) in processStructureValue.edges">
               <el-button
-                v-permisaction="['process:list:handle:active']"
+                v-if="processStructureValue.workOrder.is_end === 0 && item.source === currentNode.id"
+                :key="index"
                 type="primary"
-                @click="activeOrderActive"
+                @click="submitAction(item)"
               >
-                主动接单
+                {{ item.label }}
               </el-button>
-            </div>
-            <div v-else>
-              <template v-for="(item, index) in processStructureValue.edges">
-                <el-button
-                  v-if="processStructureValue.workOrder.is_end===0 && item.source===currentNode.id"
-                  :key="index"
-                  type="primary"
-                  @click="submitAction(item)"
-                >
-                  {{ item.label }}
-                </el-button>
-              </template>
-            </div>
+            </template>
           </div>
         </div>
       </el-card>
 
       <el-card class="box-card" style="margin-top: 15px">
         <div slot="header" class="clearfix">
-          <span>工单流转历史</span>
+          <span><i class="el-icon-refresh" style="margin-right: 10px;" />工单流转历史</span>
         </div>
+        <el-steps :active="processStructureValue.workOrder.is_end === 1 ? 3 : circulationHistoryList.length > 0 ? 1 : 0" finish-status="success" simple style="margin-bottom: 20px;">
+          <el-step title="流程开始" />
+          <el-step title="工单流转中" />
+          <el-step title="流程结束" />
+        </el-steps>
         <div class="text item">
           <el-table
             :data="circulationHistoryList"
@@ -177,9 +173,15 @@
               label="处理时间"
             />
             <el-table-column
-              prop="remarks"
               label="备注"
-            />
+            >
+              <template slot-scope="scope">
+                <el-tag v-if="scope.row.remarks && scope.row.remarks.length > 0" style="white-space: normal;height:auto;">
+                  {{ scope.row.remarks }}
+                </el-tag>
+                <el-tag v-else type="info" style="white-space: normal;height:auto;">暂无备注</el-tag>
+              </template>
+            </el-table-column>
           </el-table>
         </div>
       </el-card>
