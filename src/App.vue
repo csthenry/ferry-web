@@ -24,7 +24,7 @@ body, button, input, optgroup, select, textarea {
   border-color: #409eff;
 }
 /* 进行中状态：圈内 */
-.el-step__head.is-process > .el-step__icon {
+#process-trace .el-step__head.is-process > .el-step__icon {
   background: #409eff;
   color: #fff;
 }
@@ -73,22 +73,23 @@ body, button, input, optgroup, select, textarea {
   color: #F56C6C;
 }
 /* 步骤条逻辑 */
-.el-step__head.is-process > .el-step__line i {
+#process-trace .el-step__head.is-process > .el-step__line i {
     width: 20%!important;
     border-width: 1px!important;
 }
-.el-step__head.is-success > .el-step__line i {
+#process-trace .el-step__head.is-success > .el-step__line i {
     width: 100%!important;
     border-width: 1px!important;
 }
-.el-step__head.is-finish > .el-step__line i {
+#process-trace .el-step__head.is-finish > .el-step__line i {
     width: 100%!important;
     border-width: 1px!important;
 }
-.el-step__title {
+#process-trace .el-step__title {
   margin: 10px auto;
   line-height: normal!important;
 }
+/* 文件上传 */
 .el-upload {
   text-align: left;
 }
