@@ -1,6 +1,6 @@
 module.exports = {
   title: 'WorkFlow',
-  logo: './static/uploadfile/default.png',
+  logo: '/favicon.ico',
   isLdap: false,
   isVerifyCode: true,
 

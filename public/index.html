@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -34,178 +33,73 @@
       color: #000;
       padding: 0.2em 0;
     }
-
-    #loader-wrapper {
-      position: fixed;
-      top: 0;
-      left: 0;
+    .loading-next {
       width: 100%;
-      height: 100%;
-      z-index: 999999;
+      height: 100%
     }
 
-    #loader {
-      display: block;
-      position: relative;
-      left: 50%;
+    .loading-next .loading-next-box {
+      position: absolute;
       top: 50%;
-      width: 150px;
-      height: 150px;
-      margin: -75px 0 0 -75px;
-      border-radius: 50%;
-      border: 10px solid transparent;
-      border-top-color: #FFF;
-      -webkit-animation: spin 2s linear infinite;
-      -ms-animation: spin 2s linear infinite;
-      -moz-animation: spin 2s linear infinite;
-      -o-animation: spin 2s linear infinite;
-      animation: spin 2s linear infinite;
-      z-index: 1001;
+      left: 50%;
+      transform: translate(-50%,-50%)
     }
 
-    #loader:before {
-      content: "";
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      right: 10px;
-      bottom: 10px;
-      border-radius: 50%;
-      border: 10px solid transparent;
-      border-top-color: #FFF;
-      -webkit-animation: spin 2.5s linear infinite;
-      -moz-animation: spin 2.5s linear infinite;
-      -o-animation: spin 2.5s linear infinite;
-      -ms-animation: spin 2.5s linear infinite;
-      animation: spin 2.5s linear infinite;
+    .loading-next .loading-next-box-warp {
+      width: 80px;
+      height: 80px
     }
 
-    #loader:after {
-      content: "";
-      position: absolute;
-      top: 30px;
-      left: 30px;
-      right: 30px;
-      bottom: 30px;
-      border-radius: 50%;
-      border: 10px solid transparent;
-      border-top-color: #FFF;
-      -moz-animation: spin 1.5s linear infinite;
-      -o-animation: spin 1.5s linear infinite;
-      -ms-animation: spin 1.5s linear infinite;
-      -webkit-animation: spin 1.5s linear infinite;
-      animation: spin 1.5s linear infinite;
+    .loading-next .loading-next-box-warp .loading-next-box-item {
+      width: 33.333333%;
+      height: 33.333333%;
+      background: #1890ff;
+      float: left;
+      animation: loading-next-animation 1.2s infinite ease;
+      border-radius: 1px
     }
 
+    .loading-next .loading-next-box-warp .loading-next-box-item:nth-child(7) {
+      animation-delay: 0s
+    }
 
-    @-webkit-keyframes spin {
-      0% {
-        -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        transform: rotate(0deg);
+    .loading-next .loading-next-box-warp .loading-next-box-item:nth-child(4),.loading-next .loading-next-box-warp .loading-next-box-item:nth-child(8) {
+      animation-delay: .1s
+    }
+
+    .loading-next .loading-next-box-warp .loading-next-box-item:nth-child(1),.loading-next .loading-next-box-warp .loading-next-box-item:nth-child(5),.loading-next .loading-next-box-warp .loading-next-box-item:nth-child(9) {
+      animation-delay: .2s
+    }
+
+    .loading-next .loading-next-box-warp .loading-next-box-item:nth-child(2),.loading-next .loading-next-box-warp .loading-next-box-item:nth-child(6) {
+      animation-delay: .3s
+    }
+
+    .loading-next .loading-next-box-warp .loading-next-box-item:nth-child(3) {
+      animation-delay: .4s
+    }
+
+    @keyframes loading-next-animation {
+      0%,70%,to {
+        transform: scaleZ(1)
       }
-
-      100% {
-        -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        transform: rotate(360deg);
+      35% {
+        transform: scale3D(0,0,1)
       }
     }
-
-    @keyframes spin {
-      0% {
-        -webkit-transform: rotate(0deg);
-        -ms-transform: rotate(0deg);
-        transform: rotate(0deg);
+    @-webkit-keyframes loading-next-animation {
+      0%,70%,to {
+        transform: scaleZ(1)
       }
-
-      100% {
-        -webkit-transform: rotate(360deg);
-        -ms-transform: rotate(360deg);
-        transform: rotate(360deg);
+      35% {
+        transform: scale3D(0,0,1)
       }
     }
-
-
-    #loader-wrapper .loader-section {
-      position: fixed;
-      top: 0;
-      width: 51%;
-      height: 100%;
-      background: #7171C6;
-      z-index: 1000;
-      -webkit-transform: translateX(0);
-      -ms-transform: translateX(0);
-      transform: translateX(0);
-    }
-
-    #loader-wrapper .loader-section.section-left {
-      left: 0;
-    }
-
-    #loader-wrapper .loader-section.section-right {
-      right: 0;
-    }
-
-
-    .loaded #loader-wrapper .loader-section.section-left {
-      -webkit-transform: translateX(-100%);
-      -ms-transform: translateX(-100%);
-      transform: translateX(-100%);
-      -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
-      transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
-    }
-
-    .loaded #loader-wrapper .loader-section.section-right {
-      -webkit-transform: translateX(100%);
-      -ms-transform: translateX(100%);
-      transform: translateX(100%);
-      -webkit-transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
-      transition: all 0.7s 0.3s cubic-bezier(0.645, 0.045, 0.355, 1.000);
-    }
-
-    .loaded #loader {
-      opacity: 0;
-      -webkit-transition: all 0.3s ease-out;
-      transition: all 0.3s ease-out;
-    }
-
-    .loaded #loader-wrapper {
-      visibility: hidden;
-      -webkit-transform: translateY(-100%);
-      -ms-transform: translateY(-100%);
-      transform: translateY(-100%);
-      -webkit-transition: all 0.3s 1s ease-out;
-      transition: all 0.3s 1s ease-out;
-    }
-
-    .no-js #loader-wrapper {
+    .no-js .loading-next {
       display: none;
     }
-
     .no-js h1 {
       color: #222222;
-    }
-
-    #loader-wrapper .load_title {
-      font-family: 'Open Sans';
-      color: #FFF;
-      font-size: 19px;
-      width: 100%;
-      text-align: center;
-      z-index: 9999999999999;
-      position: absolute;
-      top: 60%;
-      opacity: 1;
-      line-height: 30px;
-    }
-
-    #loader-wrapper .load_title span {
-      font-weight: normal;
-      font-style: italic;
-      font-size: 13px;
-      color: #FFF;
-      opacity: 0.5;
     }
   </style>
 </head>
@@ -213,9 +107,21 @@
 <body>
   <div id="app">
     <div id="loader-wrapper">
-      <div id="loader"></div>
-      <div class="loader-section section-left"></div>
-      <div class="loader-section section-right"></div>
+      <div class="loading-next">
+        <div class="loading-next-box">
+          <div class="loading-next-box-warp">
+            <div class="loading-next-box-item"></div>
+            <div class="loading-next-box-item"></div>
+            <div class="loading-next-box-item"></div>
+            <div class="loading-next-box-item"></div>
+            <div class="loading-next-box-item"></div>
+            <div class="loading-next-box-item"></div>
+            <div class="loading-next-box-item"></div>
+            <div class="loading-next-box-item"></div>
+            <div class="loading-next-box-item"></div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -226,5 +132,4 @@
   <% } %>
   <!-- 使用CDN的JS文件 -->
 </body>
-
 </html>

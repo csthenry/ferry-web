@@ -22,10 +22,11 @@
     </div> -->
     <div class="login-weaper animated bounceInDown">
       <div class="login-left">
-        <div class="login-time" v-text="currentTime" />
+        <!--        <div class="login-time" v-text="currentTime" />-->
+        <el-tag v-show="currentTime && currentTime.length > 0" class="login-time">{{ currentTime }}</el-tag>
         <img :src="logo" alt="" class="img">
         <p class="title" v-text="title" />
-        <span>现已接入字节星球 | 陌上花（moshanghua.net）</span>
+        <span style="font-weight: 500;">现已接入字节星球 | 陌上花（moshanghua.net）</span>
       </div>
       <div class="login-border">
         <div class="login-main">
@@ -107,35 +108,35 @@
                 active-color="#13ce66"
               />
             </div>
-            <el-row :gutter="20" class="tips-button-container">
-              <el-col :span="12">
-                <el-popover
-                  placement="bottom"
-                  title="初始账号信息"
-                  trigger="click"
-                  content="用户账号：与平台账号相同；初始密码：用户账号.123"
-                >
-                  <el-button slot="reference">初始账号说明</el-button>
-                </el-popover>
-              </el-col>
-              <el-col :span="12">
-                <el-popover
-                  placement="bottom"
-                  title="初始账号示例"
-                  trigger="click"
-                  content="[平台账号：henry] 本系统账号：henry；初始密码：henry.123"
-                >
-                  <el-button slot="reference">初始账号示例</el-button>
-                </el-popover>
-              </el-col>
-            </el-row>
+            <!--            <el-row :gutter="20" class="tips-button-container">-->
+            <!--              <el-col :span="12">-->
+            <!--                <el-popover-->
+            <!--                  placement="bottom"-->
+            <!--                  title="初始账号信息"-->
+            <!--                  trigger="click"-->
+            <!--                  content="用户账号：与平台账号相同；初始密码：用户账号.123"-->
+            <!--                >-->
+            <!--                  <el-button slot="reference">初始账号说明</el-button>-->
+            <!--                </el-popover>-->
+            <!--              </el-col>-->
+            <!--              <el-col :span="12">-->
+            <!--                <el-popover-->
+            <!--                  placement="bottom"-->
+            <!--                  title="初始账号示例"-->
+            <!--                  trigger="click"-->
+            <!--                  content="[平台账号：henry] 本系统账号：henry；初始密码：henry.123"-->
+            <!--                >-->
+            <!--                  <el-button slot="reference">初始账号示例</el-button>-->
+            <!--                </el-popover>-->
+            <!--              </el-col>-->
+            <!--            </el-row>-->
             <el-alert
               title="注意："
               type="warning"
               description="若为首次登录，请及时更改初始密码！"
               show-icon
             />
-            <el-button :loading="loading" type="primary" style="width:100%;padding:12px 20px;margin:20px 0;" @click.native.prevent="handleLogin">
+            <el-button round :loading="loading" type="primary" style="width:100%;padding:12px 20px;margin:20px 0;" @click.native.prevent="handleLogin">
               <span v-if="!loading">登 录</span>
               <span v-else>登 录 中...</span>
             </el-button>
@@ -353,12 +354,9 @@ $cursor: #fff;
     width: 100%;
     height: 100%;
     margin: 0 auto;
-    background: url("../../assets/login.png") no-repeat;
-    background-color: #304175;
+    background: url("../../assets/login.png") no-repeat,radial-gradient(153.25% 257.2% at 118.99% 181.67%,rgba(50,132,255,.2) 0%,rgba(82,120,255,0) 100%),radial-gradient(123.54% 204.83% at 25.87% 195.17%,rgba(111,76,253,.15) 0%,rgba(122,76,253,0) 78.85%),linear-gradient(0deg,rgba(0,94,235,.03),rgba(0,94,235,.03)),radial-gradient(109.58% 109.58% at 31.53% -36.58%,rgba(0,94,235,.3) 0%,rgba(0,94,235,0) 100%),rgba(0,57,142,.05);
     position: relative;
-    background-size: cover;
     height: 100vh;
-    background-position: 50%;
 }
 
 #particles-js{
@@ -370,9 +368,9 @@ $cursor: #fff;
 
 .login-weaper{
   margin: 0 auto;
-  width: 1100px;
-  -webkit-box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 40%);
-  box-shadow: 0px 10px 20px 0px rgb(0 0 0 / 40%);
+  width: 1000px;
+  -webkit-box-shadow: 0px 5px 20px 0px rgb(0 0 0 / 20%);
+  box-shadow: 0px 5px 20px 0px rgb(0 0 0 / 20%);
   z-index: 1000;
   transition: .5s;
   border-radius: 10px;
@@ -388,12 +386,12 @@ $cursor: #fff;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
   flex-direction: column;
-  background-color: rgb(135 172 249 / 75%);
-  color: #fff;
+  background-color: transparent;
+  color: #005eeb;
   float: left;
   width: 50%;
   position: relative;
-    min-height: 600px;
+    min-height: 545px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -404,12 +402,10 @@ $cursor: #fff;
     position: absolute;
     left: 25px;
     top: 25px;
-    width: 100%;
-    color: #fff;
+    font-weight: 700;
+    color: #005eeb;
     opacity: .9;
-    font-size: 18px;
     overflow: hidden;
-    font-weight: 500;
   }
 }
 
@@ -421,15 +417,14 @@ $cursor: #fff;
 
 .login-left .title {
   text-align: center;
-  color: #fff;
-  letter-spacing: 2px;
+  color: #005eeb;
   font-size: 30px;
   font-weight: 600;
 }
 
 .login-border{
   position: relative;
-    min-height: 600px;
+    min-height: 545px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -440,7 +435,7 @@ $cursor: #fff;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
     color: #fff;
-    background-color: hsla(0,0%,100%,.9);
+    background-color: #ffffff8c;
     width: 50%;
     float: left;
 }
