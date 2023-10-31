@@ -99,41 +99,26 @@
                 </el-skeleton>
               </div>
             </template>
-            <div prop="code" style="width: 100%;float: left;margin-bottom: 13px">
-              <!-- <el-checkbox v-if="openLdap" v-model="isLdapTmp">LDAP登录</el-checkbox> -->
+            <div prop="code" style="display: flex;align-items: center;width: 100%;float: left;margin-bottom: 13px">
               <el-switch
                 v-if="openLdap"
                 v-model="isLdapTmp"
                 active-text="LDAP登录"
                 active-color="#13ce66"
               />
+              <el-popover
+                placement="bottom"
+                trigger="hover"
+                title="初始账号信息"
+                content="用户账号：与平台账号相同；初始密码：用户账号.123"
+              >
+                <i slot="reference" class="el-icon-question" style="color: #1890ff;margin-left: 10px" />
+              </el-popover>
             </div>
-            <!--            <el-row :gutter="20" class="tips-button-container">-->
-            <!--              <el-col :span="12">-->
-            <!--                <el-popover-->
-            <!--                  placement="bottom"-->
-            <!--                  title="初始账号信息"-->
-            <!--                  trigger="click"-->
-            <!--                  content="用户账号：与平台账号相同；初始密码：用户账号.123"-->
-            <!--                >-->
-            <!--                  <el-button slot="reference">初始账号说明</el-button>-->
-            <!--                </el-popover>-->
-            <!--              </el-col>-->
-            <!--              <el-col :span="12">-->
-            <!--                <el-popover-->
-            <!--                  placement="bottom"-->
-            <!--                  title="初始账号示例"-->
-            <!--                  trigger="click"-->
-            <!--                  content="[平台账号：henry] 本系统账号：henry；初始密码：henry.123"-->
-            <!--                >-->
-            <!--                  <el-button slot="reference">初始账号示例</el-button>-->
-            <!--                </el-popover>-->
-            <!--              </el-col>-->
-            <!--            </el-row>-->
             <el-alert
-              title="注意："
+              title="注意"
               type="warning"
-              description="若为首次登录，请及时更改初始密码！"
+              description="首次登录账号，请及时更改初始密码！"
               show-icon
             />
             <el-button round :loading="loading" type="primary" style="width:100%;padding:12px 20px;margin:20px 0;" @click.native.prevent="handleLogin">

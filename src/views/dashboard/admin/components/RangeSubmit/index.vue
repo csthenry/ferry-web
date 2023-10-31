@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import * as echarts from 'echarts';
+import * as echarts from 'echarts'
 import resize from '../mixins/resize'
 
 export default {
@@ -99,7 +99,7 @@ export default {
           {
             name: '工单总数',
             type: 'line',
-            color:'#74c0df',
+            color: '#74c0df',
             areaStyle: {},
             emphasis: {
               focus: 'series'
@@ -109,7 +109,7 @@ export default {
           {
             name: '未结束',
             type: 'line',
-            color:'#fac858',
+            color: '#fac858',
             areaStyle: {},
             emphasis: {
               focus: 'series'
@@ -119,7 +119,7 @@ export default {
           {
             name: '已结束',
             type: 'line',
-            color:'#91cc75',
+            color: '#91cc75',
             areaStyle: {},
             emphasis: {
               focus: 'series'

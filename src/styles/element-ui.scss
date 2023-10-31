@@ -1,5 +1,14 @@
 // cover some element-ui styles
-
+html{
+  --el-menu-border-color: #dcdfe6;
+  --el-border-radius-small: 5px !important;
+  --el-box-shadow-light: 0px 0px 4px rgba(0, 94, 235, 0.1) !important;
+  --el-text-color-regular: #646a73 !important;
+  // * menu
+  --el-menu-bg-color: #e5effd;
+  --el-menu-item-bg-color: rgba(255, 255, 255, .3);
+  --el-menu-item-bg-color-active: #ffffff;
+}
 .el-breadcrumb__inner,
 .el-breadcrumb__inner a {
   font-weight: 400 !important;

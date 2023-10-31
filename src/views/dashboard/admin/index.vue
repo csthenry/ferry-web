@@ -52,7 +52,7 @@
     <el-card v-loading="loading" :bordered="false" :body-style="{padding: '0'}" :style="{ marginBottom: '12px' }">
       <div class="salesCard">
         <div>
-          <h4 :style="{ marginBottom: '20px' }" style="margin-left: 20px;">工单数据统计</h4>
+          <h4 :style="{ marginBottom: '20px' }" style="margin-left: 20px;"><i class="el-icon-s-data" />工单数据统计</h4>
           <RangeSubmit :statistics-data="dashboardValue.submit" />
         </div>
       </div>

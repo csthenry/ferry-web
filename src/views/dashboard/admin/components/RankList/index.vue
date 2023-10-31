@@ -59,7 +59,7 @@ export default {
             text-align: center;
           }
           &.active {
-            background-color: #314659;
+            background-color: #81aff5;
             color: #fff;
           }
           &:last-child {

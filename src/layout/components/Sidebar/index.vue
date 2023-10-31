@@ -5,11 +5,11 @@
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
-        :background-color="variables.menuBg"
+        :background-color="variables.subMenuBg"
         :text-color="variables.menuText"
-        :unique-opened="false"
+        :unique-opened="true"
         :active-text-color="variables.menuActiveText"
-        :collapse-transition="false"
+        :collapse-transition="true"
         mode="vertical"
       >
         <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
@@ -52,3 +52,15 @@ export default {
   }
 }
 </script>
+<style lang="scss">
+@import '@/styles/variables.scss';
+
+.sidebar-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: url(../../../assets/menu-bg.png) $menuBg no-repeat top;
+  background-size: contain;
+}
+</style>
