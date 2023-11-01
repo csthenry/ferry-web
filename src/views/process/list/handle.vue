@@ -57,19 +57,19 @@
 
       <el-card class="box-card" style="margin-top: 15px;">
         <div slot="header" class="clearfix" style="display: flex; align-items: center; line-height: 28px; flex-wrap: wrap;">
-          <span><i class="el-icon-edit" style="margin-right: 10px;" />工单标题：</span>
+          <span><i class="el-icon-edit" style="margin-right: 5px;" />工单标题：</span>
           <span>{{ processStructureValue.workOrder.title }}</span>
           <el-divider direction="vertical" />
-          <span><i class="el-icon-warning-outline" style="margin-right: 10px;" />工单优先级：</span>
+          <span><i class="el-icon-warning-outline" style="margin-right: 5px;" />工单优先级：</span>
           <el-tag v-if="processStructureValue.workOrder.priority === 2" type="warning">紧急</el-tag>
           <el-tag v-else-if="processStructureValue.workOrder.priority === 3" type="danger">非常紧急</el-tag>
           <el-tag v-else type="success">一般</el-tag>
           <el-divider direction="vertical" />
-          <span><i class="el-icon-user" style="margin-right: 10px;" />申请人：</span>
+          <span><i class="el-icon-user" style="margin-right: 5px;" />申请人：</span>
           <el-avatar icon="el-icon-user-solid" size="small" style="margin-right: 5px;" :src="processStructureValue.workOrder.creator_avatar" />
           <span>{{ processStructureValue.workOrder.creator_name }}</span>
           <el-divider direction="vertical" />
-          <span><i class="el-icon-time" style="margin-right: 10px;" />创建时间：</span>
+          <span><i class="el-icon-time" style="margin-right: 5px;" />创建时间：</span>
           <span>{{ processStructureValue.workOrder.create_time }}</span>
         </div>
 

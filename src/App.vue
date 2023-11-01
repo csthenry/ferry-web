@@ -17,6 +17,11 @@ body, button, input, optgroup, select, textarea {
   font-family: "HarmonyOS Sans SC", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB",
     "Microsoft YaHei", "微软雅黑", Arial, sans-serif !important;
 }
+
+.el-button--primary {
+  background-color: #005eeb;
+  border-color: #005eeb;
+}
 /* el-step */
 /* 进行中状态：圈线 */
 .el-step__head.is-process {
@@ -99,6 +104,9 @@ body, button, input, optgroup, select, textarea {
     display: none!important;
   }
   .el-pagination__jump {
+    display: none!important;
+  }
+  .el-pagination .el-pager {
     display: none!important;
   }
 }

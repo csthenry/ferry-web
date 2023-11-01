@@ -1,6 +1,9 @@
 <template>
   <div class="app-container">
     <el-card class="box-card remove-padding-bottom">
+      <div slot="header" class="clearfix">
+        <span><i class="el-icon-menu" style="margin-right: 10px;" />可申请工单列表</span>
+      </div>
       <el-form ref="listQuery" :model="listQuery" :inline="true">
         <el-form-item label="流程名称">
           <el-input
@@ -125,8 +128,17 @@ export default {
 
 <style scoped>
   .workflow-classify-title {
-    border-left: 3px solid rgb(64, 158, 255);
+    //border-left: 3px solid rgb(64, 158, 255);
     padding-left: 5px;
+  }
+  .workflow-classify-title::before {
+    position: absolute;
+    border-radius: 4px;
+    left: 30px;
+    width: 4px;
+    height: 18px;
+    content: "";
+    background: #005eeb;
   }
 
   .workflow-classify-div {

@@ -33,7 +33,7 @@
 
     <el-card :bordered="false" :body-style="{padding: '5'}" :style="{ marginBottom: '12px' }">
       <el-form ref="form" :model="form">
-        <el-form-item label="工单统计过滤" :style="{ marginBottom: '0px' }">
+        <el-form-item label="数据统计过滤" :style="{ marginBottom: '0px' }">
           <el-date-picker
             v-model="querys"
             type="daterange"
@@ -152,11 +152,14 @@ export default {
       })
     },
     timeScreening() {
-      if (this.querys.length > 1) {
+      if (this.querys && this.querys.length > 1) {
         this.queryList.start_time = this.querys[0]
         this.queryList.end_time = this.querys[1]
-        this.getInitData()
+      } else {
+        this.queryList.start_time = ''
+        this.queryList.end_time = ''
       }
+      this.getInitData()
     },
     toTicketList(path) {
       this.$router.push({ path: path })
