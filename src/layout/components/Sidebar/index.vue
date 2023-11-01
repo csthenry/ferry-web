@@ -1,7 +1,7 @@
 <template>
   <div :class="{'has-logo':showLogo}">
     <logo v-if="showLogo" :collapse="isCollapse" />
-    <el-scrollbar wrap-class="scrollbar-wrapper">
+    <el-scrollbar>
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
@@ -9,7 +9,7 @@
         :text-color="variables.menuText"
         :unique-opened="true"
         :active-text-color="variables.menuActiveText"
-        :collapse-transition="true"
+        :collapse-transition="false"
         mode="vertical"
       >
         <sidebar-item v-for="route in permission_routes" :key="route.path" :item="route" :base-path="route.path" />
@@ -62,5 +62,13 @@ export default {
   height: 100%;
   background: url(../../../assets/menu-bg.png) $menuBg no-repeat top;
   background-size: contain;
+  .el-scrollbar {
+    flex: 1;
+    .el-menu {
+      overflow: auto;
+      overflow-x: hidden;
+      border-right: none;
+    }
+  }
 }
 </style>

@@ -9,31 +9,31 @@ function resolve(dir) {
 const name = defaultSettings.title || 'ferry' // page title
 
 // 本地环境是否需要使用cdn
-const devNeedCdn = true;
+const devNeedCdn = true
 
 // cdn链接
 const cdn = {
   // cdn：模块名称和模块作用域命名（对应window里面挂载的变量名称）
   externals: {
     vue: 'Vue',
-    vuex:'Vuex',
-    axios:'axios',
-    'vue-router':'VueRouter',
-    'element-ui':'ELEMENT',
-    "echarts":"echarts",
+    vuex: 'Vuex',
+    axios: 'axios',
+    'vue-router': 'VueRouter',
+    'element-ui': 'ELEMENT',
+    'echarts': 'echarts'
   },
   // cdn的css链接
   css: [
-      "https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/theme-chalk/index.min.css",
+    'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/theme-chalk/index.min.css'
   ],
   // cdn的js链接
   js: [
-      "https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/2.6.14/vue.min.js",
-      "https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue-router/3.0.2/vue-router.min.js",
-      "https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js",
-      "https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/index.min.js",
-      "https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/echarts/5.3.0/echarts.min.js",
-      "https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/vuex/3.6.2/vuex.min.js",
+    'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue/2.6.14/vue.min.js',
+    'https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/vue-router/3.0.2/vue-router.min.js',
+    'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/axios/0.26.0/axios.min.js',
+    'https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/element-ui/2.15.7/index.min.js',
+    'https://lf9-cdn-tos.bytecdntp.com/cdn/expire-1-M/echarts/5.3.0/echarts.min.js',
+    'https://lf26-cdn-tos.bytecdntp.com/cdn/expire-1-M/vuex/3.6.2/vuex.min.js'
   ]
 }
 
@@ -68,38 +68,38 @@ module.exports = {
       errors: false
     },
     proxy: {
-      '/api': {                                //   以'/api'开头的请求会被代理进行转发
-        target: 'http://124.220.236.223:9888',       //   要发向的后台服务器地址  如果后台服务跑在后台开发人员的机器上，就写成 `http://ip:port` 如 `http:192.168.12.213:8081`   ip为后台服务器的ip
+      '/api': { //   以'/api'开头的请求会被代理进行转发
+        target: 'http://124.220.236.223:9888', //   要发向的后台服务器地址  如果后台服务跑在后台开发人员的机器上，就写成 `http://ip:port` 如 `http:192.168.12.213:8081`   ip为后台服务器的ip
         changeOrigin: true
       },
-      '/login': {                                //   以'/api'开头的请求会被代理进行转发
-        target: 'http://124.220.236.223:9888',       //   要发向的后台服务器地址  如果后台服务跑在后台开发人员的机器上，就写成 `http://ip:port` 如 `http:192.168.12.213:8081`   ip为后台服务器的ip
+      '/login': { //   以'/api'开头的请求会被代理进行转发
+        target: 'http://124.220.236.223:9888', //   要发向的后台服务器地址  如果后台服务跑在后台开发人员的机器上，就写成 `http://ip:port` 如 `http:192.168.12.213:8081`   ip为后台服务器的ip
         changeOrigin: true
       },
-      '/refresh_token': {                                //   以'/api'开头的请求会被代理进行转发
-        target: 'http://124.220.236.223:9888',       //   要发向的后台服务器地址  如果后台服务跑在后台开发人员的机器上，就写成 `http://ip:port` 如 `http:192.168.12.213:8081`   ip为后台服务器的ip
+      '/refresh_token': { //   以'/api'开头的请求会被代理进行转发
+        target: 'http://124.220.236.223:9888', //   要发向的后台服务器地址  如果后台服务跑在后台开发人员的机器上，就写成 `http://ip:port` 如 `http:192.168.12.213:8081`   ip为后台服务器的ip
         changeOrigin: true
       },
-      '/swagger': {                                //   以'/api'开头的请求会被代理进行转发
-        target: 'http://124.220.236.223:9888',       //   要发向的后台服务器地址  如果后台服务跑在后台开发人员的机器上，就写成 `http://ip:port` 如 `http:192.168.12.213:8081`   ip为后台服务器的ip
+      '/swagger': { //   以'/api'开头的请求会被代理进行转发
+        target: 'http://124.220.236.223:9888', //   要发向的后台服务器地址  如果后台服务跑在后台开发人员的机器上，就写成 `http://ip:port` 如 `http:192.168.12.213:8081`   ip为后台服务器的ip
         changeOrigin: true
       },
-      '/static/uploadfile': {                                //   以'/api'开头的请求会被代理进行转发
-        target: 'http://124.220.236.223:9888',       //   要发向的后台服务器地址  如果后台服务跑在后台开发人员的机器上，就写成 `http://ip:port` 如 `http:192.168.12.213:8081`   ip为后台服务器的ip
+      '/static/uploadfile': { //   以'/api'开头的请求会被代理进行转发
+        target: 'http://124.220.236.223:9888', //   要发向的后台服务器地址  如果后台服务跑在后台开发人员的机器上，就写成 `http://ip:port` 如 `http:192.168.12.213:8081`   ip为后台服务器的ip
         changeOrigin: true
-      },
+      }
     },
-    disableHostCheck: true,
+    disableHostCheck: true
   },
-  configureWebpack:(config) => {
+  configureWebpack: (config) => {
     const plugins = []
     // 用cdn方式引入，则构建时要忽略相关资源
-    if (devNeedCdn){
+    if (devNeedCdn) {
       config.externals = cdn.externals
-      config.mode = 'production';
-      config["performance"] = {//打包文件大小配置
-        "maxEntrypointSize": 10000000,
-        "maxAssetSize": 30000000
+      config.mode = 'production'
+      config['performance'] = {// 打包文件大小配置
+        'maxEntrypointSize': 10000000,
+        'maxAssetSize': 30000000
       }
       config.plugins.push(
         new MonacoWebpackPlugin()
@@ -107,15 +107,15 @@ module.exports = {
     }
     config.name = name,
     config.resolve['alias'] = {
-        '@': resolve('src')
+      '@': resolve('src')
     }
   },
   chainWebpack(config) {
     // ============注入cdn start============
     config.plugin('html').tap(args => {
-        // 需要cdn时，才注入cdn
-        if (devNeedCdn) args[0].cdn = cdn
-        return args
+      // 需要cdn时，才注入cdn
+      if (devNeedCdn) args[0].cdn = cdn
+      return args
     })
     // ============注入cdn end============
     config.plugins.delete('preload') // TODO: need test

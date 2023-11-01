@@ -24,14 +24,12 @@
       transition: 0s width ease-in-out, 0s padding-left ease-in-out, 0s padding-right ease-in-out;
     }
 
-    .scrollbar-wrapper {
-      overflow-x: hidden !important;
+    .el-scrollbar__wrap {
+      margin: 0!important;
     }
-
-    .el-scrollbar__bar.is-vertical {
-      right: 0px;
+    .el-scrollbar__wrap::-webkit-scrollbar {
+      display: none;
     }
-
     .el-scrollbar {
       height: 100%;
     }
@@ -82,6 +80,7 @@
       span {
         vertical-align: unset !important;
       }
+      font-size: 16px;
       background-color: $subMenuBg;
       &:hover {
         color: $primary-color!important;
@@ -189,6 +188,7 @@
 .el-menu, .el-menu--vertical {
   .el-menu-item {
     display: flex;
+    font-size: 16px;
     align-items: center;
     margin: 3px 0;
     padding-left: 25px!important;

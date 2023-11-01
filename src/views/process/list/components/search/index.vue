@@ -81,7 +81,7 @@
         <el-option label="非常紧急" :value="3" />
       </el-select>
     </el-form-item>
-    <el-form-item v-if="genre !== 'upcoming'" label="是否结束">
+    <el-form-item v-if="genre !== 'upcoming'" label="已结束">
       <el-select v-model="listQuery.isEnd" placeholder="请选择状态" size="small" clearable style="width: 130px" @change="getList">
         <el-option label="是" :value="1" />
         <el-option label="否" :value="0" />
@@ -104,7 +104,7 @@
     </el-form-item>
     <el-form-item>
       <el-button type="primary" icon="el-icon-search" size="small" @click="getList">搜索</el-button>
-      <el-button type="success" icon="el-icon-refresh" size="small" :loading="loading" @click="refresh">刷新</el-button>
+      <el-button type="success" icon="el-icon-refresh" size="small" plain :loading="loading" @click="refresh">刷新</el-button>
     </el-form-item>
   </div>
 </template>

@@ -14,7 +14,7 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" icon="el-icon-search" size="small" @click="handleQuery">搜索</el-button>
-          <el-button type="success" icon="el-icon-refresh" size="small" :loading="loading" @click="refresh">刷新</el-button>
+          <el-button type="success" icon="el-icon-refresh" size="small" plain :loading="loading" @click="refresh">刷新</el-button>
         </el-form-item>
       </el-form>
       <el-skeleton style="width: 100%" :loading="loading" :count="3" :throttle="skeletonDelay" animated>
