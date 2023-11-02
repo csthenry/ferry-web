@@ -76,9 +76,9 @@
     </el-form-item>
     <el-form-item label="优先级">
       <el-select v-model="listQuery.priority" placeholder="请选择优先级" size="small" clearable style="width: 130px" @change="getList">
-        <el-option label="一般" :value="1" />
-        <el-option label="紧急" :value="2" />
-        <el-option label="非常紧急" :value="3" />
+        <el-option label="普通" :value="1" />
+        <el-option label="优先" :value="2" />
+        <el-option label="紧急" :value="3" />
       </el-select>
     </el-form-item>
     <el-form-item v-if="genre !== 'upcoming'" label="已结束">

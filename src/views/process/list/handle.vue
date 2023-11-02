@@ -25,7 +25,7 @@
                 v-else-if="stepIsEnd && item.id === processStructureValue.workOrder.current_state"
                 :key="index"
                 :title="item.label"
-                description="不通过：流程已终止"
+                description="未通过：流程已终止"
                 status="error"
               />
               <!-- 以process/success形式展示当前节点 -->
@@ -61,9 +61,9 @@
           <span>{{ processStructureValue.workOrder.title }}</span>
           <el-divider direction="vertical" />
           <span><i class="el-icon-warning-outline" style="margin-right: 5px;" />工单优先级：</span>
-          <el-tag v-if="processStructureValue.workOrder.priority === 2" type="warning">紧急</el-tag>
-          <el-tag v-else-if="processStructureValue.workOrder.priority === 3" type="danger">非常紧急</el-tag>
-          <el-tag v-else type="success">一般</el-tag>
+          <el-tag v-if="processStructureValue.workOrder.priority === 2" type="warning">优先</el-tag>
+          <el-tag v-else-if="processStructureValue.workOrder.priority === 3" type="danger">紧急</el-tag>
+          <el-tag v-else type="success">普通</el-tag>
           <el-divider direction="vertical" />
           <span><i class="el-icon-user" style="margin-right: 5px;" />申请人：</span>
           <el-avatar icon="el-icon-user-solid" size="small" style="margin-right: 5px;" :src="processStructureValue.workOrder.creator_avatar" />
@@ -152,9 +152,9 @@
             border
             style="width: 100%"
           >
-            <el-table-column label="结果" width="100" align="center">
+            <el-table-column label="状态" width="100" align="center">
               <template slot-scope="scope">
-                <el-tag v-if="scope.row.status === 0" size="small" type="danger">不通过</el-tag>
+                <el-tag v-if="scope.row.status === 0" size="small" type="danger">未通过</el-tag>
                 <el-tag v-else-if="scope.row.status === 1" size="small" type="success">已通过</el-tag>
                 <el-tag v-else size="small" type="warning">已完成</el-tag>
               </template>
@@ -279,7 +279,7 @@ export default {
         for (let i = 0; i < this.circulationHistoryList.length; i++) {
           const item = this.circulationHistoryList[i]
           const cirSource = item['source']
-          this.stepHistoryList[cirSource] = item['processor'] + ' ' + item['update_time']
+          this.stepHistoryList[cirSource] = '[' + item['processor'] + '] ' + item['update_time']
         }
         // 获取当前展示节点列表
         this.nodeStepList = []

@@ -22,16 +22,16 @@
             <span>{{ scope.row.principals ? scope.row.principals : "暂无" }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="优先级" :show-overflow-tooltip="true" width="120" align="center">
+        <el-table-column label="优先级" :show-overflow-tooltip="true" width="110" align="center">
           <template slot-scope="scope">
             <span v-if="scope.row.priority===2">
-              <el-tag type="warning">紧急</el-tag>
+              <el-tag type="warning">优先</el-tag>
             </span>
             <span v-else-if="scope.row.priority===3">
-              <el-tag type="danger">非常紧急</el-tag>
+              <el-tag type="danger">紧急</el-tag>
             </span>
             <span v-else>
-              <el-tag type="success">一般</el-tag>
+              <el-tag type="success">普通</el-tag>
             </span>
           </template>
         </el-table-column>
