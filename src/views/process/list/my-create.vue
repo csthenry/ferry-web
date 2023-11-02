@@ -24,7 +24,7 @@
             <span>{{ scope.row.principals ? scope.row.principals : "暂无" }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="优先级" :show-overflow-tooltip="true" width="120" align="left">
+        <el-table-column label="优先级" :show-overflow-tooltip="true" width="120" align="center">
           <template slot-scope="scope">
             <span v-if="scope.row.priority===2">
               <el-tag type="warning">紧急</el-tag>
@@ -48,7 +48,7 @@
             <span>{{ parseTime(scope.row.create_time) }}</span>
           </template>
         </el-table-column>
-        <el-table-column label="操作" align="center" class-name="small-padding fixed-width" width="180">
+        <el-table-column fixed="right" label="操作" align="center" class-name="small-padding fixed-width">
           <template slot-scope="scope">
             <el-button
               v-permisaction="['process:list:myCreate:select']"

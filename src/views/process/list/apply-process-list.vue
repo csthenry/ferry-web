@@ -128,7 +128,6 @@ export default {
 
 <style scoped>
   .workflow-classify-title {
-    //border-left: 3px solid rgb(64, 158, 255);
     padding-left: 5px;
   }
   .workflow-classify-title::before {

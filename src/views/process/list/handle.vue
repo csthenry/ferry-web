@@ -148,9 +148,17 @@
         <div class="text item">
           <el-table
             :data="circulationHistoryList"
+            max-height="300"
             border
             style="width: 100%"
           >
+            <el-table-column label="结果" width="100" align="center">
+              <template slot-scope="scope">
+                <el-tag v-if="scope.row.status === 0" size="small" type="danger">不通过</el-tag>
+                <el-tag v-else-if="scope.row.status === 1" size="small" type="success">已通过</el-tag>
+                <el-tag v-else size="small" type="warning">已完成</el-tag>
+              </template>
+            </el-table-column>
             <el-table-column
               prop="state"
               label="节点"
