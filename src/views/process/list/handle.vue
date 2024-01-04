@@ -86,7 +86,8 @@
                 currentNode.hideTpls.indexOf(tplItem.form_structure.id)!==-1) ||
                 (currentNode.writeTpls===undefined ||
                 currentNode.writeTpls===null ||
-                currentNode.writeTpls.indexOf(tplItem.form_structure.id)===-1)||
+                currentNode.writeTpls.indexOf(tplItem.form_structure.id)===-1 ||
+                !processStructureValue.userAuthority) ||
                 (isActiveProcessing && currentNode.activeOrder))"
               :remote="remoteFunc"
               :value="tplItem.form_data"
