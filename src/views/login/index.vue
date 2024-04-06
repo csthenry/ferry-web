@@ -110,7 +110,7 @@
                 placement="bottom"
                 trigger="hover"
                 title="初始账号信息"
-                content="用户账号：与平台账号相同；初始密码：用户账号.123"
+                content="用户账号：同对应平台的账号；初始密码：注册时所用的邮箱"
               >
                 <i slot="reference" class="el-icon-question" style="color: #1890ff;margin-left: 10px" />
               </el-popover>
