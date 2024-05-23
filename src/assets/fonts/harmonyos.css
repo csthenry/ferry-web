@@ -6,7 +6,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Regular.a.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Regular.a.woff2) format('woff2');
     unicode-range: U+0000-007F,U+0080-00FF,U+3002,U+FF1F,U+FF01,U+FF0C,U+3001,U+FF1B,U+FF1A,U+300C,U+300D,U+300E,U+300F,U+2018,U+2019,U+201C,U+201D,U+FF08,U+FF09,U+3014,U+3015,U+3010,U+3011,U+2014,U+2026,U+2013,U+FF0E,U+300A,U+300B,U+3008,U+3009;
 }
 @font-face {
@@ -16,7 +16,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Regular.b.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Regular.b.woff2) format('woff2');
     unicode-range: U+4E00-57C3;
 }
 @font-face {
@@ -26,7 +26,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Regular.c.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Regular.c.woff2) format('woff2');
     unicode-range: U+57C4-6187;
 }
 @font-face {
@@ -36,7 +36,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Regular.d.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Regular.d.woff2) format('woff2');
     unicode-range: U+6188-6B4B;
 }
 @font-face {
@@ -46,7 +46,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Regular.e.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Regular.e.woff2) format('woff2');
     unicode-range: U+6B4C-750F;
 }
 @font-face {
@@ -56,7 +56,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Regular.f.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Regular.f.woff2) format('woff2');
     unicode-range: U+7510-7ED3;
 }
 @font-face {
@@ -66,7 +66,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Regular.g.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Regular.g.woff2) format('woff2');
     unicode-range: U+7ED4-8897;
 }
 @font-face {
@@ -76,7 +76,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Regular.h.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Regular.h.woff2) format('woff2');
     unicode-range: U+8898-925B;
 }
 @font-face {
@@ -86,7 +86,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Regular.i.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Regular.i.woff2) format('woff2');
     unicode-range: U+925C-9C1F;
 }
 @font-face {
@@ -96,7 +96,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Regular.j.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Regular.j.woff2) format('woff2');
     unicode-range: U+9C20-9FA5;
 }
 /* HarmonyOS_Sans Medium*/
@@ -107,7 +107,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC Medium'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Medium.a.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Medium.a.woff2) format('woff2');
     unicode-range: U+0000-007F,U+0080-00FF,U+3002,U+FF1F,U+FF01,U+FF0C,U+3001,U+FF1B,U+FF1A,U+300C,U+300D,U+300E,U+300F,U+2018,U+2019,U+201C,U+201D,U+FF08,U+FF09,U+3014,U+3015,U+3010,U+3011,U+2014,U+2026,U+2013,U+FF0E,U+300A,U+300B,U+3008,U+3009;
 }
 @font-face {
@@ -117,7 +117,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC Medium'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Medium.b.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Medium.b.woff2) format('woff2');
     unicode-range: U+4E00-57C3;
 }
 @font-face {
@@ -127,7 +127,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC Medium'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Medium.c.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Medium.c.woff2) format('woff2');
     unicode-range: U+57C4-6187;
 }
 @font-face {
@@ -137,7 +137,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC Medium'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Medium.d.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Medium.d.woff2) format('woff2');
     unicode-range: U+6188-6B4B;
 }
 @font-face {
@@ -147,7 +147,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC Medium'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Medium.e.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Medium.e.woff2) format('woff2');
     unicode-range: U+6B4C-750F;
 }
 @font-face {
@@ -157,7 +157,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC Medium'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Medium.f.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Medium.f.woff2) format('woff2');
     unicode-range: U+7510-7ED3;
 }
 @font-face {
@@ -167,7 +167,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC Medium'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Medium.g.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Medium.g.woff2) format('woff2');
     unicode-range: U+7ED4-8897;
 }
 @font-face {
@@ -177,7 +177,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC Medium'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Medium.h.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Medium.h.woff2) format('woff2');
     unicode-range: U+8898-925B;
 }
 @font-face {
@@ -187,7 +187,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC Medium'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Medium.i.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Medium.i.woff2) format('woff2');
     unicode-range: U+925C-9C1F;
 }
 @font-face {
@@ -197,7 +197,7 @@
     font-display: swap;
     src:
             local('HarmonyOS Sans SC Medium'),
-            url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Medium.j.woff2) format('woff2');
+            url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Medium.j.woff2) format('woff2');
     unicode-range: U+9C20-9FA5;
 }
 /* HarmonyOS_Sans Bold*/
@@ -206,7 +206,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Bold.a.woff2) format('woff2');
+    src: url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Bold.a.woff2) format('woff2');
     unicode-range: U+0000-007F,U+0080-00FF,U+3002,U+FF1F,U+FF01,U+FF0C,U+3001,U+FF1B,U+FF1A,U+300C,U+300D,U+300E,U+300F,U+2018,U+2019,U+201C,U+201D,U+FF08,U+FF09,U+3014,U+3015,U+3010,U+3011,U+2014,U+2026,U+2013,U+FF0E,U+300A,U+300B,U+3008,U+3009;
 }
 @font-face {
@@ -214,7 +214,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Bold.b.woff2) format('woff2');
+    src: url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Bold.b.woff2) format('woff2');
     unicode-range: U+4E00-57C3;
 }
 @font-face {
@@ -222,7 +222,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Bold.c.woff2) format('woff2');
+    src: url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Bold.c.woff2) format('woff2');
     unicode-range: U+57C4-6187;
 }
 @font-face {
@@ -230,7 +230,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Bold.d.woff2) format('woff2');
+    src: url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Bold.d.woff2) format('woff2');
     unicode-range: U+6188-6B4B;
 }
 @font-face {
@@ -238,7 +238,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Bold.e.woff2) format('woff2');
+    src: url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Bold.e.woff2) format('woff2');
     unicode-range: U+6B4C-750F;
 }
 @font-face {
@@ -246,7 +246,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Bold.f.woff2) format('woff2');
+    src: url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Bold.f.woff2) format('woff2');
     unicode-range: U+7510-7ED3;
 }
 @font-face {
@@ -254,7 +254,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Bold.g.woff2) format('woff2');
+    src: url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Bold.g.woff2) format('woff2');
     unicode-range: U+7ED4-8897;
 }
 @font-face {
@@ -262,7 +262,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Bold.h.woff2) format('woff2');
+    src: url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Bold.h.woff2) format('woff2');
     unicode-range: U+8898-925B;
 }
 @font-face {
@@ -270,7 +270,7 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Bold.i.woff2) format('woff2');
+    src: url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Bold.i.woff2) format('woff2');
     unicode-range: U+925C-9C1F;
 }
 @font-face {
@@ -278,6 +278,6 @@
     font-style: normal;
     font-weight: 700;
     font-display: swap;
-    src: url(//upyun.bytecho.net/font/HarmonyOS_Sans_SC_Bold.j.woff2) format('woff2');
+    src: url(//static.bytecho.net/font/HarmonyOS_Sans_SC_Bold.j.woff2) format('woff2');
     unicode-range: U+9C20-9FA5;
 }
