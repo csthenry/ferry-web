@@ -66,8 +66,33 @@
           <el-tag v-else type="success">普通</el-tag>
           <el-divider direction="vertical" />
           <span><i class="el-icon-user" style="margin-right: 5px;" />申请人：</span>
-          <el-avatar icon="el-icon-user-solid" size="small" style="margin-right: 5px;" :src="processStructureValue.workOrder.creator_avatar" />
-          <span>{{ processStructureValue.workOrder.creator_name }}</span>
+          <el-avatar icon="el-icon-user-solid" size="small" style="margin-right: 5px;" :src="processStructureValue.workOrder.creator_info.avatar" />
+          <span>{{ processStructureValue.workOrder.creator_info.name }}</span>
+          <el-popover
+            placement="bottom"
+            trigger="hover"
+          >
+            <el-descriptions title="申请人详细信息" border>
+              <el-descriptions-item label="UID">{{ processStructureValue.workOrder.creator }}</el-descriptions-item>
+              <el-descriptions-item label="用户名">{{ processStructureValue.workOrder.creator_info.name }}</el-descriptions-item>
+              <el-descriptions-item v-if="processStructureValue.workOrder.creator_info.sex === '0'" label="性别"><el-tag size="small">男</el-tag></el-descriptions-item>
+              <el-descriptions-item v-else label="性别"><el-tag size="small" type="danger">女</el-tag></el-descriptions-item>
+              <el-descriptions-item label="手机号">
+                {{ processStructureValue.workOrder.creator_info.phone ? processStructureValue.workOrder.creator_info.phone : '暂无' }}
+              </el-descriptions-item>
+              <el-descriptions-item label="邮箱">{{ processStructureValue.workOrder.creator_info.mail }}</el-descriptions-item>
+              <el-descriptions-item label="用户组">
+                {{ processStructureValue.workOrder.creator_info.role }}
+              </el-descriptions-item>
+              <el-descriptions-item label="用户岗位">
+                {{ processStructureValue.workOrder.creator_info.position }}
+              </el-descriptions-item>
+              <el-descriptions-item label="用户部门">
+                {{ processStructureValue.workOrder.creator_info.department }}
+              </el-descriptions-item>
+            </el-descriptions>
+            <el-tag slot="reference" size="small" style="margin-left: 10px">详细信息</el-tag>
+          </el-popover>
           <el-divider direction="vertical" />
           <span><i class="el-icon-time" style="margin-right: 5px;" />创建时间：</span>
           <span>{{ processStructureValue.workOrder.create_time }}</span>

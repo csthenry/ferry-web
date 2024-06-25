@@ -255,7 +255,8 @@ export const basicComponents = [
         },
         {
           value: 'Option 2'
-        }, {
+        },
+        {
           value: 'Option 3'
         }
       ],
@@ -464,25 +465,19 @@ export const advanceComponents = [
       remoteOptions: [],
       showAllLevels: true,
       options: [{
-        value: 'lanyulei',
-        label: '作者',
+        value: 'opt_1',
+        label: 'Option 1',
         children: [{
-          value: 'character',
-          label: '性格',
+          value: 'sub_opt_1',
+          label: 'Sub Option 1',
           children: [{
-            value: 'good',
-            label: '好'
-          }, {
-            value: 'well',
-            label: '很好'
-          }, {
-            value: 'veryGood',
-            label: '非常好'
+            value: 'mem_opt',
+            label: 'Mem Option'
           }]
         },
         {
-          value: 'Handsome',
-          label: '帅气'
+          value: 'opt_2',
+          label: 'Option 2'
         }]
       }],
       props: {
