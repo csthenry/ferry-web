@@ -84,11 +84,11 @@
               <el-descriptions-item label="用户组">
                 {{ processStructureValue.workOrder.creator_info.role }}
               </el-descriptions-item>
-              <el-descriptions-item label="用户岗位">
-                {{ processStructureValue.workOrder.creator_info.position }}
-              </el-descriptions-item>
               <el-descriptions-item label="用户部门">
                 {{ processStructureValue.workOrder.creator_info.department }}
+              </el-descriptions-item>
+              <el-descriptions-item label="用户岗位">
+                {{ processStructureValue.workOrder.creator_info.position }}
               </el-descriptions-item>
             </el-descriptions>
             <el-tag slot="reference" size="small" style="margin-left: 10px">详细信息</el-tag>
@@ -256,7 +256,7 @@ export default {
       stepHistoryList: [], // 步骤条历史（id, 处理人, 处理时间）
       activeIndex: 0,
       processStructureValue: {
-        workOrder: { title: '' }
+        workOrder: { title: '', creator_info: {}}
       },
       ruleForm: {
         title: '',
