@@ -207,10 +207,12 @@ import {
   activeOrder
 } from '@/api/process/work-order'
 
-import { listUser } from '@/api/system/sysuser'
-
 import { mapGetters } from 'vuex'
+import { listUser } from '@/api/system/sysuser'
 import { getDeptList } from '@/api/system/dept'
+import { listRole } from '@/api/system/role'
+import { listPost } from '@/api/system/post'
+
 export default {
   data() {
     return {
@@ -255,6 +257,18 @@ export default {
         async deptTreeList(resolve) {
           const res = await getDeptList()
           resolve(res.data)
+        },
+        async roleList(resolve) {
+          const res = await listRole({
+            pageSize: 999999
+          })
+          resolve(res.data.list)
+        },
+        async postList(resolve) {
+          const res = await listPost({
+            pageSize: 999999
+          })
+          resolve(res.data.list)
         }
       }
     }
