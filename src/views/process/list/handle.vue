@@ -72,7 +72,7 @@
             placement="bottom"
             trigger="hover"
           >
-            <el-descriptions title="申请人详细信息" border>
+            <el-descriptions title="申请人信息" border>
               <el-descriptions-item label="UID">{{ processStructureValue.workOrder.creator }}</el-descriptions-item>
               <el-descriptions-item label="用户名">{{ processStructureValue.workOrder.creator_info.name }}</el-descriptions-item>
               <el-descriptions-item v-if="processStructureValue.workOrder.creator_info.sex === '0'" label="性别"><el-tag size="small">男</el-tag></el-descriptions-item>

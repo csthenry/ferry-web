@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-card class="box-card">
       <div slot="header" class="clearfix">
-        <span>公共信息</span>
+        <span><i class="el-icon-edit" style="margin-right: 5px;" />公共信息</span>
       </div>
       <div class="text item">
         <el-form ref="ruleForm" :model="ruleForm" :rules="rules" label-width="100px">
@@ -19,10 +19,29 @@
         </el-form>
       </div>
     </el-card>
-
+    <el-card class="box-card" style="margin-top: 10px">
+      <div slot="header" class="clearfix">
+        <span><i class="el-icon-d-arrow-right" style="margin-right: 10px;" />表单流程</span>
+      </div>
+      <div class="text item">
+        <el-steps simple finish-status="process">
+          <template v-for="item in processStructureValue.nodes">
+            <!-- 展示未隐藏节点  -->
+            <el-step
+              v-if="item.isHideNode === false ||
+                item.isHideNode === undefined ||
+                item.isHideNode == null"
+              :title="item.label"
+              status="process"
+              icon="el-icon-star-on"
+            />
+          </template>
+        </el-steps>
+      </div>
+    </el-card>
     <el-card v-loading="loading" class="box-card" style="margin-top: 10px">
       <div slot="header" class="clearfix">
-        <span>表单信息</span>
+        <span><i class="el-icon-edit" style="margin-right: 5px;" />表单信息</span>
       </div>
       <div class="text item">
         <template v-for="(tplItem, tplIndex) in processStructureValue.tpls">
@@ -73,6 +92,8 @@ import {
   processStructure,
   createWorkOrder
 } from '@/api/process/work-order'
+import { getUserProfile } from '@/api/system/sysuser'
+
 import { listUser } from '@/api/system/sysuser'
 import { getDeptList } from '@/api/system/dept'
 import { listRole } from '@/api/system/role'
@@ -141,12 +162,18 @@ export default {
     this.getProcessNodeList()
   },
   methods: {
+    setProcessTitle(processName) {
+      getUserProfile().then(response => {
+        this.ruleForm.title = `[${response.data.nickName}] ${processName}表单`
+      })
+    },
     getProcessNodeList() {
       processStructure({
         processId: this.$route.query.processId
       }).then(response => {
         this.processStructureValue = response.data
         this.currentNode = this.processStructureValue.nodes[0]
+        this.setProcessTitle(response.data.process.name)
         this.loading = false
       })
     },
