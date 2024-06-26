@@ -531,6 +531,7 @@ export default {
   }
 
   .preview-cascader-select .el-input.is-disabled .el-input__inner {
+    padding: 0;
     background-color: #fff;
     border: none;
     color: #303133;
