@@ -66,7 +66,7 @@
             >重开</el-button>
             <el-button
               v-if="scope.row.is_end===0"
-              v-permisaction="['process:list:upcoming:urge']"
+              v-permisaction="['process:list:myCreate:urge']"
               size="mini"
               type="text"
               icon="el-icon-alarm-clock"
