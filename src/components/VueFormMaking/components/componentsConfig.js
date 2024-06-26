@@ -247,7 +247,7 @@ export const basicComponents = [
       clearable: false,
       placeholder: '',
       required: false,
-      showLabel: false,
+      showLabel: true,
       width: '',
       options: [
         {

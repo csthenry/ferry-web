@@ -67,12 +67,24 @@
       <template v-else-if="widget.type === 'cascader'">
         <el-cascader
           v-model="dataModel"
-          class="preview-cascader-class"
+          class="preview-cascader-select"
+          placeholder="未选择"
           :disabled="true"
           :show-all-levels="widget.options.showAllLevels"
           :options="widget.options.remote?widget.options.remoteOptions:widget.options.options"
           :props="widget.options.props"
         />
+      </template>
+      <template v-else-if="widget.type === 'select'">
+        <el-select
+          v-model="dataModel"
+          class="preview-cascader-select"
+          placeholder="未选择"
+          disabled="true"
+          :style="{width: widget.options.width}"
+        >
+          <el-option v-for="item in (widget.options.remote ? widget.options.remoteOptions : widget.options.options)" :key="item.value" :value="item.value" :label="widget.options.showLabel?item.label:item.value" />
+        </el-select>
       </template>
       <template v-else>
         <div>
@@ -223,7 +235,7 @@
           :style="{width: widget.options.width}"
           :filterable="widget.options.filterable"
         >
-          <el-option v-for="item in (widget.options.remote ? widget.options.remoteOptions : widget.options.options)" :key="item.value" :value="item.value" :label="widget.options.showLabel || widget.options.remote?item.label:item.value" />
+          <el-option v-for="item in (widget.options.remote ? widget.options.remoteOptions : widget.options.options)" :key="item.value" :value="item.value" :label="widget.options.showLabel?item.label:item.value" />
         </el-select>
       </template>
 
@@ -518,13 +530,16 @@ export default {
     margin: 0;
   }
 
-  .preview-cascader-class .el-input.is-disabled .el-input__inner {
+  .preview-cascader-select .el-input.is-disabled .el-input__inner {
     background-color: #fff;
     border: none;
     color: #303133;
   }
 
-  .preview-cascader-class .el-input.is-disabled .el-input__suffix .el-input__suffix-inner .el-input__icon.el-icon-arrow-down:before {
+  .preview-cascader-select .el-input.is-disabled .el-input__suffix .el-input__suffix-inner .el-input__icon.el-icon-arrow-down:before {
+    content: ''
+  }
+  .preview-cascader-select .el-input.is-disabled .el-input__suffix .el-input__suffix-inner .el-input__icon.el-icon-arrow-up:before {
     content: ''
   }
 </style>
