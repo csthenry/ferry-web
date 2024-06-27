@@ -7,7 +7,7 @@
           <span><i class="el-icon-d-arrow-right" style="margin-right: 10px;" />流程跟踪</span>
           <el-button style="float: right; padding: 0; font-size: unset;" type="text" @click="()=>{this.wfdDialogVisible=true}">查看流程图</el-button>
           <el-dialog title="查看流程图" :visible.sync="wfdDialogVisible" width="60%">
-            <WfdDesign ref="wfd" :data="processStructureValue" :height="300" mode="view" isView />
+            <WfdDesign ref="wfd" :data="processStructureValue" :height="300" mode="view" is-view />
           </el-dialog>
         </div>
         <div class="text item">
@@ -407,21 +407,21 @@ export default {
     // 提交确认通知
     openSubmitActionCheck(item) {
       this.$confirm('此表单提交后不可撤销，确认提交吗？', '提示', {
-          confirmButtonText: '确定',
-          cancelButtonText: '取消',
-          type: 'warning'
-        }).then(() => {
-          this.$message({
-            type: 'info',
-            message: '正在提交...'
-          });
-          this.submitAction(item);
-        }).catch(() => {
-          this.$message({
-            type: 'info',
-            message: '已取消提交'
-          });
-      });
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(() => {
+        this.$message({
+          type: 'info',
+          message: '正在提交...'
+        })
+        this.submitAction(item)
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消提交'
+        })
+      })
     },
     // 获取提示消息
     getAlertMessage() {

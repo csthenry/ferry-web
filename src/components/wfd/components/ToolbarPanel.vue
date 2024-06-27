@@ -1,70 +1,70 @@
 <template>
-    <div class="toolbar">
-        <el-tooltip :content="this.i18n['tooltip.undo']" placement="bottom">
-            <span class="command" data-command="undo">
-                <span class="iconfont icon-undo"/>
-            </span>
-        </el-tooltip>
-        <el-tooltip :content="this.i18n['tooltip.redo']" placement="bottom">
-            <span class="command" data-command="redo">
-                <span class="iconfont icon-redo"/>
-            </span>
-        </el-tooltip>
-        <span class="separator"/>
-        <el-tooltip :content="this.i18n['tooltip.copy']" placement="bottom">
-            <span class="command" data-command="copy">
-                <span class="iconfont icon-copy-o"/>
-            </span>
-        </el-tooltip>
-        <el-tooltip :content="this.i18n['tooltip.paste']" placement="bottom">
-            <span class="command" data-command="paste">
-                <span class="iconfont icon-paster-o"/>
-            </span>
-        </el-tooltip>
-        <el-tooltip :content="this.i18n['tooltip.delete']" placement="bottom">
-            <span class="command" data-command="delete">
-                <span class="iconfont icon-delete-o"/>
-            </span>
-        </el-tooltip>
-        <span class="separator"/>
-        <el-tooltip :content="this.i18n['tooltip.zoomIn']" placement="bottom">
-            <span class="command" data-command="zoomIn">
-                <span class="iconfont icon-zoom-in-o"/>
-            </span>
-        </el-tooltip>
-        <el-tooltip :content="this.i18n['tooltip.zoomOut']" placement="bottom">
-            <span class="command" data-command="zoomOut">
-                <span class="iconfont icon-zoom-out-o"/>
-            </span>
-        </el-tooltip>
-        <el-tooltip :content="this.i18n['tooltip.zoomReset']" placement="bottom">
-            <span class="command" data-command="resetZoom">
-                <span class="iconfont icon-actual-size-o"/>
-            </span>
-        </el-tooltip>
-        <el-tooltip :content="this.i18n['tooltip.autoFit']" placement="bottom">
-            <span class="command" data-command="autoFit">
-                <span class="iconfont icon-fit"/>
-            </span>
-        </el-tooltip>
-        <span class="separator"/>
-        <el-tooltip :content="this.i18n['tooltip.toFront']" placement="bottom">
-            <span class="command" data-command="toFront">
-                <span class="iconfont icon-to-front"/>
-            </span>
-        </el-tooltip>
-        <el-tooltip :content="this.i18n['tooltip.toBack']" placement="bottom">
-            <span class="command" data-command="toBack">
-                <span class="iconfont icon-to-back"/>
-            </span>
-        </el-tooltip>
-    </div>
+  <div class="toolbar">
+    <el-tooltip :content="this.i18n['tooltip.undo']" placement="bottom">
+      <span class="command" data-command="undo">
+        <span class="iconfont icon-undo" />
+      </span>
+    </el-tooltip>
+    <el-tooltip :content="this.i18n['tooltip.redo']" placement="bottom">
+      <span class="command" data-command="redo">
+        <span class="iconfont icon-redo" />
+      </span>
+    </el-tooltip>
+    <span class="separator" />
+    <el-tooltip :content="this.i18n['tooltip.copy']" placement="bottom">
+      <span class="command" data-command="copy">
+        <span class="iconfont icon-copy-o" />
+      </span>
+    </el-tooltip>
+    <el-tooltip :content="this.i18n['tooltip.paste']" placement="bottom">
+      <span class="command" data-command="paste">
+        <span class="iconfont icon-paster-o" />
+      </span>
+    </el-tooltip>
+    <el-tooltip :content="this.i18n['tooltip.delete']" placement="bottom">
+      <span class="command" data-command="delete">
+        <span class="iconfont icon-delete-o" />
+      </span>
+    </el-tooltip>
+    <span class="separator" />
+    <el-tooltip :content="this.i18n['tooltip.zoomIn']" placement="bottom">
+      <span class="command" data-command="zoomIn">
+        <span class="iconfont icon-zoom-in-o" />
+      </span>
+    </el-tooltip>
+    <el-tooltip :content="this.i18n['tooltip.zoomOut']" placement="bottom">
+      <span class="command" data-command="zoomOut">
+        <span class="iconfont icon-zoom-out-o" />
+      </span>
+    </el-tooltip>
+    <el-tooltip :content="this.i18n['tooltip.zoomReset']" placement="bottom">
+      <span class="command" data-command="resetZoom">
+        <span class="iconfont icon-actual-size-o" />
+      </span>
+    </el-tooltip>
+    <el-tooltip :content="this.i18n['tooltip.autoFit']" placement="bottom">
+      <span class="command" data-command="autoFit">
+        <span class="iconfont icon-fit" />
+      </span>
+    </el-tooltip>
+    <span class="separator" />
+    <el-tooltip :content="this.i18n['tooltip.toFront']" placement="bottom">
+      <span class="command" data-command="toFront">
+        <span class="iconfont icon-to-front" />
+      </span>
+    </el-tooltip>
+    <el-tooltip :content="this.i18n['tooltip.toBack']" placement="bottom">
+      <span class="command" data-command="toBack">
+        <span class="iconfont icon-to-back" />
+      </span>
+    </el-tooltip>
+  </div>
 </template>
 
 <script>
-  export default {
-    inject: ['i18n']
-  }
+export default {
+  inject: ['i18n']
+}
 </script>
 
 <style lang="scss" scoped>

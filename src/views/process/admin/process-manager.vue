@@ -182,7 +182,7 @@
                     :lang="lang"
                   />
                   <el-dialog title="查看流程图" :visible.sync="wfdDialogVisible" :append-to-body="true" width="60%">
-                    <WfdDesign ref="wfd" :data="ruleForm.structure" :height="300" isView />
+                    <WfdDesign ref="wfd" :data="ruleForm.structure" :height="300" is-view />
                   </el-dialog>
                 </div>
               </div>

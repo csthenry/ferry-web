@@ -1,6 +1,6 @@
-import editorStyle from "../util/defaultStyle";
-import { shapeBase } from '@antv/g6/lib/shape/shapeBase';
-import Shape from '@antv/g6/lib/shape/shape';
+import editorStyle from '../util/defaultStyle'
+import { shapeBase } from '@antv/g6/lib/shape/shapeBase'
+import Shape from '@antv/g6/lib/shape/shape'
 
 export default function(G6) {
   Shape.registerFactory('controlPoint', {
@@ -10,28 +10,28 @@ export default function(G6) {
         type: 'marker',
         itemType: type,
         drawShape(cfg, group) {
-          const style = this.getShapeStyle(cfg);
+          const style = this.getShapeStyle(cfg)
           const shape = group.addShape('marker', {
             attrs: {
               ...style,
               symbol: 'square'
             },
             name: 'controlPoint-shape',
-            draggable: true,
-          });
-          return shape;
+            draggable: true
+          })
+          return shape
         },
         setState(name, value, item) {
           if (name === 'active') {
             if (value) {
-              this.update({ style: { ...editorStyle.pointPointHoverStyle } }, item);
+              this.update({ style: { ...editorStyle.pointPointHoverStyle }}, item)
             } else {
-              this.update({ style: { ...editorStyle.pointPointStyle } }, item);
+              this.update({ style: { ...editorStyle.pointPointStyle }}, item)
             }
           }
         }
-      });
-      return shapeObj;
+      })
+      return shapeObj
     }
-  });
+  })
 }
