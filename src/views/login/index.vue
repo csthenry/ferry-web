@@ -1,38 +1,17 @@
 <template>
   <div class="login-container">
-    <!-- 粒子特效 -->
-    <!-- <div id="particles-js">
-      <vue-particles
-        color="#dedede"
-        :particle-opacity="0.7"
-        :particles-number="80"
-        shape-type="circle"
-        :particle-size="4"
-        lines-color="#dedede"
-        :lines-width="1"
-        :line-linked="true"
-        :line-opacity="0.4"
-        :lines-distance="150"
-        :move-speed="3"
-        :hover-effect="true"
-        hover-mode="grab"
-        :click-effect="true"
-        click-mode="push"
-      />
-    </div> -->
     <div class="login-weaper animated bounceInDown">
       <div class="login-left">
-        <!--        <div class="login-time" v-text="currentTime" />-->
         <el-tag v-show="currentTime && currentTime.length > 0" class="login-time">{{ currentTime }}</el-tag>
         <img :src="logo" alt="" class="img">
         <p class="title" v-text="title" />
-        <span style="font-weight: 500;">现已接入字节星球 | 陌上花（moshanghua.net）</span>
+        <span style="font-weight: 500;">- Powered by Ferry-neo -</span>
       </div>
       <div class="login-border">
         <div class="login-main">
           <div class="login-title"> 用户登录 </div>
           <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" autocomplete="on" label-position="left">
-            <el-form-item prop="username">
+            <el-form-item prop="username" style="margin-bottom: 15px;">
               <span class="svg-container">
                 <i class="el-icon-user" />
               </span>
@@ -48,7 +27,7 @@
             </el-form-item>
 
             <el-tooltip v-model="capsTooltip" content="Caps lock is On" placement="right" manual>
-              <el-form-item prop="password">
+              <el-form-item prop="password" style="margin-bottom: 15px;">
                 <span class="svg-container">
                   <svg-icon icon-class="password" />
                 </span>
@@ -71,7 +50,7 @@
               </el-form-item>
             </el-tooltip>
             <template v-if="isVerifyCodeTmp">
-              <el-form-item prop="code" style="width: 66%;float: left; margin-bottom: 13px">
+              <el-form-item prop="code" style="width: 66%;float: left; margin-bottom: 15px;">
                 <span class="svg-container">
                   <svg-icon icon-class="validCode" />
                 </span>
@@ -94,12 +73,12 @@
                     <el-skeleton-item variant="button" style="width: 100%; height: 48px; border: 1px solid rgba(0,0,0, 0.1); border-radius:5px;" />
                   </template>
                   <template>
-                    <img style="height: 48px;width: 100%;border: 1px solid rgba(0,0,0, 0.1);border-radius:5px;" :src="codeUrl" @click="getCode">
+                    <img style="height: 48px; width: 100%; border: 1px solid rgba(0,0,0, 0.1); border-radius:5px;" :src="codeUrl" @click="getCode">
                   </template>
                 </el-skeleton>
               </div>
             </template>
-            <div prop="code" style="display: flex;align-items: center;width: 100%;float: left;margin-bottom: 13px">
+            <div prop="code" style="display: flex; align-items: center; width: 100%; float: left;margin-bottom: 15px;">
               <el-switch
                 v-if="openLdap"
                 v-model="isLdapTmp"
@@ -109,18 +88,12 @@
               <el-popover
                 placement="bottom"
                 trigger="hover"
-                title="初始账号信息"
-                content="用户账号：同对应平台的账号；初始密码：注册时所用的邮箱"
+                title="LDAP登录说明"
+                content="非LDAP用户请关闭此按钮后登录，忘记密码请联系管理员"
               >
                 <i slot="reference" class="el-icon-question" style="color: #1890ff;margin-left: 10px" />
               </el-popover>
             </div>
-            <el-alert
-              title="注意"
-              type="warning"
-              description="首次登录账号，请及时更改初始密码！"
-              show-icon
-            />
             <el-button round :loading="loading" type="primary" style="width:100%;padding:12px 20px;margin:20px 0;" @click.native.prevent="handleLogin">
               <span v-if="!loading">登 录</span>
               <span v-else>登 录 中...</span>
@@ -310,7 +283,7 @@ $cursor: #fff;
   }
   .login-border {
     width: 100%!important;
-    border-radius: 10px!important;
+    border-radius: 4px!important;
   }
 }
 @media screen and (max-width: 570px) {
@@ -353,17 +326,17 @@ $cursor: #fff;
 
 .login-weaper{
   margin: 0 auto;
-  width: 1000px;
+  width: 850px;
   -webkit-box-shadow: 0px 5px 20px 0px rgb(0 0 0 / 20%);
   box-shadow: 0px 5px 20px 0px rgb(0 0 0 / 20%);
   z-index: 1000;
   transition: .5s;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 .login-left{
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
@@ -374,9 +347,9 @@ $cursor: #fff;
   background-color: transparent;
   color: #005eeb;
   float: left;
-  width: 50%;
+  width: 55%;
   position: relative;
-    min-height: 545px;
+    min-height: 470px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -403,13 +376,13 @@ $cursor: #fff;
 .login-left .title {
   text-align: center;
   color: #005eeb;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 600;
 }
 
 .login-border{
   position: relative;
-    min-height: 545px;
+    min-height: 470px;
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
@@ -417,23 +390,23 @@ $cursor: #fff;
     display: -ms-flexbox;
     display: flex;
     border-left: none;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
     color: #fff;
     background-color: #ffffff8c;
-    width: 50%;
+    width: 45%;
     float: left;
 }
 
 .login-main{
-    margin: 40px auto;
-    width: 65%;
+    margin: 30px auto;
+    width: 70%;
     transition: .5s;
 }
 
 .login-title{
   color: #333;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     font-weight: bold;
     font-size: 25px;
     text-align: center;
@@ -466,10 +439,14 @@ $cursor: #fff;
   }
 
   .el-form-item {
-    border: 1px solid rgba(0,0,0, 0.1);
-    background: rgba(255, 255, 255, 0.8);
-    border-radius: 5px;
+    // border: 1px solid rgba(0,0,0, 0.1);
+    // background: rgba(255, 255, 255, 0.8);
+    // border-radius: 5px;
     color: #454545;
+    background: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border-bottom: 1px solid #dcdfe6;
   }
   .el-alert{
     margin-top: 20px;

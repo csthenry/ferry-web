@@ -6,7 +6,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const name = defaultSettings.title || 'ferry' // page title
+const name = defaultSettings.title || 'workflow' // page title
 
 // 本地环境是否需要使用cdn
 const devNeedCdn = true
@@ -44,7 +44,9 @@ const cdn = {
 // port = 9527 npm run dev OR npm run dev --port = 9527
 const port = process.env.port || process.env.npm_config_port || 9527 // dev port
 
-const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
+// const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin') // 清除注释
+const CompressionWebpackPlugin = require('compression-webpack-plugin'); // 开启压缩
 
 // All configuration item explanations can be find in https://cli.vuejs.org/config/
 module.exports = {
@@ -61,12 +63,9 @@ module.exports = {
   lintOnSave: false, // process.env.NODE_ENV === 'development',
   productionSourceMap: false,
   devServer: {
+    host: 'localhost',
     port: port,
     open: true,
-    overlay: {
-      warnings: false,
-      errors: false
-    },
     proxy: {
       '/api': { //   以'/api'开头的请求会被代理进行转发
         target: 'http://localhost:8001', //   要发向的后台服务器地址  如果后台服务跑在后台开发人员的机器上，就写成 `http://ip:port` 如 `http:192.168.12.213:8081`   ip为后台服务器的ip
@@ -94,15 +93,41 @@ module.exports = {
   configureWebpack: (config) => {
     const plugins = []
     // 用cdn方式引入，则构建时要忽略相关资源
-    if (devNeedCdn) {
+    if (process.env.NODE_ENV === 'development' || devNeedCdn) {
       config.externals = cdn.externals
       config.mode = 'production'
       config['performance'] = {// 打包文件大小配置
         'maxEntrypointSize': 10000000,
         'maxAssetSize': 30000000
       }
+      // config.plugins.push(
+      //   new MonacoWebpackPlugin()
+      // )
       config.plugins.push(
-        new MonacoWebpackPlugin()
+        new UglifyJsPlugin({
+          uglifyOptions: {
+            output: {
+              comments: false, // 去掉注释
+            },
+            warnings: false,
+            compress: {
+              drop_console: false,
+              drop_debugger: false,
+              // pure_funcs: ['console.log']//移除console
+            }
+          }
+        })
+      )
+      // 服务器也要相应开启gzip
+      config.plugins.push(
+        new CompressionWebpackPlugin({
+          filename: '[path].gz[query]',
+          algorithm: 'gzip',
+          test: /\.(js|css)$/,// 匹配文件名
+          threshold: 10000, // 对超过10k的数据压缩
+          deleteOriginalAssets: false, // 不删除源文件
+          minRatio: 0.8 // 压缩比
+        })
       )
     }
     config.name = name,
@@ -117,9 +142,14 @@ module.exports = {
       if (devNeedCdn) args[0].cdn = cdn
       return args
     })
+    config.plugin('webpack-bundle-analyzer') // 查看打包文件体积大小
+      .use(require('webpack-bundle-analyzer').BundleAnalyzerPlugin)
     // ============注入cdn end============
-    config.plugins.delete('preload') // TODO: need test
-    config.plugins.delete('prefetch') // TODO: need test
+
+    // 移除 preload(预载) 插件
+    config.plugins.delete('preload')
+    // 移除 prefetch(预取) 插件
+    config.plugins.delete('prefetch')
 
     // set svg-sprite-loader
     config.module

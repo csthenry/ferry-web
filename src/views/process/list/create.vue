@@ -22,6 +22,10 @@
     <el-card class="box-card" style="margin-top: 10px">
       <div slot="header" class="clearfix">
         <span><i class="el-icon-d-arrow-right" style="margin-right: 10px;" />表单流程</span>
+          <el-button style="float: right; padding: 0; font-size: unset;" type="text" @click="()=>{this.wfdDialogVisible=true}">查看流程图</el-button>
+          <el-dialog title="查看流程图" :visible.sync="wfdDialogVisible" width="60%">
+            <WfdDesign ref="wfd" :data="processStructureValue" :height="300" mode="view" isView />
+          </el-dialog>
       </div>
       <div class="text item">
         <el-steps simple finish-status="process">
@@ -70,7 +74,7 @@
           :key="index"
           type="primary"
           :disabled="submitDisabled"
-          @click="submitAction(item)"
+          @click="openSubmitActionCheck(item)"
         >
           {{ item.label }}
         </el-button>
@@ -101,9 +105,13 @@ import { listPost } from '@/api/system/post'
 
 export default {
   name: 'Create',
+  components: {
+    WfdDesign: () => import('@/components/wfd/components/Wfd')
+  },
   data() {
     return {
       loading: true,
+      wfdDialogVisible: false,
       submitDisabled: false,
       active: 0,
       processStructureValue: {},
@@ -241,6 +249,25 @@ export default {
           })
         }
       })
+    },
+    // 提交确认通知
+    openSubmitActionCheck(item) {
+      this.$confirm('此表单提交后不可撤销，确认提交吗？', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(() => {
+          this.$message({
+            type: 'info',
+            message: '正在提交...'
+          });
+          this.submitAction(item);
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '已取消提交'
+          });
+      });
     }
   }
 }

@@ -1,48 +1,47 @@
-import editorStyle from '../util/defaultStyle'
-const Item = require('@antv/g6/src/item/item')
+import editorStyle from '../util/defaultStyle';
+import Item from '@antv/g6/lib/item/item';
+import { deepMix } from '@antv/util';
 
-const createAnchor = (index, style, group) => {
-  const anchorContainer = group.addGroup()
-  const anchor = new Item({
-    type: 'anchor',
-    group: anchorContainer,
-    capture: false,
-    index,
-    isActived: false,
-    model: {
-      style: {
-        ...style,
-        ...editorStyle.anchorPointStyle,
-        cursor: editorStyle.cursor.hoverEffectiveAnchor
-      }
-    }
-  })
-  anchor.isAnchor = true
-  anchor.toFront()
-  let hotpot
-  anchor.showHotpot = function() {
-    hotpot = anchorContainer.addShape('marker', {
+export default class Anchor extends Item {
+  constructor(cfg) {
+    super(deepMix(cfg,{
+      type: 'anchor',
+      isActived: false,
+      model: {
+        type: 'anchor',
+        style: {
+          ...editorStyle.anchorPointStyle,
+          cursor: editorStyle.cursor.hoverEffectiveAnchor,
+        }
+      },
+    }));
+    this.enableCapture(true);
+    this.isAnchor = true;
+    this.toFront();
+  }
+
+  showHotpot(){
+    this.hotpot = this.getContainer().addShape('marker', {
       attrs: {
-        ...style,
+        ...this.get('model').style,
         ...editorStyle.anchorHotsoptStyle
-      }
-    })
-    hotpot.toFront()
-    anchor.getKeyShape().toFront()
+      },
+      name: 'hotpot-shape',
+      draggable: true,
+    });
+    this.hotpot.toFront();
+    this.getKeyShape().toFront();
   }
-  anchor.setActived = function() {
-    anchor.update({ style: { ...editorStyle.anchorPointHoverStyle }})
+  setActived(){
+    this.update({style: {...editorStyle.anchorPointHoverStyle}});
   }
-  anchor.clearActived = function() {
-    anchor.update({ style: { ...editorStyle.anchorPointStyle }})
+  clearActived(){
+    this.update({style: {...editorStyle.anchorPointStyle}});
   }
-  anchor.setHotspotActived = function(act) {
-    hotpot &&
-    (act
-      ? hotpot.attr(editorStyle.anchorHotsoptActivedStyle)
-      : hotpot.attr(editorStyle.anchorHotsoptStyle))
+  setHotspotActived(act){
+    this.hotpot &&
+    (act ?
+      this.hotpot.attr(editorStyle.anchorHotsoptActivedStyle)
+      : this.hotpot.attr(editorStyle.anchorHotsoptStyle))
   }
-  return anchorContainer
 }
-
-export default createAnchor

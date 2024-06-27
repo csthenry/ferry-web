@@ -15,8 +15,8 @@
       <el-dropdown class="avatar-container right-menu-item hover-effect" placement="bottom">
         <div class="avatar-wrapper" style="height: 100%">
           <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar" alt="">
-          <span style="font-size: 14px; position: relative; bottom: 15px">{{ name }}</span>
-          <i class="el-icon-caret-bottom" style="position: absolute; top: 13px" />
+          <span style="font-size: 15px; position: relative; bottom: 12px">{{ name }}</span>
+          <i class="el-icon-caret-bottom" style="position: absolute; top: 20px" />
         </div>
         <el-dropdown-menu slot="dropdown">
           <router-link to="/profile/index">
@@ -133,13 +133,13 @@ export default {
       padding-right: 30px;
 
       .avatar-wrapper {
-        margin-top: 5px;
+        padding-top: 7px;
         position: relative;
 
         .user-avatar {
           cursor: pointer;
-          width: 40px;
-          height: 40px;
+          width: 35px;
+          height: 35px;
           border-radius: 99999px;
         }
 

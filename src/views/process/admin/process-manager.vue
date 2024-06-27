@@ -165,6 +165,9 @@
             <el-form-item label="流程" prop="structure">
               <div style="border-radius: 4px; overflow:hidden">
                 <div>
+                  <el-button size="small" style="float:right;margin: 10px 6px 0 0;" @click="()=>{this.$refs['wfd'].graph.saveXML()}">导出XML</el-button>
+                  <el-button size="small" style="float:right;margin: 10px 6px 0 0;" @click="()=>{this.$refs['wfd'].graph.saveImg()}">导出图片</el-button>
+                  <el-button size="small" style="float:right;margin: 10px 6px 0 0;" @click="()=>{this.wfdDialogVisible=true}">查看流程图</el-button>
                   <WfdDesign
                     v-if="wfdDesignRefresh"
                     ref="wfd"
@@ -178,6 +181,9 @@
                     :height="600"
                     :lang="lang"
                   />
+                  <el-dialog title="查看流程图" :visible.sync="wfdDialogVisible" :append-to-body="true" width="60%">
+                    <WfdDesign ref="wfd" :data="ruleForm.structure" :height="300" isView />
+                  </el-dialog>
                 </div>
               </div>
             </el-form-item>
@@ -216,6 +222,7 @@ export default {
   },
   data() {
     return {
+      wfdDialogVisible: false,
       queryParams: {
         pageIndex: 1,
         pageSize: 10
