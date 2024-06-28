@@ -15,7 +15,7 @@
       <el-dropdown class="avatar-container right-menu-item hover-effect" placement="bottom">
         <div class="avatar-wrapper" style="height: 100%">
           <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar" alt="">
-          <span style="font-size: 15px; position: relative; bottom: 12px">{{ name }}</span>
+          <span style="font-size: 15px; position: relative; margin-left: 10px; bottom: 12px">{{ name }}</span>
           <i class="el-icon-caret-bottom" style="position: absolute; top: 20px" />
         </div>
         <el-dropdown-menu slot="dropdown">

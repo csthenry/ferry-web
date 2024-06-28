@@ -5,7 +5,7 @@
         <el-tag v-show="currentTime && currentTime.length > 0" class="login-time">{{ currentTime }}</el-tag>
         <img :src="logo" alt="" class="img">
         <p class="title" v-text="title" />
-        <span style="font-weight: 500;">- Powered by Ferry-neo -</span>
+        <span style="font-weight: 500;">- Powered by Ferry (neo) -</span>
       </div>
       <div class="login-border">
         <div class="login-main">

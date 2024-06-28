@@ -146,9 +146,6 @@ import {
 } from '@/components/VueFormMaking'
 import '@/components/VueFormMaking/styles/FormMaking.css'
 
-import ace from 'ace-builds'
-import 'ace-builds/webpack-resolver'
-Vue.use(ace)
 Vue.use(GenerateForm)
 Vue.use(MakingForm)
 

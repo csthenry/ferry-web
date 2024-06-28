@@ -138,7 +138,6 @@ module.exports = {
   chainWebpack(config) {
     // ============注入cdn start============
     config.plugin('html').tap(args => {
-      // 需要cdn时，才注入cdn
       if (devNeedCdn) args[0].cdn = cdn
       return args
     })

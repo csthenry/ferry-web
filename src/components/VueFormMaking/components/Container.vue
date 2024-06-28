@@ -139,8 +139,13 @@
           @on-close="uploadVisible = false"
           @on-submit="handleUploadJson"
         >
-          <el-alert type="info" :title="$t('fm.description.uploadJsonInfo')" />
-          <div id="uploadeditor" style="height: 400px;width: 100%;">{{ jsonEg }}</div>
+          <el-alert type="info" style="margin-bottom: 10px;" :title="$t('fm.description.uploadJsonInfo')" />
+          <codemirror
+            ref="cmEditor"
+            :value="jsonEg"
+            :options="contentOptions"
+            class="codemirror"
+          />
         </cus-dialog>
 
         <cus-dialog
@@ -150,9 +155,12 @@
           form
           @on-close="jsonVisible = false"
         >
-
-          <div id="jsoneditor" style="height: 400px;width: 100%;">{{ jsonTemplate }}</div>
-
+          <codemirror
+            ref="cmEditor"
+            :value="jsonTemplate"
+            :options="contentOptions"
+            class="codemirror"
+          />
           <template slot="action">
             <el-button type="primary" class="json-btn" :data-clipboard-text="jsonCopyValue">{{ $t('fm.actions.copyData') }}</el-button>
           </template>
@@ -166,11 +174,16 @@
           :action="false"
           @on-close="codeVisible = false"
         >
-          <div id="codeeditor" style="height: 500px; width: 100%;">{{ htmlTemplate }}</div>
+          <codemirror
+            ref="cmEditor"
+            :value="htmlTemplate"
+            :options="contentOptions"
+            class="codemirror"
+          />
         </cus-dialog>
       </el-container>
     </el-main>
-    <!-- <el-footer height="30px" style="font-weight: 600;">Powered by <a target="_blank" href="http://www.fdevops.com">fdevops</a></el-footer> -->
+    <el-footer height="30px" style="font-weight: 600;">Powered by Ferry (neo)</el-footer>
   </el-container>
 
 </template>
@@ -186,12 +199,16 @@ import Clipboard from 'clipboard'
 import { basicComponents, layoutComponents, advanceComponents } from './componentsConfig.js'
 import generateCode from './generateCode.js'
 
-var ace = require('ace-builds/src-noconflict/ace')
-ace.config.set('basePath', '/lib/ace')
-ace.config.set('modePath', '/lib/ace')
-ace.config.set('themePath', '/lib/ace')
-window.define = window.define || ace.define
-window.require = window.require || ace.require
+// 代码编辑器
+import { codemirror } from 'vue-codemirror'
+require('codemirror/mode/xml/xml') // 这里引入的模式的js，根据设置的mode引入
+require('codemirror/mode/htmlmixed/htmlmixed') // 这里引入的模式的js，根据设置的mode引入
+
+// 远端方法
+import { listUser } from '@/api/system/sysuser'
+import { getDeptList } from '@/api/system/dept'
+import { listRole } from '@/api/system/role'
+import { listPost } from '@/api/system/post'
 
 export default {
   name: 'FmMakingForm',
@@ -201,7 +218,8 @@ export default {
     FormConfig,
     WidgetForm,
     CusDialog,
-    GenerateForm
+    GenerateForm,
+    codemirror
   },
   props: {
     preview: {
@@ -251,17 +269,57 @@ export default {
           size: 'small'
         }
       },
+      contentOptions: {
+        flattenSpans: false, // 默认情况下，CodeMirror会将使用相同class的两个span合并成一个。通过设置此项为false禁用此功能
+        matchBrackets: true, // 匹配符号
+        lineWiseCopyCut: true, // 如果在复制或剪切时没有选择文本，那么就会自动操作光标所在的整行
+        tabSize: 4,
+        value: '',
+        mode: 'python',
+        lineNumbers: true, // 显示行号
+        line: true,
+        smartIndent: true, // 智能缩进
+        autoCloseBrackets: true, // 自动输入括弧
+        foldGutter: true, // 允许在行号位置折叠
+        indentUnit: 4, // 智能缩进单位为4个空格长度
+        styleActiveLine: true // 激活当前行样式
+      },
       configTab: 'widget',
       widgetFormSelect: null,
       previewVisible: false,
-      jsonVisible: false,
-      codeVisible: false,
-      uploadVisible: false,
-      remoteFuncs: {},
+      remoteFuncs: {
+        // 获取用户列表
+        async userList(resolve) {
+          const res = await listUser({
+            pageSize: 999999
+          })
+          const options = res.data.list
+          resolve(options)
+        },
+        async deptTreeList(resolve) {
+          const res = await getDeptList()
+          resolve(res.data)
+        },
+        async roleList(resolve) {
+          const res = await listRole({
+            pageSize: 999999
+          })
+          resolve(res.data.list)
+        },
+        async postList(resolve) {
+          const res = await listPost({
+            pageSize: 999999
+          })
+          resolve(res.data.list)
+        }
+      },
       widgetModels: {},
       blank: '',
       htmlTemplate: '',
       jsonTemplate: '',
+      uploadVisible: false,
+      jsonVisible: false,
+      codeVisible: false,
       uploadEditor: null,
       jsonCopyValue: '',
       jsonClipboard: null,
@@ -335,10 +393,9 @@ export default {
     },
     handleGenerateJson() {
       this.jsonVisible = true
-      this.jsonTemplate = this.widgetForm
+      this.jsonTemplate = JSON.stringify(this.widgetForm, null, 2)
       this.$nextTick(() => {
-        const editor = ace.edit('jsoneditor')
-        editor.session.setMode('ace/mode/json')
+        this.$refs.cmEditor.codemirror.setOption('mode', 'application/json')
 
         if (!this.jsonClipboard) {
           this.jsonClipboard = new Clipboard('.json-btn')
@@ -346,27 +403,25 @@ export default {
             this.$message.success(this.$t('fm.message.copySuccess'))
           })
         }
-        this.jsonCopyValue = JSON.stringify(this.widgetForm)
+        this.jsonCopyValue = JSON.stringify(this.widgetForm, null, 2)
       })
     },
     handleGenerateCode() {
       this.codeVisible = true
       this.htmlTemplate = generateCode(JSON.stringify(this.widgetForm))
       this.$nextTick(() => {
-        const editor = ace.edit('codeeditor')
-        editor.session.setMode('ace/mode/html')
+        this.$refs.cmEditor.codemirror.setOption('mode', 'text/html')
       })
     },
     handleUpload() {
       this.uploadVisible = true
       this.$nextTick(() => {
-        this.uploadEditor = ace.edit('uploadeditor')
-        this.uploadEditor.session.setMode('ace/mode/json')
+        this.$refs.cmEditor.codemirror.setOption('mode', 'application/json')
       })
     },
     handleUploadJson() {
       try {
-        this.setJSON(JSON.parse(this.uploadEditor.getValue()))
+        this.setJSON(JSON.parse(this.$refs.cmEditor.codemirror.getValue()))
         this.uploadVisible = false
       } catch (e) {
         this.$message.error(e.message)
@@ -422,4 +477,13 @@ aside {
     color: #333333;
   }
 }
+</style>
+
+<style scoped>
+  .codemirror {
+    line-height: 150%;
+    border: 1px solid #DCDFE6;
+    border-radius: 4px;
+    overflow: hidden;
+  }
 </style>
