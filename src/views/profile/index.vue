@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-row :gutter="20">
-      <el-col :span="6" :xs="24">
+      <el-col :span="8" :xs="24">
         <el-card v-loading="loading" class="box-card">
           <div slot="header" class="clearfix">
             <span>个人信息</span>
@@ -24,12 +24,16 @@
                 <div class="pull-right">{{ user.email ? user.email : "--" }}</div>
               </li>
               <li class="list-group-item">
+                <svg-icon icon-class="peoples" /> 所属角色
+                <div class="pull-right">{{ roleName }}</div>
+              </li>
+              <li class="list-group-item">
                 <svg-icon icon-class="tree" /> 所属部门
                 <div class="pull-right">{{ deptName }}</div>
               </li>
               <li class="list-group-item">
-                <svg-icon icon-class="peoples" /> 所属角色
-                <div class="pull-right">{{ roleName }}</div>
+                <svg-icon icon-class="excel" /> 所属岗位
+                <div class="pull-right">{{ postName }}</div>
               </li>
               <li class="list-group-item">
                 <svg-icon icon-class="date" /> 创建日期
@@ -39,7 +43,7 @@
           </div>
         </el-card>
       </el-col>
-      <el-col :span="18" :xs="24">
+      <el-col :span="16" :xs="24">
         <el-card v-loading="loading">
           <div slot="header" class="clearfix">
             <span>基本资料</span>
@@ -63,6 +67,7 @@ import userAvatar from './userAvatar'
 import userInfo from './userInfo'
 import resetPwd from './resetPwd'
 import { getUserProfile } from '@/api/system/sysuser'
+import { getDeptList } from '@/api/system/dept'
 
 export default {
   name: 'Profile',
@@ -77,10 +82,10 @@ export default {
       activeTab: 'userinfo',
       roleIds: undefined,
       postIds: undefined,
-      roleName: undefined,
-      postName: undefined,
-      dept: {},
-      deptName: undefined
+      roleName: '',
+      postName: '',
+      deptList: [],
+      deptName: ''
     }
   },
   created() {
@@ -91,7 +96,9 @@ export default {
       getUserProfile().then(response => {
         this.user = response.data
         this.roleIds = response.roleIds
+        this.postIds = response.postIds
         this.roleGroup = response.roles
+        this.postGroup = response.posts
 
         if (this.roleIds[0]) {
           for (const key in this.roleGroup) {
@@ -102,9 +109,43 @@ export default {
         } else {
           this.roleName = '暂无'
         }
-        this.dept = response.dept
-        this.deptName = this.dept.deptName
-        this.loading = false
+        if (this.postIds[0]) {
+          for (const key in this.postGroup) {
+            if (this.postIds[0] === this.postGroup[key].postId) {
+              this.postName = this.postGroup[key].postName
+            }
+          }
+        } else {
+          this.postName = '暂无'
+        }
+
+        // 获取部门信息
+        const deptPath = response.dept.deptPath.slice(1).split('/')
+        deptPath.shift() // 删除根节点
+        getDeptList().then(response => {
+          this.deptList = response.data
+          let currentDept = {} // 记录当前部门对象
+          for (const deptId of deptPath) {
+            if (JSON.stringify(currentDept) !== '{}') {
+              for (const idx in currentDept.children) {
+                if (deptId == currentDept.children[idx].deptId) {
+                  this.deptName += ' / ' + currentDept.children[idx].deptName
+                  currentDept = currentDept.children[idx]
+                  break
+                }
+              }
+            } else {
+              for (const idx in this.deptList) {
+                if (deptId == this.deptList[idx].deptId) {
+                  this.deptName += this.deptList[idx].deptName
+                  currentDept = this.deptList[idx]
+                  break
+                }
+              }
+            }
+          }
+          this.loading = false
+        })
       })
     }
   }
