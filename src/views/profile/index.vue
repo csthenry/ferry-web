@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <el-row :gutter="20">
-      <el-col :span="8" :xs="24">
+      <el-col :span="6" :xs="24">
         <el-card v-loading="loading" class="box-card">
           <div slot="header" class="clearfix">
             <span>个人信息</span>
@@ -10,7 +10,17 @@
             <div class="text-center">
               <userAvatar :user="user" />
             </div>
-            <ul class="list-group list-group-striped">
+            <el-divider><i class="el-icon-s-custom"></i> 详细资料</el-divider>
+            <el-descriptions :column="1">
+              <el-descriptions-item label="用户名称">{{ user.username }}</el-descriptions-item>
+              <el-descriptions-item label="手机号码">{{ user.phone ? user.phone : "--" }}</el-descriptions-item>
+              <el-descriptions-item label="用户邮箱">{{ user.email ? user.email : "--" }}</el-descriptions-item>
+              <el-descriptions-item label="所属角色">{{ roleName }}</el-descriptions-item>
+              <el-descriptions-item label="所属部门">{{ deptName }}</el-descriptions-item>
+              <el-descriptions-item label="所属岗位">{{ postName }}</el-descriptions-item>
+              <el-descriptions-item label="创建日期">{{ parseTime(user.create_time) }}</el-descriptions-item>
+            </el-descriptions>
+            <!-- <ul class="list-group list-group-striped">
               <li class="list-group-item">
                 <svg-icon icon-class="user" /> 用户名称
                 <div class="pull-right">{{ user.username }}</div>
@@ -39,11 +49,11 @@
                 <svg-icon icon-class="date" /> 创建日期
                 <div class="pull-right">{{ parseTime(user.create_time) }}</div>
               </li>
-            </ul>
+            </ul> -->
           </div>
         </el-card>
       </el-col>
-      <el-col :span="16" :xs="24">
+      <el-col :span="18" :xs="24">
         <el-card v-loading="loading">
           <div slot="header" class="clearfix">
             <span>基本资料</span>

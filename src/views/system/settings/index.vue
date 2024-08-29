@@ -38,11 +38,11 @@
     </el-card>
     <el-card class="box-card" style="margin-top: 15px">
       <div slot="header" class="clearfix">
-        <span>Ldap配置</span>
+        <span>LDAP配置</span>
       </div>
       <div class="text item">
         <el-alert
-          title="Ldap登录验证通过后，会将用户同步至本地数据库中，请在此配置数据同步的映射关系。单击Ldap字段可编辑，双击可隐藏编辑。"
+          title="LDAP登录验证通过后，会将用户同步至本地数据库中，请在此配置数据同步的映射关系。单击LDAP字段可编辑，双击可隐藏编辑。"
           type="info"
           style="margin-bottom: 10px"
         />
@@ -63,7 +63,7 @@
           />
           <el-table-column
             prop="ldap_field_name"
-            label="Ldap字段"
+            label="LDAP字段"
           >
             <template slot-scope="{row, $index}">
               <div style="width: 100%; min-height: 24px;" @click="{{ chengenum($index, true) }}" @dblclick="{{ chengenum($index, false) }}">

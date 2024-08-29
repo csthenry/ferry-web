@@ -27,9 +27,9 @@
             <el-skeleton-item v-else variant="h1" style="width: 65%" />
           </div>
           <div style="display: inline-block;">
-            <el-skeleton-item variant="button" style="width: 222px; height: 72px;" />
-            <el-skeleton-item variant="button" style="width: 222px; height: 72px;" />
-            <el-skeleton-item variant="button" style="width: 222px; height: 72px;" />
+            <el-skeleton-item variant="button" style="width: 222px; height: 72px; margin-right: 15px;" />
+            <el-skeleton-item variant="button" style="width: 222px; height: 72px; margin-right: 15px;" />
+            <el-skeleton-item variant="button" style="width: 222px; height: 72px; margin-right: 15px;" />
           </div>
         </template>
         <template>

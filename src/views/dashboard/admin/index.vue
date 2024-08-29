@@ -2,7 +2,7 @@
   <div class="dashboard-editor-container">
     <el-row :gutter="12">
       <el-col :sm="24" :xs="24" :md="6" :xl="6" :lg="6" :style="{ marginBottom: '12px' }">
-        <chart-card v-loading="loading" title="工单总数" :total="dashboardValue.count.all" style="cursor: pointer" @click.native="toTicketList('/process/all')">
+        <chart-card v-loading="loading" title="工单总数" :total="dashboardValue.count.all">
           <el-tooltip slot="action" class="item" effect="dark" content="系统中所有工单的数量" placement="top-start">
             <i class="el-icon-warning-outline" />
           </el-tooltip>
@@ -58,7 +58,7 @@
       </div>
     </el-card>
 
-    <el-row :gutter="12">
+    <!-- <el-row :gutter="12">
       <el-col :md="8">
         <el-card v-loading="loading" :bordered="false" :body-style="{padding: '0'}" :style="{marginBottom: '12px'}">
           <div class="salesCard leaderboard">
@@ -80,7 +80,7 @@
           </div>
         </el-card>
       </el-col>
-    </el-row>
+    </el-row> -->
   </div>
 </template>
 

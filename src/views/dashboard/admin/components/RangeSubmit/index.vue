@@ -104,7 +104,8 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: this.statisticsData.total
+            data: this.statisticsData.total,
+            smooth: true
           },
           {
             name: '未结束',
@@ -114,7 +115,8 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: this.statisticsData.processing
+            data: this.statisticsData.processing,
+            smooth: true
           },
           {
             name: '已结束',
@@ -124,7 +126,8 @@ export default {
             emphasis: {
               focus: 'series'
             },
-            data: this.statisticsData.overs
+            data: this.statisticsData.overs,
+            smooth: true
           }
         ]
       })

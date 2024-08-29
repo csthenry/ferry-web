@@ -88,8 +88,8 @@
               <el-popover
                 placement="bottom"
                 trigger="hover"
-                title="LDAP登录说明"
-                content="非LDAP用户请关闭此按钮后登录，忘记密码请联系管理员"
+                title="登录说明"
+                content="非LDAP用户请关闭LDAP按钮后登录，忘记密码请联系管理员"
               >
                 <i slot="reference" class="el-icon-question" style="color: #1890ff;margin-left: 10px" />
               </el-popover>
@@ -162,6 +162,12 @@ export default {
           this.redirect = query.redirect
           this.otherQuery = this.getOtherQuery(query)
         }
+      },
+      immediate: true
+    },
+    title: {
+      handler: function(val) {
+        document.title = val
       },
       immediate: true
     },

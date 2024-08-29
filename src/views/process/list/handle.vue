@@ -29,7 +29,6 @@
                 v-else-if="stepIsEnd && item.id === processStructureValue.workOrder.current_state"
                 :key="index"
                 :title="item.label"
-                description="未通过：流程已终止"
                 status="error"
               />
               <!-- 以process/success形式展示当前节点 -->
@@ -54,6 +53,7 @@
       <el-alert
         v-if="activeIndex !== nodeStepList.length && processStructureValue.workOrder.is_end === 1"
         style="margin-top: 15px"
+        show-icon="true"
         :title="alertMessage"
         type="error"
         :closable="false"
@@ -65,37 +65,37 @@
           <span>{{ processStructureValue.workOrder.title }}</span>
           <el-divider direction="vertical" />
           <span><i class="el-icon-warning-outline" style="margin-right: 5px;" />工单优先级：</span>
-          <el-tag v-if="processStructureValue.workOrder.priority === 2" type="warning">优先</el-tag>
-          <el-tag v-else-if="processStructureValue.workOrder.priority === 3" type="danger">紧急</el-tag>
-          <el-tag v-else type="success">普通</el-tag>
+          <el-tag size="small" v-if="processStructureValue.workOrder.priority === 2" type="warning">优先</el-tag>
+          <el-tag size="small" v-else-if="processStructureValue.workOrder.priority === 3" type="danger">紧急</el-tag>
+          <el-tag size="small" v-else type="success">普通</el-tag>
           <el-divider direction="vertical" />
           <span><i class="el-icon-user" style="margin-right: 5px;" />申请人：</span>
           <el-avatar icon="el-icon-user-solid" size="small" style="margin-right: 5px;" :src="processStructureValue.workOrder.creator_info.avatar" />
-          <span>{{ processStructureValue.workOrder.creator_info.name }}</span>
+          <span>{{ processStructureValue.workOrder.creator_info.nickname }}</span>
           <el-popover
             placement="bottom"
             trigger="hover"
           >
-            <el-descriptions title="申请人信息" border>
-              <el-descriptions-item label="UID">{{ processStructureValue.workOrder.creator }}</el-descriptions-item>
-              <el-descriptions-item label="用户名">{{ processStructureValue.workOrder.creator_info.name }}</el-descriptions-item>
+            <el-descriptions title="申请人信息" border style="max-width: 650px;">
+              <el-descriptions-item label="用户名(UID)">{{processStructureValue.workOrder.creator_info.username}}({{ processStructureValue.workOrder.creator }})</el-descriptions-item>
+              <el-descriptions-item label="用户昵称">{{ processStructureValue.workOrder.creator_info.nickname }}</el-descriptions-item>
               <el-descriptions-item v-if="processStructureValue.workOrder.creator_info.sex === '0'" label="性别"><el-tag size="small">男</el-tag></el-descriptions-item>
               <el-descriptions-item v-else label="性别"><el-tag size="small" type="danger">女</el-tag></el-descriptions-item>
               <el-descriptions-item label="手机号">
                 {{ processStructureValue.workOrder.creator_info.phone ? processStructureValue.workOrder.creator_info.phone : '暂无' }}
               </el-descriptions-item>
-              <el-descriptions-item label="邮箱">{{ processStructureValue.workOrder.creator_info.mail }}</el-descriptions-item>
+              <el-descriptions-item label="电子邮箱">{{ processStructureValue.workOrder.creator_info.mail }}</el-descriptions-item>
               <el-descriptions-item label="用户组">
                 {{ processStructureValue.workOrder.creator_info.role }}
-              </el-descriptions-item>
-              <el-descriptions-item label="用户部门">
-                {{ processStructureValue.workOrder.creator_info.department }}
               </el-descriptions-item>
               <el-descriptions-item label="用户岗位">
                 {{ processStructureValue.workOrder.creator_info.position }}
               </el-descriptions-item>
+              <el-descriptions-item label="用户部门">
+                {{ processStructureValue.workOrder.creator_info.department }}
+              </el-descriptions-item>
             </el-descriptions>
-            <el-tag slot="reference" size="small" style="margin-left: 10px">详细信息</el-tag>
+            <el-tag slot="reference" size="small" style="margin-left: 10px; display: flex;">详细信息</el-tag>
           </el-popover>
           <el-divider direction="vertical" />
           <span><i class="el-icon-time" style="margin-right: 5px;" />创建时间：</span>
@@ -133,7 +133,7 @@
           <el-input
             v-model="remarks"
             type="textarea"
-            placeholder="请输入备注信息"
+            placeholder="请输入审核意见或备注信息"
             maxlength="200"
             :autosize="{ minRows: 3, maxRows: 99 }"
             show-word-limit
@@ -169,6 +169,7 @@
       <el-card class="box-card" style="margin-top: 15px">
         <div slot="header" class="clearfix">
           <span><i class="el-icon-refresh" style="margin-right: 10px;" />工单流转历史</span>
+          <el-button style="float: right; padding: 0; font-size: unset;" type="text" @click="switchCirculationHistory">{{ circulationHistoryStatus }}</el-button>
         </div>
         <el-steps :active="processStructureValue.workOrder.is_end === 1 ? 3 : circulationHistoryList.length > 0 ? 1 : 0" finish-status="success" simple style="margin-bottom: 20px;">
           <el-step title="流程开始" />
@@ -178,34 +179,67 @@
         <div class="text item">
           <el-table
             :data="circulationHistoryList"
+            :row-key="getRowKey"
+            :expand-row-keys="expandedRowKeys"
             max-height="300"
-            border
             style="width: 100%"
           >
+          <el-table-column type="expand">
+            <template slot-scope="scope">
+                <el-alert
+                  v-if="scope.row.status === 0"
+                  :description="scope.row.remarks ? scope.row.remarks : '暂无审核意见或备注'"
+                  title="审核意见或备注"
+                  type="error"
+                  show-icon
+                  :closable="false">
+                </el-alert>
+                <el-alert
+                  v-else-if="scope.row.status === 1"
+                  :description="scope.row.remarks ? scope.row.remarks : '暂无审核意见或备注'"
+                  title="审核意见或备注"
+                  type="success"
+                  show-icon
+                  :closable="false">
+                </el-alert>
+                <el-alert
+                  v-else
+                  :description="scope.row.remarks ? scope.row.remarks : '暂无审核意见或备注'"
+                  title="审核意见或备注"
+                  type="info"
+                  show-icon
+                  :closable="false">
+                </el-alert>
+            </template>
+          </el-table-column>
             <el-table-column label="状态" width="100" align="center">
               <template slot-scope="scope">
                 <el-tag v-if="scope.row.status === 0" size="small" type="danger">未通过</el-tag>
                 <el-tag v-else-if="scope.row.status === 1" size="small" type="success">已通过</el-tag>
-                <el-tag v-else size="small" type="warning">已完成</el-tag>
+                <el-tag v-else size="small">已完成</el-tag>
               </template>
             </el-table-column>
             <el-table-column
               prop="state"
-              label="节点"
+              label="环节"
+              align="center"
             />
             <el-table-column
               prop="circulation"
               label="流转"
+              align="center"
             />
             <el-table-column
               prop="processor"
               label="处理人"
+              align="center"
             />
             <el-table-column
               prop="create_time"
               label="处理时间"
+              align="center"
             />
-            <el-table-column
+            <!-- <el-table-column
               label="备注"
             >
               <template slot-scope="scope">
@@ -214,7 +248,7 @@
                 </el-tag>
                 <el-tag v-else type="info" style="white-space: normal;height:auto;">暂无备注</el-tag>
               </template>
-            </el-table-column>
+            </el-table-column> -->
           </el-table>
         </div>
       </el-card>
@@ -259,6 +293,9 @@ export default {
       remarks: '', // 备注信息
       alertMessage: '',
       stepIsEnd: false, // 该变量表明流程是否在中途被终止（不通过）
+      circulationHistoryRowKeys: [],
+      expandedRowKeys: [],  //流转历史展开行
+      circulationHistoryStatus : '展开详情', // 流转历史展开状态
       nodeStepList: [],
       circulationHistoryList: [],
       stepHistoryList: [], // 步骤条历史（id, 处理人, 处理时间）
@@ -315,6 +352,18 @@ export default {
     this.getProcessNodeList()
   },
   methods: {
+    getRowKey(row) {
+      return row.id
+    },
+    switchCirculationHistory() {
+      if (this.circulationHistoryStatus === '展开详情') {
+        this.circulationHistoryStatus = '收起详情'
+        this.expandedRowKeys = this.circulationHistoryRowKeys
+      } else {
+        this.circulationHistoryStatus = '展开详情'
+        this.expandedRowKeys = []
+      }
+    },
     getProcessNodeList() {
       processStructure({
         processId: this.$route.query.processId,
@@ -323,11 +372,15 @@ export default {
         this.isActiveProcessing = false
         this.processStructureValue = response.data
         this.circulationHistoryList = this.processStructureValue.circulationHistory
+        // 维护流转历史
+        for (let i = 0; i < this.circulationHistoryList.length; i++) {
+          this.circulationHistoryRowKeys.push(this.circulationHistoryList[i].id)
+        }
         // 维护步骤条历史
         for (let i = 0; i < this.circulationHistoryList.length; i++) {
           const item = this.circulationHistoryList[i]
           const cirSource = item['source']
-          this.stepHistoryList[cirSource] = '[' + item['processor'] + '] ' + item['update_time']
+          this.stepHistoryList[cirSource] = item['update_time']
         }
         // 获取当前展示节点列表
         this.nodeStepList = []
@@ -426,7 +479,7 @@ export default {
     // 获取提示消息
     getAlertMessage() {
       if (this.processStructureValue.workOrder.is_end === 1) {
-        this.alertMessage = '当前工单已结束。'
+        this.alertMessage = '很抱歉，环节未通过审核或被提前终止，当前流程已结束。'
         if (this.activeIndex !== this.nodeStepList.length) {
           this.stepIsEnd = true // 排除所有流程流程已完结的情况
         }
@@ -446,3 +499,19 @@ export default {
   }
 }
 </script>
+
+<style>
+.el-table__expanded-cell {
+  padding: 0!important;
+}
+.el-table__expanded-cell .el-alert {
+  border-radius: 0;
+}
+.el-alert--info.is-light {
+    background-color: #e8f4ff;
+    color: #1890ff;
+}
+.el-alert--info.is-light .el-alert__description {
+    color: #1890ff;
+}
+</style>

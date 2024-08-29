@@ -239,7 +239,7 @@ export default {
                   message: '数据提交成功',
                   type: 'success'
                 })
-                this.$router.push({ path: '/process/upcoming' })
+                this.$router.push({ path: '/process/my-create' })
               }
             }).catch(() => {
               this.submitDisabled = false

@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-card class="box-card">
       <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
-        <el-form-item label="登录地址">
+        <el-form-item label="登录地址" prop="ipaddr">
           <el-input
             v-model="queryParams.ipaddr"
             placeholder="请输入登录地址"
@@ -12,7 +12,7 @@
             @keyup.enter.native="handleQuery"
           />
         </el-form-item>
-        <el-form-item label="用户名称">
+        <el-form-item label="用户名称" prop="username">
           <el-input
             v-model="queryParams.username"
             placeholder="请输入用户名称"
