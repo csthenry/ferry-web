@@ -65,9 +65,9 @@
           <span>{{ processStructureValue.workOrder.title }}</span>
           <el-divider direction="vertical" />
           <span><i class="el-icon-warning-outline" style="margin-right: 5px;" />工单优先级：</span>
-          <el-tag size="small" v-if="processStructureValue.workOrder.priority === 2" type="warning">优先</el-tag>
-          <el-tag size="small" v-else-if="processStructureValue.workOrder.priority === 3" type="danger">紧急</el-tag>
-          <el-tag size="small" v-else type="success">普通</el-tag>
+          <el-tag v-if="processStructureValue.workOrder.priority === 2" size="small" type="warning">优先</el-tag>
+          <el-tag v-else-if="processStructureValue.workOrder.priority === 3" size="small" type="danger">紧急</el-tag>
+          <el-tag v-else size="small" type="success">普通</el-tag>
           <el-divider direction="vertical" />
           <span><i class="el-icon-user" style="margin-right: 5px;" />申请人：</span>
           <el-avatar icon="el-icon-user-solid" size="small" style="margin-right: 5px;" :src="processStructureValue.workOrder.creator_info.avatar" />
@@ -77,7 +77,7 @@
             trigger="hover"
           >
             <el-descriptions title="申请人信息" border style="max-width: 650px;">
-              <el-descriptions-item label="用户名(UID)">{{processStructureValue.workOrder.creator_info.username}}({{ processStructureValue.workOrder.creator }})</el-descriptions-item>
+              <el-descriptions-item label="用户名(UID)">{{ processStructureValue.workOrder.creator_info.username }}({{ processStructureValue.workOrder.creator }})</el-descriptions-item>
               <el-descriptions-item label="用户昵称">{{ processStructureValue.workOrder.creator_info.nickname }}</el-descriptions-item>
               <el-descriptions-item v-if="processStructureValue.workOrder.creator_info.sex === '0'" label="性别"><el-tag size="small">男</el-tag></el-descriptions-item>
               <el-descriptions-item v-else label="性别"><el-tag size="small" type="danger">女</el-tag></el-descriptions-item>
@@ -184,34 +184,34 @@
             max-height="300"
             style="width: 100%"
           >
-          <el-table-column type="expand">
-            <template slot-scope="scope">
+            <el-table-column type="expand">
+              <template slot-scope="scope">
                 <el-alert
                   v-if="scope.row.status === 0"
                   :description="scope.row.remarks ? scope.row.remarks : '暂无审核意见或备注'"
                   title="审核意见或备注"
                   type="error"
                   show-icon
-                  :closable="false">
-                </el-alert>
+                  :closable="false"
+                />
                 <el-alert
                   v-else-if="scope.row.status === 1"
                   :description="scope.row.remarks ? scope.row.remarks : '暂无审核意见或备注'"
                   title="审核意见或备注"
                   type="success"
                   show-icon
-                  :closable="false">
-                </el-alert>
+                  :closable="false"
+                />
                 <el-alert
                   v-else
                   :description="scope.row.remarks ? scope.row.remarks : '暂无审核意见或备注'"
                   title="审核意见或备注"
                   type="info"
                   show-icon
-                  :closable="false">
-                </el-alert>
-            </template>
-          </el-table-column>
+                  :closable="false"
+                />
+              </template>
+            </el-table-column>
             <el-table-column label="状态" width="100" align="center">
               <template slot-scope="scope">
                 <el-tag v-if="scope.row.status === 0" size="small" type="danger">未通过</el-tag>
@@ -294,8 +294,8 @@ export default {
       alertMessage: '',
       stepIsEnd: false, // 该变量表明流程是否在中途被终止（不通过）
       circulationHistoryRowKeys: [],
-      expandedRowKeys: [],  //流转历史展开行
-      circulationHistoryStatus : '展开详情', // 流转历史展开状态
+      expandedRowKeys: [], // 流转历史展开行
+      circulationHistoryStatus: '展开详情', // 流转历史展开状态
       nodeStepList: [],
       circulationHistoryList: [],
       stepHistoryList: [], // 步骤条历史（id, 处理人, 处理时间）

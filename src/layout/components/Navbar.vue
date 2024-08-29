@@ -63,12 +63,12 @@ export default {
   },
   data() {
     return {
-    dashboardValue: {
-      count: {
-        upcoming: 0
-      }
-    },
-    isUpcoming: false,
+      dashboardValue: {
+        count: {
+          upcoming: 0
+        }
+      },
+      isUpcoming: false
     }
   },
   created() {
