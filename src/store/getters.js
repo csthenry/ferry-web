@@ -16,6 +16,7 @@ const getters = {
   title: state => state.settings.title,
   logo: state => state.settings.logo,
   isLdap: state => state.settings.isLdap,
-  isVerifyCode: state => state.settings.isVerifyCode
+  isVerifyCode: state => state.settings.isVerifyCode,
+  upcoming: state => state.user.upcoming
 }
 export default getters

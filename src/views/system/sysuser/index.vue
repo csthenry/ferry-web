@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-row :gutter="20">
       <!--部门数据-->
-      <el-col :span="4" :xs="24" style="padding-right: 0;">
+      <el-col :span="6" :xs="24" style="padding-right: 0;">
         <el-card class="box-card">
           <div class="head-container">
             <el-input
@@ -28,7 +28,7 @@
         </el-card>
       </el-col>
       <!--用户数据-->
-      <el-col :span="20" :xs="24">
+      <el-col :span="18" :xs="24">
         <el-card class="box-card">
           <el-form ref="queryForm" :model="queryParams" :inline="true" label-width="68px">
             <el-form-item label="用户名称" prop="username">

@@ -56,6 +56,9 @@ router.beforeEach(async(to, from, next) => {
         }
       }
     }
+
+    // 更新待办数量
+    store.dispatch('user/getUpcoming')
   } else {
     /* has no token*/
 

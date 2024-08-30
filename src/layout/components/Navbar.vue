@@ -14,7 +14,7 @@
       <el-dropdown class="avatar-container right-menu-item hover-effect" placement="bottom">
         <div class="avatar-wrapper" style="height: 100%; margin-right: 10px;">
           <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar" alt="">
-          <el-badge :value="dashboardValue.count.upcoming" :hidden="!isUpcoming" :max="99" class="item">
+          <el-badge :value="upcoming" :hidden="!isUpcoming" :max="99" class="item">
             <span style="font-size: 15px; position: relative; margin-left: 10px; bottom: 12px">{{ name }}</span>
           </el-badge>
           <i class="el-icon-caret-bottom" style="position: absolute; top: 20px" />
@@ -40,7 +40,6 @@
 
 <script>
 import { mapGetters } from 'vuex'
-import { initData } from '@/api/dashboard'
 import Breadcrumb from '@/components/Breadcrumb'
 import Hamburger from '@/components/Hamburger'
 import Screenfull from '@/components/Screenfull'
@@ -58,29 +57,28 @@ export default {
       'sidebar',
       'avatar',
       'device',
-      'name'
+      'name',
+      'upcoming'
     ])
   },
   data() {
     return {
-      dashboardValue: {
-        count: {
-          upcoming: 0
-        }
-      },
       isUpcoming: false
     }
   },
-  created() {
-    this.getInitData()
+  watch: {
+    upcoming: {
+      handler: function(val) {
+        if (val > 0) {
+          this.isUpcoming = true
+        } else {
+          this.isUpcoming = false
+        }
+      },
+      immediate: true
+    }
   },
   methods: {
-    getInitData() {
-      initData(this.queryList).then(response => {
-        this.dashboardValue = response.data
-        this.isUpcoming = this.dashboardValue.count.upcoming > 0
-      })
-    },
     toggleSideBar() {
       this.$store.dispatch('app/toggleSideBar')
     },

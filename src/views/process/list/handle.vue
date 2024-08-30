@@ -453,6 +453,9 @@ export default {
               type: 'success'
             })
             this.getProcessNodeList()
+
+            // 更新待办数量
+            this.$store.dispatch('user/getUpcoming')
           }
         })
       })

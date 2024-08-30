@@ -1,6 +1,7 @@
 import { login, logout, getInfo, refreshtoken } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import router, { resetRouter } from '@/router'
+import { initData } from '@/api/dashboard'
 
 const state = {
   token: getToken(),
@@ -9,7 +10,8 @@ const state = {
   introduction: '',
   roles: [],
   permissions: [],
-  permisaction: []
+  permisaction: [],
+  upcoming: 0
 }
 
 const mutations = {
@@ -37,6 +39,9 @@ const mutations = {
   },
   SET_PERMISSIONS: (state, permisaction) => {
     state.permisaction = permisaction
+  },
+  SET_UPCOMING: (state, upcoming) => {
+    state.upcoming = upcoming
   }
 }
 
@@ -64,7 +69,6 @@ const actions = {
           removeToken()
           resolve()
         }
-
         const { userId, roles, name, avatar, introduction, permissions } = response.data
 
         // roles must be a non-empty array
@@ -85,6 +89,20 @@ const actions = {
       })
     })
   },
+
+  // 获取待办数量
+  getUpcoming({ commit }) {
+    return new Promise((resolve, reject) => {
+      initData().then(response => {
+        const upcoming = response.data.count.upcoming
+        commit('SET_UPCOMING', upcoming)
+        resolve(upcoming)
+      }).catch(error => {
+        reject(error)
+      })
+    })
+  },
+
   // 退出系统
   LogOut({ commit, state }) {
     return new Promise((resolve, reject) => {
