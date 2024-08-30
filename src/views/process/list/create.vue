@@ -86,6 +86,7 @@
 <script>
 
 import Vue from 'vue'
+import { mapGetters } from 'vuex'
 import {
   GenerateForm
 } from '@/components/VueFormMaking'
@@ -96,7 +97,6 @@ import {
   processStructure,
   createWorkOrder
 } from '@/api/process/work-order'
-import { getUserProfile } from '@/api/system/sysuser'
 
 import { listUser } from '@/api/system/sysuser'
 import { getDeptList } from '@/api/system/dept'
@@ -108,9 +108,21 @@ export default {
   components: {
     WfdDesign: () => import('@/components/wfd/components/Wfd')
   },
+  computed: {
+    ...mapGetters(['name'])
+  },
+  watch: {
+    name: {
+      handler: function(val) {
+        this.nickName = val
+      },
+      immediate: true
+    }
+  },
   data() {
     return {
       loading: true,
+      nickName: '',
       wfdDialogVisible: false,
       submitDisabled: false,
       active: 0,
@@ -171,9 +183,7 @@ export default {
   },
   methods: {
     setProcessTitle(processName) {
-      getUserProfile().then(response => {
-        this.ruleForm.title = `[${response.data.nickName}] ${processName}表单`
-      })
+      this.ruleForm.title = `[${this.nickName}] ${processName}表单`
     },
     getProcessNodeList() {
       processStructure({
@@ -239,6 +249,8 @@ export default {
                   message: '数据提交成功',
                   type: 'success'
                 })
+                // 更新待办数量
+                this.$store.dispatch('user/getUpcoming')
                 this.$router.push({ path: '/process/my-create' })
               }
             }).catch(() => {

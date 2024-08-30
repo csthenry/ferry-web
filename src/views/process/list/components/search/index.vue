@@ -175,6 +175,7 @@ export default {
         this.listQuery[k] = ''
       }
       this.$emit('handleSearch', this.listQuery)
+      this.$store.dispatch('user/getUpcoming')
     },
     remoteUserList(query) {
       listUser({
