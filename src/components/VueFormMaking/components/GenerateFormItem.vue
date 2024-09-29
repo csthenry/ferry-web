@@ -561,10 +561,7 @@ export default {
     content: ''
   }
   .preview-textarea .el-textarea__inner {
-    padding-left: 0;
-    padding-right: 0;
     background-color: #fff!important;
-    border: none;
     resize: none;
     color: #303133!important;
     cursor: default!important;
