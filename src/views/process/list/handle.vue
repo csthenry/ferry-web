@@ -2,7 +2,7 @@
   <div class="app-container">
     <!-- <div v-if="isLoadingStatus" /> -->
     <div v-loading="isLoadingStatus">
-      <el-card class="box-card">
+      <el-card class="box-card timeline-block">
         <div slot="header" class="clearfix">
           <span><i class="el-icon-d-arrow-right" style="margin-right: 10px;" />流程跟踪</span>
           <el-button style="float: right; padding: 0; font-size: unset;" type="text" @click="()=>{this.wfdDialogVisible=true}">查看流程图</el-button>
@@ -22,7 +22,6 @@
                 :key="index"
                 :title="item.label"
                 :status="stepIsEnd && index + 1 === activeIndex ? 'finish' : ''"
-                :description="stepHistoryList[item.id] ? stepHistoryList[item.id] : ''"
               />
               <!-- 终止状态的节点单独以error形式展示  注：若流程已终止，则终止节点一定为当前节点-->
               <el-step
@@ -47,6 +46,46 @@
               type="warning"
             />
           </div>
+        </div>
+        <el-collapse-transition>
+          <div v-show="timeline.show" class="text item">
+            <!-- 流程环节跟踪 -->
+            <el-divider content-position="center"><i class="el-icon-video-play" /> 流程环节跟踪</el-divider>
+            <el-timeline>
+              <el-timeline-item
+                v-for="(nodeItem, index) in circulationHistoryList"
+                :key="index"
+                type="primary"
+                icon="el-icon-arrow-up"
+                size="large"
+                :color="nodeItem.color"
+                :timestamp="nodeItem.create_time"
+                placement="top"
+              >
+                <el-card :body-style="{padding: '0 20px'}" shadow="hover">
+                  <div style="margin-top: 1em; display: flex; align-items: center; line-height: 28px; flex-wrap: wrap;">
+                    <span><i class="el-icon-edit" style="margin-right: 5px;" />流程环节：{{ nodeItem.state }}</span>
+                    <el-divider direction="vertical" />
+                    <span><i class="el-icon-user" style="margin-right: 5px;" />处理人：{{ nodeItem.processor }}({{ nodeItem.processor_id }})</span>
+                    <el-divider direction="vertical" />
+                    <el-tag v-if="nodeItem.status === 0" size="small" type="danger">未通过</el-tag>
+                    <el-tag v-else-if="nodeItem.status === 1" size="small" type="success">已通过</el-tag>
+                    <el-tag v-else size="small">已完成</el-tag>
+                  </div>
+                  <p style="color: #606266;">审核意见或备注：{{ nodeItem.remarks ? nodeItem.remarks : "暂无" }}</p>
+                </el-card>
+              </el-timeline-item>
+            </el-timeline>
+          </div>
+        </el-collapse-transition>
+        <div
+          v-if="currentNode.clazz !== undefined && currentNode.clazz !== null && currentNode.clazz !== '' && circulationHistoryList.length > 0"
+          class="timeline-block-control"
+          style="left: 0px;"
+          @click="switchTimeline"
+        >
+          <i :class="timeline.icon" />
+          <span>{{ timeline.text }}</span>
         </div>
       </el-card>
 
@@ -188,7 +227,7 @@
               <template slot-scope="scope">
                 <el-alert
                   v-if="scope.row.status === 0"
-                  :description="scope.row.remarks ? scope.row.remarks : '暂无审核意见或备注'"
+                  :description="scope.row.remarks ? scope.row.remarks : '暂无'"
                   title="审核意见或备注"
                   type="error"
                   show-icon
@@ -196,7 +235,7 @@
                 />
                 <el-alert
                   v-else-if="scope.row.status === 1"
-                  :description="scope.row.remarks ? scope.row.remarks : '暂无审核意见或备注'"
+                  :description="scope.row.remarks ? scope.row.remarks : '暂无'"
                   title="审核意见或备注"
                   type="success"
                   show-icon
@@ -204,7 +243,7 @@
                 />
                 <el-alert
                   v-else
-                  :description="scope.row.remarks ? scope.row.remarks : '暂无审核意见或备注'"
+                  :description="scope.row.remarks ? scope.row.remarks : '暂无'"
                   title="审核意见或备注"
                   type="info"
                   show-icon
@@ -283,6 +322,12 @@ export default {
   data() {
     return {
       isLoadingStatus: true,
+      showTimeline: false,
+      timeline: {
+        show: false,
+        icon: 'el-icon-caret-bottom',
+        text: '显示流程环节'
+      },
       wfdDialogVisible: false,
       currentNode: {
         hideTpls: null,
@@ -298,7 +343,6 @@ export default {
       circulationHistoryStatus: '展开详情', // 流转历史展开状态
       nodeStepList: [],
       circulationHistoryList: [],
-      stepHistoryList: [], // 步骤条历史（id, 处理人, 处理时间）
       activeIndex: 0,
       processStructureValue: {
         workOrder: { title: '', creator_info: {}}
@@ -364,6 +408,11 @@ export default {
         this.expandedRowKeys = []
       }
     },
+    switchTimeline() {
+      this.timeline.show = !this.timeline.show
+      this.timeline.icon = this.timeline.show ? 'el-icon-caret-top' : 'el-icon-caret-bottom'
+      this.timeline.text = this.timeline.show ? '隐藏流程环节' : '显示流程环节'
+    },
     getProcessNodeList() {
       processStructure({
         processId: this.$route.query.processId,
@@ -377,11 +426,11 @@ export default {
           this.circulationHistoryRowKeys.push(this.circulationHistoryList[i].id)
         }
         // 维护步骤条历史
-        for (let i = 0; i < this.circulationHistoryList.length; i++) {
-          const item = this.circulationHistoryList[i]
-          const cirSource = item['source']
-          this.stepHistoryList[cirSource] = item['update_time']
-        }
+        // for (let i = 0; i < this.circulationHistoryList.length; i++) {
+        //   const item = this.circulationHistoryList[i]
+        //   const cirSource = item['source']
+        //   this.stepHistoryList[cirSource] = item['update_time']
+        // }
         // 获取当前展示节点列表
         this.nodeStepList = []
         if (this.processStructureValue.nodes) {
@@ -453,7 +502,7 @@ export default {
               type: 'success'
             })
             this.getProcessNodeList()
-
+            this.remarks = ''
             // 更新待办数量
             this.$store.dispatch('user/getUpcoming')
           }
@@ -516,5 +565,32 @@ export default {
 }
 .el-alert--info.is-light .el-alert__description {
     color: #1890ff;
+}
+.timeline-block .timeline-block-control {
+    border-top: 1px solid #eaeefb;
+    height: 44px;
+    box-sizing: border-box;
+    background-color: #fff;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+    text-align: center;
+    margin: 20px -20px -20px -20px;
+    cursor: pointer;
+    color: #46a6ff;
+    position: relative;
+    transition: .3s;
+}
+.timeline-block .timeline-block-control:hover {
+    background-color: #f9fafc;
+}
+.timeline-block .timeline-block-control i {
+    line-height: 44px;
+    transform: translateX(-40px);
+}
+.timeline-block .timeline-block-control>span {
+    position: absolute;
+    transform: translateX(-30px);
+    line-height: 44px;
+    display: inline-block;
 }
 </style>

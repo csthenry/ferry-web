@@ -68,7 +68,7 @@
         <el-cascader
           v-model="dataModel"
           class="preview-cascader-select"
-          placeholder="未选择"
+          placeholder="--"
           :disabled="true"
           :show-all-levels="widget.options.showAllLevels"
           :options="widget.options.remote?widget.options.remoteOptions:widget.options.options"
@@ -79,16 +79,27 @@
         <el-select
           v-model="dataModel"
           class="preview-cascader-select"
-          placeholder="未选择"
+          placeholder="--"
           disabled="true"
           :style="{width: widget.options.width}"
         >
           <el-option v-for="item in (widget.options.remote ? widget.options.remoteOptions : widget.options.options)" :key="item.value" :value="item.value" :label="widget.options.showLabel?item.label:item.value" />
         </el-select>
       </template>
+      <template v-else-if="widget.type === 'textarea'">
+        <el-input
+          v-model="dataModel"
+          class="preview-textarea"
+          type="textarea"
+          :rows="5"
+          disabled="true"
+          placeholder="--"
+          :style="{width: widget.options.width}"
+        />
+      </template>
       <template v-else>
         <div>
-          {{ dataModel }}
+          {{ dataModel ? dataModel : '--' }}
         </div>
       </template>
     </template>
@@ -535,12 +546,33 @@ export default {
     background-color: #fff;
     border: none;
     color: #303133;
+    cursor: default;
   }
-
+  .preview-cascader-select .el-input.is-disabled .el-input__inner::-webkit-input-placeholder {
+    color: #303133!important;
+  }
+  .preview-cascader-select .el-input.is-disabled .el-input__inner::-moz-placeholder {
+    color: #303133!important;
+  }
   .preview-cascader-select .el-input.is-disabled .el-input__suffix .el-input__suffix-inner .el-input__icon.el-icon-arrow-down:before {
     content: ''
   }
   .preview-cascader-select .el-input.is-disabled .el-input__suffix .el-input__suffix-inner .el-input__icon.el-icon-arrow-up:before {
     content: ''
+  }
+  .preview-textarea .el-textarea__inner {
+    padding-left: 0;
+    padding-right: 0;
+    background-color: #fff!important;
+    border: none;
+    resize: none;
+    color: #303133!important;
+    cursor: default!important;
+  }
+  .preview-textarea .el-textarea__inner::-webkit-input-placeholder {
+    color: #303133!important;
+  }
+  .preview-textarea .el-textarea__inner::-moz-placeholder {
+    color: #303133!important;
   }
 </style>
