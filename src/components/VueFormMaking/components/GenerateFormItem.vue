@@ -97,6 +97,18 @@
           :style="{width: widget.options.width}"
         />
       </template>
+      <template v-else-if="widget.type === 'text'">
+        <span
+          :style="{
+            'font-size': widget.options.font_size,
+            'font-family': widget.options.font_family,
+            'font-weight': widget.options.font_weight,
+            'color': widget.options.font_color
+          }"
+        >
+          {{ widget.options.defaultValue }}
+        </span>
+      </template>
       <template v-else>
         <div>
           {{ dataModel ? dataModel : '--' }}

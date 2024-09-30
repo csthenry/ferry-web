@@ -50,7 +50,7 @@
         <el-collapse-transition>
           <div v-show="timeline.show" class="text item">
             <!-- 流程环节跟踪 -->
-            <el-divider content-position="center"><i class="el-icon-video-play" /> 流程环节跟踪</el-divider>
+            <el-divider content-position="center"><i class="el-icon-video-play" style="margin-right: 5px;" />流程环节跟踪</el-divider>
             <el-timeline>
               <el-timeline-item
                 v-for="(nodeItem, index) in circulationHistoryList"
@@ -72,7 +72,7 @@
                     <el-tag v-else-if="nodeItem.status === 1" size="small" type="success">已通过</el-tag>
                     <el-tag v-else size="small">已完成</el-tag>
                   </div>
-                  <p style="color: #606266;">审核意见或备注：{{ nodeItem.remarks ? nodeItem.remarks : "暂无" }}</p>
+                  <p style="color: #606266;"><i class="el-icon-warning-outline" style="margin-right: 5px;" />审核意见或备注：{{ nodeItem.remarks ? nodeItem.remarks : "暂无" }}</p>
                 </el-card>
               </el-timeline-item>
             </el-timeline>
