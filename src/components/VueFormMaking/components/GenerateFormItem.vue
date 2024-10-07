@@ -81,6 +81,7 @@
           class="preview-cascader-select"
           placeholder="--"
           disabled="true"
+          :multiple="widget.options.multiple"
           :style="{width: widget.options.width}"
         >
           <el-option v-for="item in (widget.options.remote ? widget.options.remoteOptions : widget.options.options)" :key="item.value" :value="item.value" :label="widget.options.showLabel?item.label:item.value" />
@@ -576,7 +577,7 @@ export default {
     background-color: #fff!important;
     resize: none;
     color: #303133!important;
-    cursor: default!important;
+    cursor: text!important;
   }
   .preview-textarea .el-textarea__inner::-webkit-input-placeholder {
     color: #303133!important;
