@@ -71,6 +71,7 @@
           placeholder="--"
           :disabled="true"
           :show-all-levels="widget.options.showAllLevels"
+          :style="{width: widget.options.width}"
           :options="widget.options.remote?widget.options.remoteOptions:widget.options.options"
           :props="widget.options.props"
         />
@@ -559,7 +560,7 @@ export default {
     background-color: #fff;
     border: none;
     color: #303133;
-    cursor: default;
+    cursor: text;
   }
   .preview-cascader-select .el-input.is-disabled .el-input__inner::-webkit-input-placeholder {
     color: #303133!important;

@@ -10,7 +10,7 @@
             <div class="text-center">
               <userAvatar :user="user" />
             </div>
-            <el-divider><i class="el-icon-s-custom" /> 详细资料</el-divider>
+            <el-divider><i class="el-icon-s-custom" style="margin-right: 5px;" />详细资料</el-divider>
             <el-descriptions :column="1">
               <el-descriptions-item label="用户名称">{{ user.username }}</el-descriptions-item>
               <el-descriptions-item label="手机号码">{{ user.phone ? user.phone : "--" }}</el-descriptions-item>
