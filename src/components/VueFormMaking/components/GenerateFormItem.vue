@@ -576,7 +576,6 @@ export default {
   }
   .preview-textarea .el-textarea__inner {
     background-color: #fff!important;
-    resize: none;
     color: #303133!important;
     cursor: text!important;
   }
